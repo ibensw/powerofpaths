@@ -1,36 +1,33 @@
 #include <iostream>
-#include "simulator/event.h"
-#include "simulator/simulator.h"
+#include <math.h>
+#include <stdlib.h>
 
-using namespace std;
+#include "ring/ring.h"
+#include "ring/arriveevent.h"
+#include "nodes.h"
 using namespace pop;
 
-class TestEvent: public Event{
-public:
-	TestEvent(double when, int a);
-
-	void run(Simulator* s);
-
-private:
-	int fA;
-};
-
-TestEvent::TestEvent(double when, int a):
-	Event(when)
-	{
-	fA = a;
+double exp_distr(double lambda){
+	double r = (double)rand() / (double)RAND_MAX;
+	return -lambda * log(r);
 }
 
-void TestEvent::run(Simulator* s){
-	cout << "Running event " << fA << " at " << s->getTime() << endl;
-}
+
 
 int main() {
-	Simulator sim;
-	sim.addEvent(new TestEvent(1.0, 1));
-	sim.addEvent(new TestEvent(3.0, 3));
-	sim.addEvent(new TestEvent(2.0, 2));
-	sim.addEvent(new TestEvent(0.0, 0));
-	sim.run();
+	Ring r(10, RightNode::mkRightNode);
+	r.getSimulator()->addEvent(new ArriveEvent(1.0, r.getNode(0)));
+	r.getSimulator()->addEvent(new ArriveEvent(1.1, r.getNode(0)));
+	r.getSimulator()->addEvent(new ArriveEvent(1.2, r.getNode(0)));
+	r.getSimulator()->addEvent(new ArriveEvent(1.3, r.getNode(0)));
+	r.getSimulator()->addEvent(new ArriveEvent(1.4, r.getNode(0)));
+	r.getSimulator()->addEvent(new ArriveEvent(1.5, r.getNode(0)));
+	r.getSimulator()->addEvent(new ArriveEvent(1.6, r.getNode(0)));
+	r.getSimulator()->addEvent(new ArriveEvent(1.7, r.getNode(0)));
+	r.getSimulator()->addEvent(new ArriveEvent(1.8, r.getNode(0)));
+	r.getSimulator()->addEvent(new ArriveEvent(1.9, r.getNode(0)));
+	r.getSimulator()->addEvent(new ArriveEvent(1.9, r.getNode(0)));
+
+	r.getSimulator()->run();
 	return 0;
 }

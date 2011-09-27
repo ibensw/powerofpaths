@@ -26,6 +26,10 @@ public:
 		return fRing[id % fSize];
 	}
 	
+	inline Simulator* getSimulator(){
+		return &fSimulator;
+	}
+	
 private:
 	unsigned int fSize;
 	Node** fRing;

@@ -10,6 +10,7 @@
 
 namespace pop {
 class Ring;
+class Job;
 
 class Node {
 public:
@@ -19,6 +20,9 @@ public:
 	inline unsigned int getId(){
 		return fId;
 	}
+	
+	virtual void pushJob(Job* j) = 0;
+	virtual void clearJob() = 0;
 	
 protected:
 	unsigned int fId;
