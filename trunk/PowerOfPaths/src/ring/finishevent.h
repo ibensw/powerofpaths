@@ -22,6 +22,8 @@ public:
 	
 	inline void run(Simulator* simulator){
 		j->finish(simulator->getTime());
+		delete j;
+		delete this;
 	}
 	
 private:
