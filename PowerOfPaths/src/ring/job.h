@@ -12,25 +12,42 @@
 
 namespace pop {
 
+class JobInfo {
+public:
+	virtual ~JobInfo(){
+
+	}
+};
+
 class Job {
 public:
-	Job();
+	Job(JobInfo* ji);
 	virtual ~Job();
 	
 	inline Node* getCurrentNode(){
 		return fCurrent;
 	}
 
+	inline JobInfo* getInfo(){
+		return fJobInfo;
+	}
+
 	virtual bool arrive(Node* n, double time);
 	virtual void finish(double time);
 	virtual void discard();
 	
+	static unsigned int getArrivedJobs();
+	static unsigned int getDiscardedJobs();
+	static unsigned int getFinishedJobs();
+	static unsigned int getFinishedJobTotalHops();
+
 private:
 	double fStart;
 	double fFinish;
 	Node* fCurrent;
 	Node* fFirst;
 	unsigned int fHops;
+	JobInfo* fJobInfo;
 };
 
 } /* namespace pop */

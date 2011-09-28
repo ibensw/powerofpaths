@@ -15,16 +15,17 @@ namespace pop {
 
 class ArriveEvent : public Event {
 public:
-	inline ArriveEvent(double scheduled, Node* n):
-		Event(scheduled), first(n)
+	inline ArriveEvent(double scheduled, Job* job, Node* n):
+		Event(scheduled), j(job), first(n)
 	{}
 	
 	inline void run(Simulator* simulator){
-		first->pushJob(&j);
+		first->pushJob(j);
+		delete this;
 	}
 
 private:
-	Job j;
+	Job* j;
 	Node* first;
 };
 
