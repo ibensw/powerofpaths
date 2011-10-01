@@ -20,6 +20,7 @@ public:
 	virtual ~Simulator();
 	
 	void run();
+	void run(int infointerval);
 	
 	inline double getTime(){
 		return fNow;

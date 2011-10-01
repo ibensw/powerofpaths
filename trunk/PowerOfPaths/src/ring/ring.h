@@ -11,6 +11,8 @@
 #include "node.h"
 #include "../simulator/simulator.h"
 
+//#include <iostream>
+
 namespace pop {
 
 class Ring {
@@ -22,8 +24,9 @@ public:
 		return fSize;
 	}
 	
-	inline Node* getNode(unsigned int id){
-		return fRing[id % fSize];
+	inline Node* getNode(int id){
+		//std::cout << "id: " << id << " = " << (id + fSize) % fSize << std::endl;
+		return fRing[(id + fSize) % fSize];
 	}
 	
 	inline Simulator* getSimulator(){

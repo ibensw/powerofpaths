@@ -31,10 +31,12 @@ void fillEvents(double time, double interarr, double joblen, Ring* r){
 }
 
 int main() {
-	Ring r(10, SwitchNode::makeNode);
-	fillEvents<DirectionInfo>(60*60*24, 10.0, 1.0, &r);
+	typedef RightNode node_type;
 
-	r.getSimulator()->run();
+	Ring r(1000, node_type::makeNode);
+	fillEvents<node_type::info_type>(60*60, 1.1365, 1.0, &r);
+
+	r.getSimulator()->run(60);
 
 	cout << "Total jobs:\t" << Job::getArrivedJobs() << endl;
 	cout << "Finished jobs:\t" << Job::getFinishedJobs() << endl;
