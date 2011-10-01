@@ -14,9 +14,18 @@ namespace pop {
 
 class JobInfo {
 public:
-	virtual ~JobInfo(){
+	inline JobInfo(double length):
+		fLength(length)
+	{}
 
+	virtual ~JobInfo(){}
+
+	inline double getLength(){
+		return fLength;
 	}
+
+protected:
+	double fLength;
 };
 
 class Job {

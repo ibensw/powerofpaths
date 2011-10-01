@@ -6,6 +6,7 @@
  */
 
 #include "simulator.h"
+#include <iostream>
 using namespace std;
 
 namespace pop {
@@ -22,6 +23,20 @@ void Simulator::run(){
 		Schedule x = fPending.top();
 		fPending.pop();
 		fNow = x.getEvent()->getScheduleTime();
+		x.getEvent()->run(this);
+	}
+}
+
+void Simulator::run(int interval){
+	int next = interval;
+	while(!fPending.empty()){
+		Schedule x = fPending.top();
+		fPending.pop();
+		fNow = x.getEvent()->getScheduleTime();
+		if (fNow > next){
+			cout << "Time: " << fNow << "\tPending events: " << fPending.size() << endl;
+			next+=interval;
+		}
 		x.getEvent()->run(this);
 	}
 }

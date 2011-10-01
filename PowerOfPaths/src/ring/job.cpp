@@ -33,7 +33,7 @@ bool Job::arrive(Node* n, double time){
 
 	if (fCurrent == 0){
 		++jobsArrived;
-		//cout << n->getId() << "\tJob arrived\t(arrival time: " << time << ")" << endl;
+		//cout << n->getId() << "\tJob arrived\t(at: " << n << ")" << endl;
 		fStart=time;
 		fFirst=n;
 	}else{
