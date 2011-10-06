@@ -21,7 +21,11 @@ public:
 		return fId;
 	}
 	
-	virtual void pushJob(Job* j) = 0;
+	inline Ring* getRing(){
+		return fRing;
+	}
+
+	virtual bool pushJob(Job* j) = 0;
 	virtual void clearJob() = 0;
 	
 protected:

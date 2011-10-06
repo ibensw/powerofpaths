@@ -14,18 +14,9 @@ namespace pop {
 
 class JobInfo {
 public:
-	inline JobInfo(double length):
-		fLength(length)
-	{}
+	inline JobInfo(){}
 
 	virtual ~JobInfo(){}
-
-	inline double getLength(){
-		return fLength;
-	}
-
-protected:
-	double fLength;
 };
 
 class Job {
@@ -41,11 +32,11 @@ public:
 		return fJobInfo;
 	}
 
-	virtual bool arrive(Node* n, double time);
-	virtual void finish(double time);
-	virtual void discard();
+	void forward(Node* n);
+	void finish(double time);
+	void discard();
 	
-	static unsigned int getArrivedJobs();
+	static unsigned int getTotalJobs();
 	static unsigned int getDiscardedJobs();
 	static unsigned int getFinishedJobs();
 	static unsigned int getFinishedJobTotalHops();
@@ -54,7 +45,6 @@ private:
 	double fStart;
 	double fFinish;
 	Node* fCurrent;
-	Node* fFirst;
 	unsigned int fHops;
 	JobInfo* fJobInfo;
 };

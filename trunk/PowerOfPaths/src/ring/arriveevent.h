@@ -20,7 +20,7 @@ public:
 	{}
 	
 	inline void run(Simulator* simulator){
-		first->pushJob(j);
+		j->forward(first);
 		delete this;
 	}
 
