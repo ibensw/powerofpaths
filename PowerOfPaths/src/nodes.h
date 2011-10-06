@@ -15,15 +15,17 @@
 
 struct DirectionInfo: public pop::JobInfo{
 	inline DirectionInfo(double length):
-		pop::JobInfo(length), fDirection(0)
+		fLength(length), fDirection(0), fFirst(0)
 	{}
 
+	double fLength;
 	short fDirection;
+	pop::Node* fFirst;
 };
 
-struct VisitedInfo: public pop::JobInfo{
+struct VisitedInfo: public DirectionInfo{
 	inline VisitedInfo(double length):
-		pop::JobInfo(length)
+		DirectionInfo(length)
 	{}
 
 	std::set<unsigned int> visited;
@@ -31,16 +33,18 @@ struct VisitedInfo: public pop::JobInfo{
 
 class RightNode: public pop::Node {
 public:
-	typedef pop::JobInfo info_type;
-	static Node* makeNode(unsigned int id, pop::Ring* ring){
-		return new RightNode(id, ring);
-	}
+	typedef DirectionInfo info_type;
 
 	RightNode(unsigned int id, pop::Ring* ring);
 	
-	void pushJob(pop::Job* j);
+	virtual ~RightNode(){}
+
+	bool pushJob(pop::Job* j);
 	void clearJob();
 	
+	bool wasHereFirst(pop::Job* j);
+	bool accept(pop::Job* j);
+
 protected:
 	pop::Job* fCurrent;
 };
@@ -49,15 +53,11 @@ class SwitchNode: public RightNode {
 public:
 	typedef DirectionInfo info_type;
 
-	static Node* makeNode(unsigned int id, pop::Ring* ring){
-		return new SwitchNode(id, ring);
-	}
-
 	inline SwitchNode(unsigned int id, pop::Ring* ring):
 			RightNode(id, ring), last(1)
 	{}
 
-	void pushJob(pop::Job* j);
+	bool pushJob(pop::Job* j);
 
 protected:
 	int last;
@@ -67,15 +67,11 @@ class RandSwitchNode: public RightNode {
 public:
 	typedef DirectionInfo info_type;
 
-	static Node* makeNode(unsigned int id, pop::Ring* ring){
-		return new RandSwitchNode(id, ring);
-	}
-
 	inline RandSwitchNode(unsigned int id, pop::Ring* ring):
 			RightNode(id, ring)
 	{}
 
-	void pushJob(pop::Job* j);
+	bool pushJob(pop::Job* j);
 };
 
 class PrimeNode: public SwitchNode {
@@ -83,18 +79,16 @@ public:
 	typedef DirectionInfo info_type;
 
 	static void makePrimes(unsigned int size);
-	static Node* makeNode(unsigned int id, pop::Ring* ring){
-		if (fPrimes == 0){
-			makePrimes(ring->getSize());
-		}
-		return new PrimeNode(id, ring);
-	}
 
 	inline PrimeNode(unsigned int id, pop::Ring* ring):
 		SwitchNode(id, ring)
-	{}
+	{
+		if (fPrimes == 0){
+			makePrimes(ring->getSize());
+		}
+	}
 
-	void pushJob(pop::Job* j);
+	bool pushJob(pop::Job* j);
 
 protected:
 	static int* fPrimes;
@@ -105,33 +99,37 @@ class RandPrimeNode: public PrimeNode{
 public:
 	typedef DirectionInfo info_type;
 
-	static Node* makeNode(unsigned int id, pop::Ring* ring){
+	RandPrimeNode(unsigned int id, pop::Ring* ring):
+		PrimeNode(id, ring)
+	{
 		if (fPrimes == 0){
 			makePrimes(ring->getSize());
 		}
-		return new RandPrimeNode(id, ring);
 	}
 
-	RandPrimeNode(unsigned int id, pop::Ring* ring):
-		PrimeNode(id, ring)
-	{}
-
-	void pushJob(pop::Job* j);
+	bool pushJob(pop::Job* j);
 };
 
 class RandUnvisited: public RightNode{
 public:
 	typedef VisitedInfo info_type;
 
-	static Node* makeNode(unsigned int id, pop::Ring* ring){
-		return new RandUnvisited(id, ring);
-	}
-
 	RandUnvisited(unsigned int id, pop::Ring* ring):
 		RightNode(id, ring)
 	{}
 
-	void pushJob(pop::Job* j);
+	bool pushJob(pop::Job* j);
+};
+
+class ToTopNode: public RightNode{
+public:
+	typedef DirectionInfo info_type;
+
+	ToTopNode(unsigned int id, pop::Ring* ring):
+		RightNode(id, ring)
+	{}
+
+	bool pushJob(pop::Job* j);
 };
 
 

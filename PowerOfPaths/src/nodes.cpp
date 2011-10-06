@@ -21,63 +21,75 @@ RightNode::RightNode(unsigned int id, Ring* ring):
 	Node(id, ring), fCurrent(0)
 {}
 
-void RightNode::pushJob(Job* j){
-	if (j->arrive(this, fRing->getSimulator()->getTime()) == false){
-		j->discard();
-		return;
+bool RightNode::wasHereFirst(Job* j){
+	info_type* ji = dynamic_cast<info_type*>(j->getInfo());
+
+	if (ji->fFirst == 0){
+		ji->fFirst = this;
+		return false;
 	}
+
+	return (ji->fFirst == this);
+}
+
+bool RightNode::accept(Job* j){
 	if (fCurrent == 0){
+		info_type* ji = dynamic_cast<info_type*>(j->getInfo());
 		fCurrent = j;
-		double len = j->getInfo()->getLength();
+		double len = ji->fLength;
 		fRing->getSimulator()->addEvent(new FinishEvent(fRing->getSimulator()->getTime()+len, j));
-	}else{
-		fRing->getNode(this->fId+1)->pushJob(j);
+		return true;
 	}
+	return false;
+}
+
+bool RightNode::pushJob(Job* j){
+	if (wasHereFirst(j)){
+		return false;
+	}
+
+	if (!accept(j)){
+		j->forward(fRing->getNode(this->fId+1));
+	}
+
+	return true;
 }
 
 void RightNode::clearJob(){
 	fCurrent = 0;
 }
 
-void SwitchNode::pushJob(Job* j){
-	if (j->arrive(this, fRing->getSimulator()->getTime()) == false){
-		j->discard();
-		return;
+bool SwitchNode::pushJob(Job* j){
+	if (wasHereFirst(j)){
+		return false;
 	}
-	DirectionInfo* info = dynamic_cast<DirectionInfo*>(j->getInfo());
-	if (fCurrent == 0){
-		fCurrent = j;
-		double len = j->getInfo()->getLength();
-		fRing->getSimulator()->addEvent(new FinishEvent(fRing->getSimulator()->getTime()+len, j));
-	}else{
 
-		if (info->fDirection == 0){
-			info->fDirection = last;
+	if (!accept(j)){
+		info_type* ji = dynamic_cast<info_type*>(j->getInfo());
+		if (ji->fDirection == 0){
+			ji->fDirection = last;
 			last*=-1;
 		}
 
-		fRing->getNode(this->fId + info->fDirection)->pushJob(j);
+		j->forward(fRing->getNode(this->fId + ji->fDirection));
 	}
+	return true;
 }
 
-void RandSwitchNode::pushJob(Job* j){
-	if (j->arrive(this, fRing->getSimulator()->getTime()) == false){
-		j->discard();
-		return;
+bool RandSwitchNode::pushJob(Job* j){
+	if (wasHereFirst(j)){
+		return false;
 	}
-	DirectionInfo* info = dynamic_cast<DirectionInfo*>(j->getInfo());
-	if (fCurrent == 0){
-		fCurrent = j;
-		double len = j->getInfo()->getLength();
-		fRing->getSimulator()->addEvent(new FinishEvent(fRing->getSimulator()->getTime()+len, j));
-	}else{
 
-		if (info->fDirection == 0){
-			info->fDirection = (2*(rand() % 2))-1;
+	if (!accept(j)){
+		info_type* ji = dynamic_cast<info_type*>(j->getInfo());
+		if (ji->fDirection == 0){
+			ji->fDirection = (2*(rand() % 2))-1;
 		}
 
-		fRing->getNode(this->fId + info->fDirection)->pushJob(j);
+		j->forward(fRing->getNode(this->fId + ji->fDirection));
 	}
+	return true;
 }
 
 int* PrimeNode::fPrimes = 0;
@@ -106,84 +118,90 @@ void PrimeNode::makePrimes(unsigned int size){
 	memcpy(fPrimes, primes.data(), fPrimesLen * sizeof(unsigned int));
 }
 
-void PrimeNode::pushJob(Job* j){
-	if (j->arrive(this, fRing->getSimulator()->getTime()) == false){
-		j->discard();
-		return;
+bool PrimeNode::pushJob(Job* j){
+	if (wasHereFirst(j)){
+		return false;
 	}
-	DirectionInfo* info = dynamic_cast<DirectionInfo*>(j->getInfo());
-	if (fCurrent == 0){
-		fCurrent = j;
-		double len = j->getInfo()->getLength();
-		fRing->getSimulator()->addEvent(new FinishEvent(fRing->getSimulator()->getTime()+len, j));
-	}else{
 
-		if (info->fDirection == 0){
-			info->fDirection = fPrimes[last];
+	if (!accept(j)){
+		info_type* ji = dynamic_cast<info_type*>(j->getInfo());
+		if (ji->fDirection == 0){
+			ji->fDirection = fPrimes[last];
 			++last;
 			last%=fPrimesLen;
 		}
 
-		fRing->getNode(this->fId + info->fDirection)->pushJob(j);
+		j->forward(fRing->getNode(this->fId + ji->fDirection));
 	}
+	return true;
 }
 
-void RandPrimeNode::pushJob(Job* j){
-	if (j->arrive(this, fRing->getSimulator()->getTime()) == false){
-		j->discard();
-		return;
+bool RandPrimeNode::pushJob(Job* j){
+	if (wasHereFirst(j)){
+		return false;
 	}
-	DirectionInfo* info = dynamic_cast<DirectionInfo*>(j->getInfo());
-	if (fCurrent == 0){
-		fCurrent = j;
-		double len = j->getInfo()->getLength();
-		fRing->getSimulator()->addEvent(new FinishEvent(fRing->getSimulator()->getTime()+len, j));
-	}else{
 
-		if (info->fDirection == 0){
-			info->fDirection = fPrimes[rand() % fPrimesLen];
+	if (!accept(j)){
+		info_type* ji = dynamic_cast<info_type*>(j->getInfo());
+		if (ji->fDirection == 0){
+			ji->fDirection = fPrimes[rand() % fPrimesLen];
 		}
 
-		fRing->getNode(this->fId + info->fDirection)->pushJob(j);
+		j->forward(fRing->getNode(this->fId + ji->fDirection));
 	}
+	return true;
 }
 
-void RandUnvisited::pushJob(Job* j){
-	VisitedInfo* info = dynamic_cast<VisitedInfo*>(j->getInfo());
-	if (j->arrive(this, fRing->getSimulator()->getTime()) == false || info->visited.count(this->getId())){
-		j->discard();
-		return;
+bool RandUnvisited::pushJob(Job* j){
+	info_type* ji = dynamic_cast<info_type*>(j->getInfo());
+	if (ji->visited.count(this->getId())){
+		return false;
 	}
-	if (fCurrent == 0){
-		fCurrent = j;
-		double len = j->getInfo()->getLength();
-		fRing->getSimulator()->addEvent(new FinishEvent(fRing->getSimulator()->getTime()+len, j));
-	}else{
-		info->visited.insert(this->getId());
 
-		if (fRing->getSize() == info->visited.size()){
-			this->pushJob(j);
-			return;
+	if (!accept(j)){
+		ji->visited.insert(this->getId());
+
+		if (fRing->getSize() == ji->visited.size()){
+			return false;
 		}
 
-		/*unsigned int x = rand() % (fRing->getSize() - info->visited.size());
-		unsigned int id = x;
+		unsigned int next;
+		if (5*ji->visited.size() > 4*fRing->getSize()){
+			unsigned int x = rand() % (fRing->getSize() - ji->visited.size());
+			next = x;
 
-		for (set<unsigned int>::iterator it = info->visited.begin(); it != info->visited.end(); it++){
-			if (*it <= id){
-				++id;
+			for (set<unsigned int>::iterator it = ji->visited.begin(); it != ji->visited.end(); it++){
+				if (*it <= next){
+					++next;
+				}
+			}
+		}else{
+			do{
+				next = rand() % fRing->getSize();
+			}while(ji->visited.count(next));
+		}
+
+		j->forward(fRing->getNode(next));
+	}
+	return true;
+}
+
+bool ToTopNode::pushJob(Job* j){
+	if (wasHereFirst(j)){
+		return false;
+	}
+
+	if (!accept(j)){
+		info_type* ji = dynamic_cast<info_type*>(j->getInfo());
+		if (ji->fDirection == 0){
+			if (this->getId() > fRing->getSize()/2){
+				ji->fDirection = 1;
+			}else{
+				ji->fDirection = -1;
 			}
 		}
 
-		if (info->visited.count(id)){
-			cerr << "ERROR: Chose an id that has been visited already!" << endl;
-		}*/
-
-		unsigned int x;
-		do{
-			x = rand() % fRing->getSize();
-		}while(info->visited.count(x));
-
-		fRing->getNode(x)->pushJob(j);
+		j->forward(fRing->getNode(this->fId + ji->fDirection));
 	}
+	return true;
 }

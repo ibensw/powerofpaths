@@ -6,6 +6,7 @@
  */
 
 #include "job.h"
+#include "ring.h"
 #include <iostream>
 using namespace std;
 
@@ -17,7 +18,7 @@ unsigned int jobsDiscarded = 0;
 unsigned int jobsFinishedTotalHops = 0;
 
 Job::Job(JobInfo* ji):
-	fStart(-1.0), fFinish(-1.0), fCurrent(0), fFirst(0), fHops(-1), fJobInfo(ji)
+	fStart(-1.0), fFinish(-1.0), fCurrent(0), fHops(-1), fJobInfo(ji)
 	{}
 
 Job::~Job() {
@@ -26,39 +27,33 @@ Job::~Job() {
 	}
 }
 
-bool Job::arrive(Node* n, double time){
-	if (n == fFirst){
-		return false;
-	}
-
-	if (fCurrent == 0){
-		++jobsArrived;
-		//cout << n->getId() << "\tJob arrived\t(at: " << n << ")" << endl;
-		fStart=time;
-		fFirst=n;
-	}else{
-		//cout << n->getId() << "\tJob redirected\t(arrival time: " << time << ")" << endl;
-	}
-	fCurrent = n;
-	++fHops;
-	return true;
+void Job::discard(){
+	++jobsDiscarded;
+	//cout << fCurrent->getId() << "\tJob discarded\t(arrival time: " << fStart << " / #hops: " << fHops << ")" << endl;
+	delete this;
 }
-
 void Job::finish(double time){
 	++jobsFinished;
 	jobsFinishedTotalHops+=fHops;
 	fFinish = time;
 	//cout << fCurrent->getId() << "\tJob finished\t(arrival time: " << fStart << " / finish time: " << fFinish << " / #hops: " << fHops << ")" << endl;
 	fCurrent->clearJob();
-}
-
-void Job::discard(){
-	++jobsDiscarded;
-	//cout << fCurrent->getId() << "\tJob discarded\t(arrival time: " << fStart << " / #hops: " << fHops << ")" << endl;
 	delete this;
 }
 
-unsigned int Job::getArrivedJobs(){
+void Job::forward(Node* n){
+	if (!fCurrent){
+		++jobsArrived;
+		fStart = n->getRing()->getSimulator()->getTime();
+	}
+	++fHops;
+	fCurrent = n;
+	if (!n->pushJob(this)){
+		discard();
+	}
+}
+
+unsigned int Job::getTotalJobs(){
 	return jobsArrived;
 }
 

@@ -1,11 +1,13 @@
 #include <iostream>
 #include <math.h>
+#include <time.h>
 #include <stdlib.h>
 
 #include "ring/ring.h"
 #include "ring/job.h"
 #include "ring/arriveevent.h"
 #include "nodes.h"
+#include "configuration.h"
 using namespace pop;
 using namespace std;
 
@@ -14,36 +16,40 @@ double exp_distr(double lambda){
 	return -lambda * log(r);
 }
 
-template <class INFO>
-void fillEvents(double time, double interarr, double joblen, Ring* r){
+void fillEvents(Configuration c, Ring* r){
 	double t;
 	double l;
 	Node* n;
 	for (unsigned int i = 0; i < r->getSize(); ++i){
 		n=r->getNode(i);
 		t = 0.0;
-		while (t < time){
-			t+=exp_distr(interarr);
-			l=exp_distr(joblen);
-			r->getSimulator()->addEvent(new ArriveEvent(t, new Job(new INFO(l)), n));
+		while (t < c.length){
+			t+=exp_distr(c.arrival);
+			l=exp_distr(c.joblength);
+			r->getSimulator()->addEvent(new ArriveEvent(t, new Job(c.makeInfoFunction(l)), n));
 		}
 	}
 }
 
-int main() {
-	typedef RightNode node_type;
 
-	Ring r(1000, node_type::makeNode);
-	fillEvents<node_type::info_type>(60*60, 1.1365, 1.0, &r);
+int main(int argc, char** argv) {
+	Configuration c(argc, argv);
 
-	r.getSimulator()->run(60);
+	Ring r(c.nodes, c.makeNodeFunction);
+	fillEvents(c, &r);
 
-	cout << "Total jobs:\t" << Job::getArrivedJobs() << endl;
+	if (c.progressinterval <= 0){
+		r.getSimulator()->run();
+	}else{
+		r.getSimulator()->run(c.progressinterval);
+	}
+
+	cout << "Total jobs:\t" << Job::getTotalJobs() << endl;
 	cout << "Finished jobs:\t" << Job::getFinishedJobs() << endl;
 	cout << "Discarded jobs:\t" << Job::getDiscardedJobs() << endl;
 	cout << "Total hops:\t" << Job::getFinishedJobTotalHops() << endl;
 	cout << "Hops/job:\t" << (double)Job::getFinishedJobTotalHops()/Job::getFinishedJobs() << endl;
-	cout << "Success ratio:\t" << (100.0 * Job::getFinishedJobs()) / Job::getArrivedJobs() << "%" << endl;
+	cout << "Success ratio:\t" << (100.0 * Job::getFinishedJobs()) / Job::getTotalJobs() << "%" << endl;
 
 	return 0;
 }
