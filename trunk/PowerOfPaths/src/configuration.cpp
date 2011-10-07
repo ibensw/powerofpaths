@@ -8,7 +8,7 @@ using namespace std;
 void help(){
 	cout << "Usage: -r -s long -j double -a double -n long -p long -l long -h type" << endl;
 	cout << "\t-r\tRandom seed" << endl;
-	cout << "\t-s'tSet seed\t\t\t(default: 0)" << endl;
+	cout << "\t-s\tSet seed\t\t\t(default: 0)" << endl;
 	cout << "\t-j\tJob length\t\t\t(default: 1.0)" << endl;
 	cout << "\t-a\tInterarrival time\t\t(default: 1.0)" << endl;
 	cout << "\t-n\tRing size\t\t\t(default: 100)" << endl;
@@ -38,7 +38,9 @@ Configuration::Configuration(int argc, char** argv):
 	while ((c = getopt (argc, argv, "rs:j:a:n:p:l:h")) != -1){
 		switch (c){
 		case 'r':
-			srand(time(0));
+			seed = time(0);
+			srand(seed);
+			cout << "Seed: " << seed << endl;
 			break;
 		case 's':
 			seed = atol(optarg);

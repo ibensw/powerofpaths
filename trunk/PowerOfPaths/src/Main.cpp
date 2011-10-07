@@ -44,12 +44,15 @@ int main(int argc, char** argv) {
 		r.getSimulator()->run(c.progressinterval);
 	}
 
-	cout << "Total jobs:\t" << Job::getTotalJobs() << endl;
-	cout << "Finished jobs:\t" << Job::getFinishedJobs() << endl;
-	cout << "Discarded jobs:\t" << Job::getDiscardedJobs() << endl;
-	cout << "Total hops:\t" << Job::getFinishedJobTotalHops() << endl;
-	cout << "Hops/job:\t" << (double)Job::getFinishedJobTotalHops()/Job::getFinishedJobs() << endl;
-	cout << "Success ratio:\t" << (100.0 * Job::getFinishedJobs()) / Job::getTotalJobs() << "%" << endl;
+	cout << "Total jobs:\t\t" << Job::getTotalJobs() << endl;
+	cout << "Finished jobs:\t\t" << Job::getFinishedJobs() << endl;
+	cout << "Discarded jobs:\t\t" << Job::getDiscardedJobs() << endl;
+	cout << "Total hops (finished):\t" << Job::getFinishedJobTotalHops() << endl;
+	long totalhops = Job::getFinishedJobTotalHops() + (c.nodes-1) * Job::getDiscardedJobs();
+	cout << "Total hops (all):\t" << totalhops << endl;
+	cout << "Hops/job (finished):\t" << (double)Job::getFinishedJobTotalHops()/Job::getFinishedJobs() << endl;
+	cout << "Hops/job (total):\t" << (double)totalhops/Job::getTotalJobs() << endl;
+	cout << "Success ratio:\t\t" << (100.0 * Job::getFinishedJobs()) / Job::getTotalJobs() << "%" << endl;
 
 	return 0;
 }
