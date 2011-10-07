@@ -16,7 +16,7 @@ void help();
 typedef pop::Node* (*makeNodeType)(unsigned int i, pop::Ring* r);
 typedef pop::JobInfo* (*makeInfoType)(double length);
 struct Configuration{
-	long seed;
+	unsigned int seed;
 	double joblength;
 	double arrival;
 	long nodes;
