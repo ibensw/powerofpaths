@@ -76,6 +76,8 @@ bool SwitchNode::pushJob(Job* j){
 	return true;
 }
 
+double RandSwitchNode::v = 0.5;
+
 bool RandSwitchNode::pushJob(Job* j){
 	if (wasHereFirst(j)){
 		return false;
@@ -84,7 +86,24 @@ bool RandSwitchNode::pushJob(Job* j){
 	if (!accept(j)){
 		info_type* ji = dynamic_cast<info_type*>(j->getInfo());
 		if (ji->fDirection == 0){
-			ji->fDirection = (2*(rand() % 2))-1;
+			double rnd = (double)rand() / (double)RAND_MAX;
+			ji->fDirection = (rnd < v ? 1 : -1);
+		}
+
+		j->forward(fRing->getNode(this->fId + ji->fDirection));
+	}
+	return true;
+}
+
+bool EvenSwitchNode::pushJob(Job* j){
+	if (wasHereFirst(j)){
+		return false;
+	}
+
+	if (!accept(j)){
+		info_type* ji = dynamic_cast<info_type*>(j->getInfo());
+		if (ji->fDirection == 0){
+			ji->fDirection = ((this->getId() % 2 == 1) ? 1 : -1);
 		}
 
 		j->forward(fRing->getNode(this->fId + ji->fDirection));
@@ -202,6 +221,34 @@ bool ToTopNode::pushJob(Job* j){
 		}
 
 		j->forward(fRing->getNode(this->fId + ji->fDirection));
+	}
+	return true;
+}
+
+bool RRUnvisited::pushJob(Job* j){
+	info_type* ji = dynamic_cast<info_type*>(j->getInfo());
+	if (ji->visited.count(this->getId())){
+		return false;
+	}
+
+	if (!accept(j)){
+		ji->visited.insert(this->getId());
+
+		if (fRing->getSize() == ji->visited.size()){
+			return false;
+		}
+
+		unsigned int next = this->getId() + offset + 1;
+		++offset;
+		offset%=(fRing->getSize()-1);
+
+		next%=fRing->getSize();
+		while (ji->visited.count(next)){
+			next++;
+			next%=fRing->getSize();
+		}
+
+		j->forward(fRing->getNode(next));
 	}
 	return true;
 }

@@ -16,6 +16,19 @@ double exp_distr(double lambda){
 	return -lambda * log(r);
 }
 
+void preload(Configuration c, Ring* r){
+	double rnd;
+	double l;
+	double load = c.length/c.arrival;
+	for (unsigned int i = 0; i < r->getSize(); ++i){
+		rnd = (double)rand() / (double)RAND_MAX;
+		if (rand() < load){
+			l=exp_distr(c.joblength);
+			r->getSimulator()->addEvent(new ArriveEvent(0.0, new Job(c.makeInfoFunction(l)), r->getNode(i)));			
+		}
+	}
+}
+
 void fillEvents(Configuration c, Ring* r){
 	double t;
 	double l;
@@ -35,24 +48,35 @@ void fillEvents(Configuration c, Ring* r){
 int main(int argc, char** argv) {
 	Configuration c(argc, argv);
 
-	Ring r(c.nodes, c.makeNodeFunction);
-	fillEvents(c, &r);
+#pragma omp parallel for
+	for (unsigned int i = 0; i < c.repeat; ++i){
+		Ring r(c.nodes, c.makeNodeFunction);
 
-	if (c.progressinterval <= 0){
-		r.getSimulator()->run();
-	}else{
-		r.getSimulator()->run(c.progressinterval);
+		//preload(c, &r); //disabled to compare output to more early results
+
+		fillEvents(c, &r);
+
+		if (c.progressinterval <= 0){
+			r.getSimulator()->run();
+		}else{
+			r.getSimulator()->run(c.progressinterval);
+		}
+
+#pragma omp critical
+		{
+			cout << "--------------------------" << endl;
+			cout << "Run: " << i << endl;
+			cout << "Total jobs:\t\t" << Job::getTotalJobs() << endl;
+			cout << "Finished jobs:\t\t" << Job::getFinishedJobs() << endl;
+			cout << "Discarded jobs:\t\t" << Job::getDiscardedJobs() << endl;
+			cout << "Total hops (finished):\t" << Job::getFinishedJobTotalHops() << endl;
+			long totalhops = Job::getFinishedJobTotalHops() + (c.nodes-1) * Job::getDiscardedJobs();
+			cout << "Total hops (all):\t" << totalhops << endl;
+			cout << "Hops/job (finished):\t" << (double)Job::getFinishedJobTotalHops()/Job::getFinishedJobs() << endl;
+			cout << "Hops/job (total):\t" << (double)totalhops/Job::getTotalJobs() << endl;
+			cout << "Success ratio:\t\t" << (100.0 * Job::getFinishedJobs()) / Job::getTotalJobs() << "%" << endl;
+		}
 	}
-
-	cout << "Total jobs:\t\t" << Job::getTotalJobs() << endl;
-	cout << "Finished jobs:\t\t" << Job::getFinishedJobs() << endl;
-	cout << "Discarded jobs:\t\t" << Job::getDiscardedJobs() << endl;
-	cout << "Total hops (finished):\t" << Job::getFinishedJobTotalHops() << endl;
-	long totalhops = Job::getFinishedJobTotalHops() + (c.nodes-1) * Job::getDiscardedJobs();
-	cout << "Total hops (all):\t" << totalhops << endl;
-	cout << "Hops/job (finished):\t" << (double)Job::getFinishedJobTotalHops()/Job::getFinishedJobs() << endl;
-	cout << "Hops/job (total):\t" << (double)totalhops/Job::getTotalJobs() << endl;
-	cout << "Success ratio:\t\t" << (100.0 * Job::getFinishedJobs()) / Job::getTotalJobs() << "%" << endl;
 
 	return 0;
 }

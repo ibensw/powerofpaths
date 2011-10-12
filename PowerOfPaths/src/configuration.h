@@ -22,6 +22,7 @@ struct Configuration{
 	long nodes;
 	long progressinterval;
 	long length;
+	long repeat;
 	makeNodeType makeNodeFunction;
 	makeInfoType makeInfoFunction;
 	
