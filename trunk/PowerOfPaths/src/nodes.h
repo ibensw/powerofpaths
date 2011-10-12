@@ -67,7 +67,25 @@ class RandSwitchNode: public RightNode {
 public:
 	typedef DirectionInfo info_type;
 
+	inline static void setValue(double nv){
+		v = nv;
+	}
+
 	inline RandSwitchNode(unsigned int id, pop::Ring* ring):
+			RightNode(id, ring)
+	{}
+
+	bool pushJob(pop::Job* j);
+
+private:
+	static double v;
+};
+
+class EvenSwitchNode: public RightNode{
+public:
+	typedef DirectionInfo info_type;
+
+	inline EvenSwitchNode(unsigned int id, pop::Ring* ring):
 			RightNode(id, ring)
 	{}
 
@@ -132,5 +150,18 @@ public:
 	bool pushJob(pop::Job* j);
 };
 
+class RRUnvisited: public RightNode{
+public:
+	typedef VisitedInfo info_type;
+
+	RRUnvisited(unsigned int id, pop::Ring* ring):
+		RightNode(id, ring), offset(0)
+	{}
+
+	bool pushJob(pop::Job* j);
+
+private:
+	unsigned int offset;
+};
 
 #endif /* NODES_H_ */

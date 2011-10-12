@@ -6,7 +6,7 @@
 using namespace std;
 
 void help(){
-	cout << "Usage: -r -s long -j double -a double -n long -p long -l long -h type" << endl;
+	cout << "Usage: -r -s long -j double -a double -n long -p long -l long -t long -h type" << endl;
 	cout << "\t-r\tRandom seed" << endl;
 	cout << "\t-s\tSet seed\t\t\t(default: 0)" << endl;
 	cout << "\t-j\tJob length\t\t\t(default: 1.0)" << endl;
@@ -14,8 +14,9 @@ void help(){
 	cout << "\t-n\tRing size\t\t\t(default: 100)" << endl;
 	cout << "\t-p\tPrint progress interval\t(default: -1 - disabled)" << endl;
 	cout << "\t-l\tSimulation length\t\t(default: 3600)" << endl;
+	cout << "\t-l\tRepetition\t\t(default: 1)" << endl;
 	cout << "\t-h\tPrint this help" << endl;
-	cout << "\t type\tright | switch | randswitch | prime | randprime | randunvisited | totop" << endl;
+	cout << "\t type\tright | switch | randswitch | evenswitch | prime | randprime | randunvisited | totop" << endl;
 }
 
 template <typename T>
@@ -31,16 +32,14 @@ pop::Node* createN(unsigned int id, pop::Ring* ring){
 Configuration::Configuration(int argc, char** argv):
 	seed(0), joblength(1.0),
 	arrival(1.0), nodes(100), progressinterval(-1), length(3600),
-	makeNodeFunction(0), makeInfoFunction(0)
+	repeat(1), makeNodeFunction(0), makeInfoFunction(0)
 {
 	int c;
 	int index;
-	while ((c = getopt (argc, argv, "rs:j:a:n:p:l:h")) != -1){
+	while ((c = getopt (argc, argv, "rs:j:a:n:p:l:hv:t:")) != -1){
 		switch (c){
 		case 'r':
 			seed = time(0);
-			srand(seed);
-			cout << "Seed: " << seed << endl;
 			break;
 		case 's':
 			seed = atol(optarg);
@@ -60,15 +59,24 @@ Configuration::Configuration(int argc, char** argv):
 		case 'l':
 			length = atol(optarg);
 			break;
+		case 't':
+			repeat = atol(optarg);
+			break;
 		case 'h':
 			help();
 			exit(0);
+			break;
+		case 'v':
+			RandSwitchNode::setValue(atof(optarg));
 			break;
 		default:
 			cout << "Unknown option: " << optopt << endl;
 			break;
 		}
 	}
+
+	srand(seed);
+	cout << "Seed: " << seed << endl;
 
 	for (index = optind; index < argc; index++){
 		string arg = argv[index];
@@ -83,6 +91,10 @@ Configuration::Configuration(int argc, char** argv):
 		if (arg == "randswitch"){
 			makeNodeFunction = createN<RandSwitchNode>;
 			makeInfoFunction = createJI<RandSwitchNode::info_type>;
+		}
+		if (arg == "evenswitch"){
+			makeNodeFunction = createN<EvenSwitchNode>;
+			makeInfoFunction = createJI<EvenSwitchNode::info_type>;
 		}
 		if (arg == "prime"){
 			makeNodeFunction = createN<PrimeNode>;
@@ -99,6 +111,10 @@ Configuration::Configuration(int argc, char** argv):
 		if (arg == "totop"){
 			makeNodeFunction = createN<ToTopNode>;
 			makeInfoFunction = createJI<ToTopNode::info_type>;
+		}
+		if (arg == "rrunvisited"){
+			makeNodeFunction = createN<RRUnvisited>;
+			makeInfoFunction = createJI<RRUnvisited::info_type>;
 		}
 	}
 
