@@ -36,11 +36,6 @@ public:
 	void finish(double time);
 	void discard();
 	
-	static unsigned int getTotalJobs();
-	static unsigned int getDiscardedJobs();
-	static unsigned int getFinishedJobs();
-	static unsigned int getFinishedJobTotalHops();
-
 private:
 	double fStart;
 	double fFinish;

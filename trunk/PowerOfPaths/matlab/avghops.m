@@ -1,4 +1,8 @@
-function [ ] = avghops(Q)
+function [ avg ] = avghops(Q, d)
+	if nargin < 2
+		d=1;
+	end
+
 	steady=ctmcsteadystate(Q);
 
 	len=length(Q);
@@ -15,10 +19,16 @@ function [ ] = avghops(Q)
 			t=[t (prefix + j + 1)];
 		end
 		total=total+c;
-		fprintf('%d hops: %f\n', i, c);
+		if d
+			fprintf('%d hops:\t%f\n', i, c);
+		end
 		avg=avg+(c*i);
 	end
 
-	fprintf('Loss: %f\nTotal: %f\nAverage #hops: %f\n', steady(len), total + steady(len), avg/(1-steady(len)));
+	loss=steady(len);
+	avg=avg/(1-loss);
+	if d
+		fprintf('Loss:\t%f\nTotal:\t%f\nAverage #hops:\t%f\n', loss, total + loss, avg);
+	end
 end
 
