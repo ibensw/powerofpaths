@@ -48,6 +48,12 @@ void fillEvents(Configuration c, Ring* r){
 int main(int argc, char** argv) {
 	Configuration c(argc, argv);
 
+	double success = 0.0;
+	double avghops = 0.0;
+
+	cout.setf(ios::fixed,ios::floatfield);
+	cout.precision(12);
+
 #pragma omp parallel for
 	for (unsigned int i = 0; i < c.repeat; ++i){
 		Ring r(c.nodes, c.makeNodeFunction);
@@ -66,16 +72,24 @@ int main(int argc, char** argv) {
 		{
 			cout << "--------------------------" << endl;
 			cout << "Run: " << i << endl;
-			cout << "Total jobs:\t\t" << Job::getTotalJobs() << endl;
-			cout << "Finished jobs:\t\t" << Job::getFinishedJobs() << endl;
-			cout << "Discarded jobs:\t\t" << Job::getDiscardedJobs() << endl;
-			cout << "Total hops (finished):\t" << Job::getFinishedJobTotalHops() << endl;
-			long totalhops = Job::getFinishedJobTotalHops() + (c.nodes-1) * Job::getDiscardedJobs();
+			cout << "Total jobs:\t\t" << r.getTotalJobs() << endl;
+			cout << "Finished jobs:\t\t" << r.getFinishedJobs() << endl;
+			cout << "Discarded jobs:\t\t" << r.getDiscardedJobs() << endl;
+			cout << "Total hops (finished):\t" << r.getFinishedJobTotalHops() << endl;
+			long totalhops = r.getFinishedJobTotalHops() + (c.nodes-1) * r.getDiscardedJobs();
 			cout << "Total hops (all):\t" << totalhops << endl;
-			cout << "Hops/job (finished):\t" << (double)Job::getFinishedJobTotalHops()/Job::getFinishedJobs() << endl;
-			cout << "Hops/job (total):\t" << (double)totalhops/Job::getTotalJobs() << endl;
-			cout << "Success ratio:\t\t" << (100.0 * Job::getFinishedJobs()) / Job::getTotalJobs() << "%" << endl;
+			cout << "Hops/job (finished):\t" << (double)r.getFinishedJobTotalHops()/r.getFinishedJobs() << endl;
+			cout << "Hops/job (total):\t" << (double)totalhops/r.getTotalJobs() << endl;
+			cout << "Success ratio:\t\t" << (100.0 * r.getFinishedJobs()) / r.getTotalJobs() << "%" << endl;
+			success+=(double)(r.getFinishedJobs()) / r.getTotalJobs();
+			avghops+=(double)r.getFinishedJobTotalHops()/r.getFinishedJobs();
 		}
+	}
+
+	if (c.repeat > 1){
+		cout << "--------------------------" << endl;
+		cout << "Avg. hops/job (finished):\t" << avghops / c.repeat << endl;
+		cout << "Avg. success ratio:\t\t" << 100.0 * success / c.repeat << "%" << endl;
 	}
 
 	return 0;

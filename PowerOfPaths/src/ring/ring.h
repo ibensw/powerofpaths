@@ -33,10 +33,41 @@ public:
 		return &fSimulator;
 	}
 	
+	inline unsigned int getTotalJobs(){
+		return jobsTotal;
+	}
+	inline unsigned int getDiscardedJobs(){
+		return jobsDiscarded;
+	}
+	inline unsigned int getFinishedJobs(){
+		return jobsFinished;
+	}
+	inline unsigned int getFinishedJobTotalHops(){
+		return jobsFinishedTotalHops;
+	}
+
+	inline void jobCreated(){
+		++jobsTotal;
+	}
+
+	inline void jobFinished(unsigned int hops){
+		++jobsFinished;
+		jobsFinishedTotalHops+=hops;
+	}
+
+	inline void jobDiscarded(){
+		++jobsDiscarded;
+	}
+
 private:
 	unsigned int fSize;
 	Node** fRing;
 	Simulator fSimulator;
+
+	unsigned int jobsTotal;
+	unsigned int jobsFinished;
+	unsigned int jobsDiscarded;
+	unsigned int jobsFinishedTotalHops;
 };
 
 } /* namespace pop */
