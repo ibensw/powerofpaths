@@ -1,9 +1,13 @@
-function [Q] = randswitchchain(size, rate)
+function [Q] = randswitchchain(size, rate, p)
 %RIGHTCHAIN Summary of this function goes here
 %   Detailed explanation goes here
 
+	if nargin < 3
+		p=0.5;
+	end
+
     totalsize = 2^size;
-    Q = zeros(totalsize);
+    Q = sparse(totalsize, totalsize);
     
     BITS = zeros(1, size);
     
@@ -22,12 +26,12 @@ function [Q] = randswitchchain(size, rate)
 		bt=b+1;
 		while bitand(i, BITS(mod(bt-1, size)+1)) & (bt ~= (b))
 		    bt=bt+1;
-		    r = r + rate/2;
+		    r = r + rate*p;
 		end
 		bt=b-1;
 		while bitand(i, BITS(mod(bt-1, size)+1)) & (bt ~= (b))
 		    bt=bt-1;
-		    r = r + rate/2;
+		    r = r + rate*(1-p);
 		end
 		Q(i+1, j+1)=r;
 	    end

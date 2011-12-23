@@ -11,7 +11,8 @@ function [ Q ] = rprimechain( size, rate )
 	
 	rpcount = length(rprimes);
 	
-	Q=zeros(totalsize);
+	%Q=zeros(totalsize);
+	Q=sparse(totalsize, totalsize);
 	
 	for i=0:totalsize-1
 		tot=0;
