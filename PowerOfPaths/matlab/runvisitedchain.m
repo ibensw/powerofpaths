@@ -4,7 +4,7 @@ function [ Q ] = runvisitedchain( size, rate )
 
 	rate = rate*size;
 
-	Q = zeros(size+1);
+	Q = sparse(size+1, size+1);
 	
 	Q(1,2) = rate;
 	Q(1,1) = -rate;

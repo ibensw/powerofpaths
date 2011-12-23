@@ -16,4 +16,5 @@ for i=l
 end
 fprintf('\n');
 
+%plot(l, r./r, l, rs./r);
 plot(l, r./r, l, rs./r, l, rp./r, l, ru./r);

@@ -3,7 +3,8 @@ function [ avg ] = avghops(Q, d)
 		d=1;
 	end
 
-	steady=ctmcsteadystate(Q);
+	%a full vector so make it full
+	steady=full(ctmcsteadystate(Q));
 
 	len=length(Q);
 	states=log2(len);

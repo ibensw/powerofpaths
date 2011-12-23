@@ -3,7 +3,7 @@ function [Q] = randunvisitedchain(size, rate)
 %   Detailed explanation goes here
 
     totalsize = 2^size;
-    Q = zeros(totalsize);
+    Q = sparse(totalsize, totalsize);
     
     BITS = zeros(1, size);
     
