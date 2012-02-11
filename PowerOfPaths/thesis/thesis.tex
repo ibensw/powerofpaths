@@ -1,0 +1,77 @@
+\documentclass[10pt,a4paper,titlepage]{article}
+\usepackage[latin1]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\author{Wouter ibens \\ University of Antwerp}
+\title{Masterthesis:\\ The power of two paths in grid computing networks}
+\begin{document}
+\maketitle
+
+\section*{Abstract}
+a
+
+\newpage
+
+\tableofcontents
+
+\newpage
+
+\section*{Introduction}
+Write at the end
+
+
+\section{Setup}
+Explain the setup, the goals, the reasons, explain the balancing-techniques
+Insert a picture of nodes in a ring
+
+Imagine a ring-structured distributed system, consisting of several nodes, each connected its two neighbours. Nodes may have $x$ servers, meaning they can process at most $x$ jobs at a time. External jobs will arrive at each node, independent of eachother. Busy nodes will pass an incoming job on to another node using a specified algorithm. This setup is fixed during the whole thesis. Our goal is to examine how well given algorithms distribute the load of the system. It is measured using the average number of times a job must be forwarded before is can be executed. Jobs that are forwarded to any node in the system are discarded. We assume the jobs have a Poisson arrival rate with parameter $\lambda$, the service time is exponental with parameter $\mu$, and forwarding a job takes no time at all. Unless otherwise noted, we assume $\mu=1$.
+
+\subsection{Techniques}
+Various forwarding rules will be discusses, they can be divided into two groups: forward to neighbour and forward anywhere. The first techniques allows a busy node to forward an incoming job to either its left or right neighbour, where the latter may forward these jobs to any node in the system. All techniques discussed in this thesis will make sure a job will visit every node at least once before returning to their originating node. Note however, that nodes that would be forwarded to their originating node will be dropped instead.
+
+\subsection{Forward to neighbour}
+Following techniques only allow a busy node to forward a job to its left or right neighbour.
+
+\subsubsection{Forward right}
+This is the most straight-forward technique, a busy node will always forward a job to its right node. In a saturated system, a job will visit the ring in a clockwise direction before being dropped.
+
+\subsubsection{Left/Right forward}
+When using Left/Right forward, a busy node that receives a new job will forward the job either left or right. The direction is saved in the job metadata, following busy nodes will forward the node in the same direction. The direction will alternate for every new job that cannot be served.
+
+\subsubsection{Random Left/Right forward with parameter $p$}
+As the Left/Right forward technique, the first node will push the job in a certain direction, instead of alternating the direction. De direction is right with probability $p$ and left with probability $1-p$.
+
+\subsubsection{Position-dependant forward}
+Another technique consists of always choosing the same direction at the incoming node, but alternating that direction for every node. This technique gives a certain node ID 0, its right neighbour ID 1, and so one, until every node in the ring has an ID. When a node its ID is even, it will always forward new jobs right, if its ID is odd, if will forward them left.
+
+\subsection{Forward anywhere}
+When the ring-formation of the system is just a virtual overlay, but the nodes are actually connected in a less structured network like the internet, instead of only its neighbours, a node can reach any other node in the distributed system. Other techniques can be used to distribute incoming jobs elsewhere.
+
+\subsubsection{Random unvisited}
+
+\subsubsection{Round Robin unvisited}
+
+\subsubsection{Relative Prime offset}
+
+\subsubsection{Random Relative Prime offset}
+
+
+\section{Simulation}
+How does the simulator work, what are its results
+\subsection{Forward to neighbour}
+\subsection{Forward anywhere}
+
+\section{Numerical Validation}
+How is it validated, give an complete example, compare results
+
+\section{Conclusion}
+Which techniques work best in which invironments? Why? Runner up? Why do some techniques don't work as expected?
+
+\section*{Acknowledgements}
+Thanks to everyone
+
+\section*{References}
+Hope to at least find dome :s
+
+\end{document}
