@@ -49,12 +49,17 @@ Another technique consists of always choosing the same direction at the incoming
 When the ring-formation of the system is just a virtual overlay, but the nodes are actually connected in a less structured network like the internet, instead of only its neighbours, a node can reach any other node in the distributed system. Other techniques can be used to distribute incoming jobs elsewhere.
 
 \subsubsection{Random unvisited}
+When nodes aply this technique, a forwarding node will save its ID in the jobs metadata. When another busy node must forward the job it will choose a random node that has not been visited before.
+
+%TODO This is analogue to an erlang thing
 
 \subsubsection{Round Robin unvisited}
 
-\subsubsection{Relative Prime offset}
+\subsubsection{Coprime offset}
+Another technique uses coprimes. When the ring initialises, a list of numbers is generated. Every number from 1 to the size of the ring minus one, that is coprime to the size of the ring is saved in this list. For example, when the ring has 10 nodes, the list contains $\{1, 3 , 7 , 9\}$. When a busy node receives a job, the next number from the list is choosen and saved in the jobs metadata, the job will travel in steps equal to this number.
 
-\subsubsection{Random Relative Prime offset}
+\subsubsection{Random Coprime offset}
+This technique is analogue to the previous one. But instead of taking the next number from the list, a random value from this list is choosen.
 
 
 \section{Simulation}
