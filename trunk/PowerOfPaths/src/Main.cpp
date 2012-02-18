@@ -56,7 +56,7 @@ int main(int argc, char** argv) {
 
 #pragma omp parallel for
 	for (unsigned int i = 0; i < c.repeat; ++i){
-		Ring r(c.nodes, c.makeNodeFunction);
+		Ring r(c.nodes, c.nodeSize, c.makeNodeFunction);
 
 		//preload(c, &r); //disabled to compare output to more early results
 
