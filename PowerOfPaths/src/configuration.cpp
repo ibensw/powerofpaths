@@ -12,6 +12,7 @@ void help(){
 	cout << "\t-j\tJob length\t\t\t(default: 1.0)" << endl;
 	cout << "\t-a\tInterarrival time\t\t(default: 1.0)" << endl;
 	cout << "\t-n\tRing size\t\t\t(default: 100)" << endl;
+	cout << "\t-c\tProcessing units per node\t(default: 1)" << endl;
 	cout << "\t-p\tPrint progress interval\t(default: -1 - disabled)" << endl;
 	cout << "\t-l\tSimulation length\t\t(default: 3600)" << endl;
 	cout << "\t-t\tRepetition\t\t(default: 1)" << endl;
@@ -25,18 +26,18 @@ pop::JobInfo* createJI(double len){
 }
 
 template <typename T>
-pop::Node* createN(unsigned int id, pop::Ring* ring){
-	return new T(id, ring);
+pop::Node* createN(unsigned int id, pop::Ring* ring, unsigned int size){
+	return new T(id, ring, size);
 }
 
 Configuration::Configuration(int argc, char** argv):
 	seed(0), joblength(1.0),
-	arrival(1.0), nodes(100), progressinterval(-1), length(3600),
+	arrival(1.0), nodes(100), nodeSize(1), progressinterval(-1), length(3600),
 	repeat(1), makeNodeFunction(0), makeInfoFunction(0)
 {
 	int c;
 	int index;
-	while ((c = getopt (argc, argv, "rs:j:a:n:p:l:hv:t:")) != -1){
+	while ((c = getopt (argc, argv, "rs:j:a:n:c:p:l:hv:t:")) != -1){
 		switch (c){
 		case 'r':
 			seed = time(0);
@@ -53,8 +54,11 @@ Configuration::Configuration(int argc, char** argv):
 		case 'n':
 			nodes = atol(optarg);
 			break;
+		case 'c':
+			nodeSize = atol(optarg);
+			break;
 		case 'p':
-			progressinterval = atol(optarg);
+			progressinterval = atoi(optarg);
 			break;
 		case 'l':
 			length = atol(optarg);

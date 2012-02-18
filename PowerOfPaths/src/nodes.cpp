@@ -17,8 +17,8 @@
 using namespace pop;
 using namespace std;
 
-RightNode::RightNode(unsigned int id, Ring* ring):
-	Node(id, ring), fCurrent(0)
+RightNode::RightNode(unsigned int id, Ring* ring, unsigned int size):
+	Node(id, ring, size)
 {}
 
 bool RightNode::wasHereFirst(Job* j){
@@ -33,9 +33,9 @@ bool RightNode::wasHereFirst(Job* j){
 }
 
 bool RightNode::accept(Job* j){
-	if (fCurrent == 0){
+	if (!isBusy()){
 		info_type* ji = dynamic_cast<info_type*>(j->getInfo());
-		fCurrent = j;
+		fCurrents.insert(j);
 		double len = ji->fLength;
 		fRing->getSimulator()->addEvent(new FinishEvent(fRing->getSimulator()->getTime()+len, j));
 		return true;
@@ -55,8 +55,8 @@ bool RightNode::pushJob(Job* j){
 	return true;
 }
 
-void RightNode::clearJob(){
-	fCurrent = 0;
+void RightNode::clearJob(Job* j){
+	fCurrents.erase(j);
 }
 
 bool SwitchNode::pushJob(Job* j){

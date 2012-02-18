@@ -9,13 +9,13 @@
 
 namespace pop {
 
-Ring::Ring(unsigned int size, Node* (*mkNode)(unsigned int i, Ring* r)):
+Ring::Ring(unsigned int size, unsigned int nodesize, Node* (*mkNode)(unsigned int i, Ring* r, unsigned int ns)):
 	fSize(size),
 	fRing(new Node*[size]),
 	jobsTotal(0), jobsFinished(0), jobsDiscarded(0), jobsFinishedTotalHops(0)
 {
 	for (unsigned int i = 0; i < size; ++i){
-		fRing[i] = mkNode(i, this);
+		fRing[i] = mkNode(i, this, nodesize);
 	}
 }
 

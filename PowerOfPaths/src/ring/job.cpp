@@ -27,11 +27,12 @@ void Job::discard(){
 	//cout << fCurrent->getId() << "\tJob discarded\t(arrival time: " << fStart << " / #hops: " << fHops << ")" << endl;
 	delete this;
 }
+
 void Job::finish(double time){
 	fCurrent->getRing()->jobFinished(fHops);
 	fFinish = time;
 	//cout << fCurrent->getId() << "\tJob finished\t(arrival time: " << fStart << " / finish time: " << fFinish << " / #hops: " << fHops << ")" << endl;
-	fCurrent->clearJob();
+	fCurrent->clearJob(this);
 	delete this;
 }
 

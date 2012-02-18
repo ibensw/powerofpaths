@@ -13,13 +13,14 @@
 
 void help();
 
-typedef pop::Node* (*makeNodeType)(unsigned int i, pop::Ring* r);
+typedef pop::Node* (*makeNodeType)(unsigned int i, pop::Ring* r, unsigned int size);
 typedef pop::JobInfo* (*makeInfoType)(double length);
 struct Configuration{
 	unsigned int seed;
 	double joblength;
 	double arrival;
 	long nodes;
+	unsigned int nodeSize;
 	long progressinterval;
 	long length;
 	long repeat;

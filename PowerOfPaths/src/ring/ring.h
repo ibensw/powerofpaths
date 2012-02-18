@@ -17,7 +17,7 @@ namespace pop {
 
 class Ring {
 public:
-	Ring(unsigned int size, Node* (*mkNode)(unsigned int i, Ring* r));
+	Ring(unsigned int size, unsigned int nodesize, Node* (*mkNode)(unsigned int i, Ring* r, unsigned int ns));
 	virtual ~Ring();
 	
 	inline unsigned int getSize(){

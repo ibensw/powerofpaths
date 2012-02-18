@@ -39,7 +39,7 @@ int main(int argc, char* argv[]){
 
 	double v;
 
-	printf("Q=matrix(%u,%u,[", sqrsize, sqrsize);
+	printf("Q:=Matrix(%u,%u,[", sqrsize, sqrsize+1);
 
 	for (i=0; i < sqrsize; ++i){
 		printf("[");
@@ -78,18 +78,19 @@ int main(int argc, char* argv[]){
 			}else{
 				printf("0");
 			}
-
-			if (j != sqrsize-1){
-				printf(",");
-			}
-		}
-		printf("]");
-		if (i != sqrsize-1){
 			printf(",");
 		}
+		printf("1]");
+		if (i != sqrsize-1)
+			printf(",");
 	}
 
 	printf("])\n");
+	printf("e:=Matrix(1,%u,[", sqrsize);
+	for (i = 0; i < sqrsize-1; ++i){
+		printf("0,");
+	}
+	printf("1])\n");
 
 	return 0;
 }

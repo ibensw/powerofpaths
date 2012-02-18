@@ -9,8 +9,8 @@
 
 namespace pop {
 
-Node::Node(unsigned int id, Ring* ring):
-	fId(id), fRing(ring)
+Node::Node(unsigned int id, Ring* ring, unsigned int size):
+	fId(id), fRing(ring), fSize(size)
 	{}
 
 Node::~Node() {
