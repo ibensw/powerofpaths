@@ -2,7 +2,7 @@ function [Q, T] = rightchain(size, rate)
 %RIGHTCHAIN Summary of this function goes here
 %   Detailed explanation goes here
 
-	[S T] = makestates(size);
+	[S T C] = makestates(size);
 
     totalsize = 2^size;
     csize = length(S);
@@ -28,11 +28,14 @@ function [Q, T] = rightchain(size, rate)
     end
     
     for i=1:csize
-    	t=0;
-    	for j=1:csize
-    		t=t+Q(i,j);
-    	end
-    	Q(i,i) = -t;
+	%[i csize]
+    	%t=0;
+    	%for j=1:csize
+    	%	t=t+Q(i,j);
+    	%end
+    	%Q(i,i) = -t;
+	Q(i,i) = -sum(Q(i,:));
+	Q(i,:) = Q(i,:)/C(i);
     end
     
 end
