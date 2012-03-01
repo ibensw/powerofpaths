@@ -13,9 +13,9 @@ void help(){
 	cout << "\t-a\tInterarrival time\t\t(default: 1.0)" << endl;
 	cout << "\t-n\tRing size\t\t\t(default: 100)" << endl;
 	cout << "\t-c\tProcessing units per node\t(default: 1)" << endl;
-	cout << "\t-p\tPrint progress interval\t(default: -1 - disabled)" << endl;
+	cout << "\t-p\tPrint progress interval\t\t(default: -1 - disabled)" << endl;
 	cout << "\t-l\tSimulation length\t\t(default: 3600)" << endl;
-	cout << "\t-t\tRepetition\t\t(default: 1)" << endl;
+	cout << "\t-t\tRepetition\t\t\t(default: 1)" << endl;
 	cout << "\t-h\tPrint this help" << endl;
 	cout << "\t type\tright | switch | randswitch | evenswitch | prime | randprime | randunvisited | totop" << endl;
 }

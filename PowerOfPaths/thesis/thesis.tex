@@ -1,12 +1,28 @@
-\documentclass[10pt,a4paper,titlepage]{article}
+\documentclass[10pt,a4paper]{article}
 \usepackage[latin1]{inputenc}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{appendix}
+\usepackage{graphicx}
+\usepackage{listings}
 \author{Wouter ibens \\ University of Antwerp}
 \title{Masterthesis:\\ The power of two paths in grid computing networks}
 \begin{document}
 \maketitle
+
+\begin{center}
+\begin{large}
+Promotor: \\ Benny Van Houdt
+\end{large}
+\vspace{28em}
+
+\includegraphics[width=0.17\textwidth]{resources/ua.pdf}
+\end{center}
+
+\thispagestyle{empty}
+\newpage
 
 \section*{Abstract}
 a
@@ -27,7 +43,10 @@ Insert a picture of nodes in a ring
 
 Imagine a ring-structured distributed system, consisting of several nodes, each connected its two neighbours. Nodes may have $x$ servers, meaning they can process at most $x$ jobs at a time. External jobs will arrive at each node, independent of eachother. Busy nodes will pass an incoming job on to another node using a specified algorithm. This setup is fixed during the whole thesis. Our goal is to examine how well given algorithms distribute the load of the system. It is measured using the average number of times a job must be forwarded before is can be executed. Jobs that are forwarded to any node in the system are discarded. We assume the jobs have a Poisson arrival rate with parameter $\lambda$, the service time is exponental with parameter $\mu$, and forwarding a job takes no time at all. Unless otherwise noted, we assume $\mu=1$.
 
+As performance measure in this thesis is the average number of times a job visits a busy node. Since the loss rate is the same for every technique (a job will visit every node before being dropped), we will only take into account the jobs that were finished.
+
 \subsection{Techniques}
+\label{techniques}
 Various forwarding rules will be discusses, they can be divided into two groups: forward to neighbour and forward anywhere. The first techniques allows a busy node to forward an incoming job to either its left or right neighbour, where the latter may forward these jobs to any node in the system. All techniques discussed in this thesis will make sure a job will visit every node at least once before returning to their originating node. Note however, that nodes that would be forwarded to their originating node will be dropped instead.
 
 \subsection{Forward to neighbour}
@@ -63,8 +82,35 @@ This technique is analogue to the previous one. But instead of taking the next n
 
 
 \section{Simulation}
-How does the simulator work, what are its results
+As part of this thesis, a simulator is developed to easily test the discribed techniques. The code can be found at \url{http://code.google.com/p/powerofpaths/}.
+
+//TODO update when changed
+
+The usage is described below:
+\begin{lstlisting}
+Usage: -r -s long -j double -a double -n long -p long -l long -t long -h type
+	-r	Random seed
+	-s	Set seed			(default: 0)
+	-j	Job length			(default: 1.0)
+	-a	Interarrival time		(default: 1.0)
+	-n	Ring size			(default: 100)
+	-c	Processing units per node	(default: 1)
+	-p	Print progress interval		(default: -1 - disabled)
+	-l	Simulation length		(default: 3600)
+	-t	Repetition			(default: 1)
+	-h	Print this help
+	 type	right | switch | randswitch | evenswitch | prime | randprime | randunvisited | totop
+\end{lstlisting}
+
+We used the simulator to test the various forwarding techniques.
+
+//TODO How does the simulator work, what are its results
+
+Below, we will show the results we discovered using the various techniques described in section \ref{techniques}. We will plot the results against the average load of the system. Every result will be averaged over 10 random runs. Unless otherwise noted, the ring size is 100 and each node has one server.
 \subsection{Forward to neighbour}
+\subsubsection{Forward right}
+
+
 \subsection{Forward anywhere}
 
 \section{Numerical Validation}
@@ -77,6 +123,12 @@ Which techniques work best in which invironments? Why? Runner up? Why do some te
 Thanks to everyone
 
 \section*{References}
-Hope to at least find dome :s
+Insert them
+
+\appendix
+\appendixpage
+\addappheadtotoc
+\section{Source code}
+Insert source code here
 
 \end{document}
