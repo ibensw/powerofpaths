@@ -1,4 +1,4 @@
-function [Ql] = lump(Q)
+function [Ql S] = lump(Q)
 %LUMP Summary of this function goes here
 %   Detailed explanation goes here
 
