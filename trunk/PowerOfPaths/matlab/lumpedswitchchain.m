@@ -58,7 +58,12 @@ function [Q S] = lumpedswitchchain( nodes, rate, p )
 	for i=1:s
 		for j=0:2^nodes-1
 			if i > R(j+1)
-				if bitcount(bitxor(S(i),j))==1
+				x=bitxor(S(i),j);
+%				if (bits==x)
+				if sum(bits==x)
+%				if bitcount(bitxor(S(i),j))==1
+%				if length(find(x))
+%				if (S(i) ~= j)
 					Q(i,R(j+1))=Q(i,R(j+1))+1;
 				end
 			end
