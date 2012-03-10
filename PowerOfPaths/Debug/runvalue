@@ -1,0 +1,9 @@
+#!/bin/bash
+
+for j in 0.8; do
+	for v in 0.1 0.2 0.3 0.4; do
+		echo $j - $v
+		./run randswitch-$v.$j.dat -j $j -r -v $v randswitch
+	done
+done
+
