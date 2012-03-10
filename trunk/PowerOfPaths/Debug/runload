@@ -10,7 +10,7 @@ for load in 0.05 0.1 0.15 0.2 0.25 0.3 0.35 0.4 0.45 0.5 0.55 0.6 0.66 0.7 0.75 
 	#echo ./PowerOfPaths -r -t 1000 -a $ia $a
 	echo -n -e "$load\t"
 	echo  -n -e "$load\t" >> $f
-	result=`./PowerOfPaths -r -t 1000 -a $ia -l $t $a | grep "Avg. hops/job (finished):" | cut -d: -f2`
+	result=`./PowerOfPaths -r -t 1000 -a $ia -l $t $f | grep "Avg. hops/job (finished):" | cut -d: -f2`
 	echo $result >> $f
 	echo $result
 done
