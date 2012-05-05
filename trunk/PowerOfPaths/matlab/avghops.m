@@ -1,9 +1,11 @@
 function [ avg ] = avghops(Q, d)
+%Calculate average number of times a job is forwarded
+%Set parameter d=0 to disable output
+
 	if nargin < 2
 		d=1;
 	end
 
-	%a full vector so make it full
 	steady=full(ctmcsteadystate(Q));
 
 	len=length(Q);

@@ -1,4 +1,10 @@
 function [r, refindex, coverage] = makestates(rsize)
+%Generate lumped states
+%	RETURN:
+%		r:	a vector of the remaining states, ordered
+%		refindex:	a reference index, each old state points to the new lumped state
+%		coverade:	a count how many states a lumped state represents
+
 	powers = 2.^[0:rsize-1];
 	
 	function [v] = rotate(a, size)

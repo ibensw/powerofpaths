@@ -1,6 +1,9 @@
 function [Q S] = lumpedswitchchain( nodes, rate, p )
-%LUMPEDSWITCHCHAIN Summary of this function goes here
-%   Detailed explanation goes here
+%LUMPEDSWITCHCHAIN Generate a Markov Chain using the random switch left/right method
+%   Parameters:
+%		nodes	number of nodes
+%		rate	rate lambda
+%		p		probability p that a job is forwarded right
 
 	function [c] = bitcount(v)
 		c=0;
@@ -59,11 +62,7 @@ function [Q S] = lumpedswitchchain( nodes, rate, p )
 		for j=0:2^nodes-1
 			if i > R(j+1)
 				x=bitxor(S(i),j);
-%				if (bits==x)
 				if sum(bits==x)
-%				if bitcount(bitxor(S(i),j))==1
-%				if length(find(x))
-%				if (S(i) ~= j)
 					Q(i,R(j+1))=Q(i,R(j+1))+1;
 				end
 			end

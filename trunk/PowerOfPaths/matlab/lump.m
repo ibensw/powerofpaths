@@ -1,6 +1,6 @@
 function [Ql S] = lump(Q)
-%LUMP Summary of this function goes here
-%   Detailed explanation goes here
+%LUMP Lump a matrix representing a Markov Chain
+%   The states of the matrix Q must represent the availability of the the servers
 
 	[S R C] = makestates(log2(length(Q)));
 
@@ -9,7 +9,6 @@ function [Ql S] = lump(Q)
 	[i j s] = find(Q);
 
 	for x=1:length(i)
-		%[i(x) j(x) s(x); R(i(x)) R(j(x)) 0; S(R(i(x))) S(R(j(x))) 0];
 		Ql(R(i(x)),R(j(x)))=Ql(R(i(x)),R(j(x)))+s(x);
 	end
 

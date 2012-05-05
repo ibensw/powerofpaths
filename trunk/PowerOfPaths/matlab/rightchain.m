@@ -1,6 +1,5 @@
 function [Q] = rightchain(size, rate)
-%RIGHTCHAIN Summary of this function goes here
-%   Detailed explanation goes here
+%RIGHTCHAIN Generate a Markov Chain that always forwards right
 
     totalsize = 2^size;
     Q = sparse(totalsize, totalsize);
