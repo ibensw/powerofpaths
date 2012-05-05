@@ -1,20 +1,59 @@
-\contentsline {section}{\numberline {1}Setup}{4}{section.1}
-\contentsline {subsection}{\numberline {1.1}Techniques}{4}{subsection.1.1}
-\contentsline {subsection}{\numberline {1.2}Forward to neighbour}{4}{subsection.1.2}
-\contentsline {subsubsection}{\numberline {1.2.1}Forward right}{4}{subsubsection.1.2.1}
-\contentsline {subsubsection}{\numberline {1.2.2}Left/Right forward}{4}{subsubsection.1.2.2}
-\contentsline {subsubsection}{\numberline {1.2.3}Random Left/Right forward with parameter $p$}{5}{subsubsection.1.2.3}
-\contentsline {subsubsection}{\numberline {1.2.4}Position-dependant forward}{5}{subsubsection.1.2.4}
-\contentsline {subsection}{\numberline {1.3}Forward anywhere}{5}{subsection.1.3}
-\contentsline {subsubsection}{\numberline {1.3.1}Random unvisited}{5}{subsubsection.1.3.1}
-\contentsline {subsubsection}{\numberline {1.3.2}Round Robin unvisited}{5}{subsubsection.1.3.2}
-\contentsline {subsubsection}{\numberline {1.3.3}Coprime offset}{5}{subsubsection.1.3.3}
-\contentsline {subsubsection}{\numberline {1.3.4}Random Coprime offset}{5}{subsubsection.1.3.4}
-\contentsline {section}{\numberline {2}Simulation}{5}{section.2}
-\contentsline {subsection}{\numberline {2.1}Forward to neighbour}{6}{subsection.2.1}
-\contentsline {subsubsection}{\numberline {2.1.1}Forward right}{6}{subsubsection.2.1.1}
-\contentsline {subsection}{\numberline {2.2}Forward anywhere}{6}{subsection.2.2}
-\contentsline {section}{\numberline {3}Numerical Validation}{6}{section.3}
-\contentsline {section}{\numberline {4}Conclusion}{6}{section.4}
-\contentsline {section}{Appendices}{7}{section*.6}
-\contentsline {section}{\numberline {A}Source code}{7}{appendix.A}
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}
+\defcounter {refsection}{0}
+\contentsline {section}{\numberline {1}Setup}{3}
+\defcounter {refsection}{0}
+\contentsline {subsection}{\numberline {1.1}Forwarding algorithms}{4}
+\defcounter {refsection}{0}
+\contentsline {subsection}{\numberline {1.2}Forward to neighbour}{4}
+\defcounter {refsection}{0}
+\contentsline {subsubsection}{\numberline {1.2.1}Forward right}{4}
+\defcounter {refsection}{0}
+\contentsline {subsubsection}{\numberline {1.2.2}Left/Right forward}{4}
+\defcounter {refsection}{0}
+\contentsline {subsubsection}{\numberline {1.2.3}Random Left/Right forward with parameter $p$}{4}
+\defcounter {refsection}{0}
+\contentsline {subsection}{\numberline {1.3}Forward anywhere}{4}
+\defcounter {refsection}{0}
+\contentsline {subsubsection}{\numberline {1.3.1}Random unvisited}{4}
+\defcounter {refsection}{0}
+\contentsline {subsubsection}{\numberline {1.3.2}Round Robin unvisited}{5}
+\defcounter {refsection}{0}
+\contentsline {subsubsection}{\numberline {1.3.3}Coprime offset}{5}
+\defcounter {refsection}{0}
+\contentsline {subsubsection}{\numberline {1.3.4}Random Coprime offset}{5}
+\defcounter {refsection}{0}
+\contentsline {section}{\numberline {2}Simulation}{5}
+\defcounter {refsection}{0}
+\contentsline {subsection}{\numberline {2.1}Measure}{5}
+\defcounter {refsection}{0}
+\contentsline {subsection}{\numberline {2.2}Forward to neighbour}{6}
+\defcounter {refsection}{0}
+\contentsline {subsubsection}{\numberline {2.2.1}Left/Right Forward}{6}
+\defcounter {refsection}{0}
+\contentsline {subsubsection}{\numberline {2.2.2}Random Left/Right forward with parameter $p$}{6}
+\defcounter {refsection}{0}
+\contentsline {subsubsection}{\numberline {2.2.3}Position-dependant forwarding}{6}
+\defcounter {refsection}{0}
+\contentsline {subsection}{\numberline {2.3}Forward anywhere}{7}
+\defcounter {refsection}{0}
+\contentsline {subsubsection}{\numberline {2.3.1}Random unvisited}{7}
+\defcounter {refsection}{0}
+\contentsline {section}{\numberline {3}Numerical Validation}{8}
+\defcounter {refsection}{0}
+\contentsline {subsection}{\numberline {3.1}Forward Right}{8}
+\defcounter {refsection}{0}
+\contentsline {subsection}{\numberline {3.2}Random Left/Right forward with parameter $p$}{9}
+\defcounter {refsection}{0}
+\contentsline {subsection}{\numberline {3.3}Random Coprime offset}{9}
+\defcounter {refsection}{0}
+\contentsline {subsection}{\numberline {3.4}Random Unvisited}{9}
+\defcounter {refsection}{0}
+\contentsline {subsection}{\numberline {3.5}Lumped states}{9}
+\defcounter {refsection}{0}
+\contentsline {subsection}{\numberline {3.6}Equivalent techniques}{10}
+\defcounter {refsection}{0}
+\contentsline {section}{\numberline {4}Conclusion}{10}
+\defcounter {refsection}{0}
+\contentsline {section}{\numberline {A}Simulator source code}{10}
+\defcounter {refsection}{0}
+\contentsline {section}{\numberline {B}MATLAB Numerical evaluation code}{10}

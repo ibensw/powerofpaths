@@ -1,6 +1,5 @@
 function [Q] = randunvisitedchain(size, rate)
-%RIGHTCHAIN Summary of this function goes here
-%   Detailed explanation goes here
+%Generate a Markov Chain where forward anywhere is used as forwarding technique
 
     totalsize = 2^size;
     Q = sparse(totalsize, totalsize);

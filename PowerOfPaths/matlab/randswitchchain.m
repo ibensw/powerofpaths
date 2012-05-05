@@ -1,7 +1,4 @@
 function [Q] = randswitchchain(size, rate, p)
-%RIGHTCHAIN Summary of this function goes here
-%   Detailed explanation goes here
-
 	if nargin < 3
 		p=0.5;
 	end

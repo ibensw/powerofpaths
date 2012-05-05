@@ -1,4 +1,5 @@
 function [ avg ] = lumpavghops(Q)
+%Get the average number of times a job is forwarded when the state matrix is lumped
 
 	fullsize=length(Q);
 	[Q S]=lump(Q);

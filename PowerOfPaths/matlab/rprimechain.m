@@ -1,4 +1,5 @@
 function [ Q ] = rprimechain( size, rate )
+%Generate a Markov Chain that chooses a random coprime a uses this as forwarding offset
 
 	totalsize=2^size;
 	rprimes=[];
