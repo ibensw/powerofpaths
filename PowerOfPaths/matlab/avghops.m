@@ -1,6 +1,9 @@
 function [ avg ] = avghops(Q, d)
-%Calculate average number of times a job is forwarded
-%Set parameter d=0 to disable output
+%AVGHOPS Calculate average number of times a job is forwarded
+%Parameters:
+%	Q	The matrix representing a markov chain
+%Optional:
+%	d	Debug mode, default=1, disable debug output=0
 
 	if nargin < 2
 		d=1;

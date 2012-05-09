@@ -1,4 +1,10 @@
 function [Q] = randswitchchain(size, rate, p)
+%RANDSWITCHCHAIN Generates a Markov Chain that randomly forward left or right
+%Parameters:
+%	size	The size of the Markov Chain
+%	rate	The rate of arrivals
+%	p		The probability a job is forwarded right	
+
 	if nargin < 3
 		p=0.5;
 	end

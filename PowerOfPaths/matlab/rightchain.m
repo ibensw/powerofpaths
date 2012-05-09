@@ -1,5 +1,8 @@
 function [Q] = rightchain(size, rate)
 %RIGHTCHAIN Generate a Markov Chain that always forwards right
+%Parameters:
+%	size	The size of the ring
+%	rate	The rate of arrivals
 
     totalsize = 2^size;
     Q = sparse(totalsize, totalsize);

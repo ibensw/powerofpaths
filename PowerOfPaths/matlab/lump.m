@@ -1,6 +1,11 @@
 function [Ql S] = lump(Q)
 %LUMP Lump a matrix representing a Markov Chain
-%   The states of the matrix Q must represent the availability of the the servers
+%Parameters:
+%	Q	The matrix that should be lumped
+%Return:
+%	Ql	The lumped matrix representation
+%	S	The states that are used in the lumped matrix
+%The states of the matrix Q must represent the availability of the the servers
 
 	[S R C] = makestates(log2(length(Q)));
 

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.2.13)  5 MAY 2012 17:46
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.2.13)  9 MAY 2012 11:48
 entering extended mode
  %&-line parsing enabled.
 **thesis.tex
@@ -306,6 +306,113 @@ Package biblatex Info: ... file 'biblatex.cfg' found.
 (/usr/share/texmf/tex/latex/biblatex/biblatex.cfg
 File: biblatex.cfg 
 ))
+(/usr/share/texmf-texlive/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2009/10/09 v6.79a Hypertext links for LaTeX
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2009/04/10 v2.0 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in pdf mode detected.
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifvtex.sty
+Package: ifvtex 2008/11/04 v1.4 Switches for detecting VTeX and its modes (HO)
+Package ifvtex Info: VTeX not detected.
+)
+(/usr/share/texmf-texlive/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2009/01/23 v0.5 Provides ifxetex conditional
+)
+(/usr/share/texmf-texlive/tex/latex/oberdiek/hycolor.sty
+Package: hycolor 2009/10/02 v1.5 Code for color options of hyperref/bookmark (H
+O)
+
+(/usr/share/texmf-texlive/tex/latex/oberdiek/xcolor-patch.sty
+Package: xcolor-patch 2009/10/02 xcolor patch
+))
+\@linkdim=\dimen124
+\Hy@linkcounter=\count179
+\Hy@pagecounter=\count180
+
+(/usr/share/texmf-texlive/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2009/10/09 v6.79a Hyperref: PDFDocEncoding definition (HO)
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2007/12/12 v1.2 Prefix for e-TeX command names (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2007/09/09 v1.2 Providing info/warning/message (HO)
+)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)
+(/usr/share/texmf-texlive/tex/latex/latexconfig/hyperref.cfg
+File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
+)
+(/usr/share/texmf-texlive/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2009/08/13 v3.4 Keyval support for LaTeX options (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2009/07/30 v1.5 Key value parser with default handler suppor
+t (HO)
+))
+Package hyperref Info: Hyper figures OFF on input line 2975.
+Package hyperref Info: Link nesting OFF on input line 2980.
+Package hyperref Info: Hyper index ON on input line 2983.
+Package hyperref Info: Plain pages OFF on input line 2990.
+Package hyperref Info: Backreferencing OFF on input line 2995.
+
+Implicit mode ON; LaTeX internals redefined
+Package hyperref Info: Bookmarks ON on input line 3191.
+LaTeX Info: Redefining \url on input line 3428.
+(/usr/share/texmf-texlive/tex/generic/oberdiek/bitset.sty
+Package: bitset 2007/09/28 v1.0 Data type bit set (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/intcalc.sty
+Package: intcalc 2007/09/27 v1.1 Expandable integer calculations (HO)
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/bigintcalc.sty
+Package: bigintcalc 2007/11/11 v1.1 Expandable big integer calculations (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2009/09/23 v0.6 LuaTeX support for pdfTeX utility functions
+ (HO)
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2009/04/17 v1.2 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+(/usr/share/texmf-texlive/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2009/08/05 v1.0 Some LaTeX kernel commands for general use (HO
+)
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+)))
+\Fld@menulength=\count181
+\Field@Width=\dimen125
+\Fld@charsize=\dimen126
+\Field@toks=\toks24
+Package hyperref Info: Hyper figures OFF on input line 4377.
+Package hyperref Info: Link nesting OFF on input line 4382.
+Package hyperref Info: Hyper index ON on input line 4385.
+Package hyperref Info: backreferencing OFF on input line 4392.
+Package hyperref Info: Link coloring OFF on input line 4397.
+Package hyperref Info: Link coloring with OCG OFF on input line 4402.
+Package hyperref Info: PDF/A mode OFF on input line 4407.
+
+(/usr/share/texmf-texlive/tex/generic/oberdiek/atbegshi.sty
+Package: atbegshi 2008/07/31 v1.9 At begin shipout hook (HO)
+)
+\Hy@abspage=\count182
+\c@Item=\count183
+\c@Hfootnote=\count184
+)
+*hyperref using default driver hpdftex*
+(/usr/share/texmf-texlive/tex/latex/hyperref/hpdftex.def
+File: hpdftex.def 2009/10/09 v6.79a Hyperref driver for pdfTeX
+\Fld@listcount=\count185
+)
 (/usr/share/texmf-texlive/tex/latex/graphics/color.sty
 Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
 
@@ -314,143 +421,308 @@ File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
 )
 Package color Info: Driver file: pdftex.def on input line 130.
 )
+(/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2004/09/05 1.3 listings language file
+)
 Package biblatex Info: Trying to load language 'english'...
 Package biblatex Info: ... file 'english.lbx' found.
 
 (/usr/share/texmf/tex/latex/biblatex/lbx/english.lbx
 File: english.lbx 2010/03/19 v0.9a biblatex localization
 )
-\@quotelevel=\count179
- (./thesis.aux
-
-LaTeX Warning: Label `figlr' multiply defined.
-
-)
+\@quotelevel=\count186
+ (./thesis.aux)
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 46.
-LaTeX Font Info:    ... okay on input line 46.
- (/usr/share/texmf/tex/context/base/supp-pdf.mkii
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 48.
+LaTeX Font Info:    ... okay on input line 48.
+
+(/usr/share/texmf/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count180
-\scratchdimen=\dimen124
+\scratchcounter=\count187
+\scratchdimen=\dimen127
 \scratchbox=\box33
-\nofMPsegments=\count181
-\nofMParguments=\count182
-\everyMPshowfont=\toks24
-\MPscratchCnt=\count183
-\MPscratchDim=\dimen125
-\MPnumerator=\count184
-\everyMPtoPDFconversion=\toks25
+\nofMPsegments=\count188
+\nofMParguments=\count189
+\everyMPshowfont=\toks25
+\MPscratchCnt=\count190
+\MPscratchDim=\dimen128
+\MPnumerator=\count191
+\everyMPtoPDFconversion=\toks26
 )
-\c@lstlisting=\count185
+\c@lstlisting=\count192
 \openout3 = `thesis-blx.bib'.
 
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'thesis.bbl' found.
  (./thesis.bbl)
-Package biblatex Info: Reference section=0 on input line 46.
-Package biblatex Info: Reference segment=0 on input line 46.
-LaTeX Font Info:    Try loading font information for U+msa on input line 47.
+Package biblatex Info: Reference section=0 on input line 48.
+Package biblatex Info: Reference segment=0 on input line 48.
+Package hyperref Info: Link coloring OFF on input line 48.
+ (/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
+Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
+
+(/usr/share/texmf-texlive/tex/latex/oberdiek/refcount.sty
+Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
+)
+\c@section@level=\count193
+)
+LaTeX Info: Redefining \ref on input line 48.
+LaTeX Info: Redefining \pageref on input line 48.
+ (./thesis.out)
+(./thesis.out)
+\@outlinefile=\write4
+\openout4 = `thesis.out'.
+
+\AtBeginShipoutBox=\box34
+LaTeX Font Info:    Try loading font information for U+msa on input line 50.
  (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 47.
+LaTeX Font Info:    Try loading font information for U+msb on input line 50.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 ) [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [1] (./thesis.toc)
-\tf@toc=\write4
-\openout4 = `thesis.toc'.
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]pdfTeX warning (ext4): dest
+ination with the same identifier (name{page.1}) has been already used, duplicat
+e ignored
+<to be read again> 
+                   \relax 
+l.54 \newpage
+              [1] (./thesis.toc)
+\tf@toc=\write5
+\openout5 = `thesis.toc'.
 
  [2]
-<resources/ring.pdf, id=17, 510.69818pt x 585.4916pt>
+<resources/ring.pdf, id=173, 510.69818pt x 585.4916pt>
 File: resources/ring.pdf Graphic file (type pdf)
- <use resources/ring.pdf>
-[3 <./resources/ring.pdf>] [4]
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 138.
 
+<use resources/ring.pdf> [3 <./resources/ring.pdf>]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 100.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 100.
+
+[4]
+
+! Undefined control sequence.
+\lstlisting ->\def \lstenv@name 
+                                {lstlisting}\begingroup \lst@setcatcodes \ca...
+l.145 \end{lstlisting}
+                      
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Package Listings Error: Extra \endlstlisting.
+
+See the Listings package documentation for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.145 \end{lstlisting}
+                      
+I'm ignoring this, since I wasn't doing a \def {lstlisting}\begingroup \catcode
+ `\spacefactor \@m 11\relax \catcode `\==12\relax \catcode \active =\active \ls
+tlisting@.
+
+
+! LaTeX Error: \begin{equation*} on input line 133 ended by \end{lstlisting}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.145 \end{lstlisting}
+                      
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
+
+! Missing $ inserted.
+<inserted text> 
+                $
+l.145 \end{lstlisting}
+                      
+I've inserted something that you may have forgotten.
+(See the <inserted text> above.)
+With luck, this will get me unwedged. But if you
+really didn't forget anything, try typing `2' now; then
+my insertion and my current dilemma will both disappear.
+
+! Display math should end with $$.
+<to be read again> 
+                   \endgroup 
+l.145 \end{lstlisting}
+                      
+The `$' that I just saw supposedly matches a previous `$$'.
+So I shall assume that you typed `$$' both times.
+
+
+Overfull \hbox (1584.14224pt too wide) detected at line 145
+\OML/cmm/m/it/10 language \OT1/cmr/m/n/10 = \OML/cmm/m/it/10 Python\OT1/cmr/m/n
+/10 ][]\OML/cmm/m/it/10 Usage \OT1/cmr/m/n/10 : \OMS/cmsy/m/n/10 ^^@\OML/cmm/m/
+it/10 r \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 slong \OMS/cmsy/m/n/10 ^^@ \OML/c
+mm/m/it/10 jdouble \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 adouble \OMS/cmsy/m/n/
+10 ^^@ \OML/cmm/m/it/10 nlong \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 plong \OMS/
+cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 llong \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 tl
+ong \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 htype \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m
+/it/10 rRandomseed \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 sSetseed\OT1/cmr/m/n/1
+0 (\OML/cmm/m/it/10 default \OT1/cmr/m/n/10 : 0) \OMS/cmsy/m/n/10 ^^@ \OML/cmm/
+m/it/10 jJoblength\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 default \OT1/cmr/m/n/10 : 1
+\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 0) \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 aInt
+erarrivaltime\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 default \OT1/cmr/m/n/10 : 1\OML/
+cmm/m/it/10 :\OT1/cmr/m/n/10 0) \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 nRingsize
+\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 default \OT1/cmr/m/n/10 : 100) \OMS/cmsy/m/n/
+10 ^^@ \OML/cmm/m/it/10 pPrintprogressinterval\OT1/cmr/m/n/10 (\OML/cmm/m/it/10
+ default \OT1/cmr/m/n/10 : \OMS/cmsy/m/n/10 ^^@\OT1/cmr/m/n/10 1 \OMS/cmsy/m/n/
+10 ^^@ \OML/cmm/m/it/10 disabled\OT1/cmr/m/n/10 ) \OMS/cmsy/m/n/10 ^^@ \OML/cmm
+/m/it/10 lSimulationlength\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 default \OT1/cmr/m/
+n/10 : 3600) \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/it/10 tRepetition\OT1/cmr/m/n/10 (
+\OML/cmm/m/it/10 default \OT1/cmr/m/n/10 : 1) \OMS/cmsy/m/n/10 ^^@ \OML/cmm/m/i
+t/10 hPrintthishelptyperight\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 switch\OMS/cmsy/
+m/n/10 j\OML/cmm/m/it/10 randswitch\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 evenswitc
+h\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 prime\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 ran
+dprime\OMS/cmsy/m/n/10 j\OML/cmm/m/it/10 randunvisited\OMS/cmsy/m/n/10 j\OML/cm
+m/m/it/10 totop
+ []
+
+[5] <data/right.pdf, id=267, 415.5525pt x 407.5225pt>
+File: data/right.pdf Graphic file (type pdf)
+ <use data/right.pdf>
+[6 <./data/right.pdf>]
+<data/switchright.pdf, id=280, 432.61626pt x 407.5225pt>
+File: data/switchright.pdf Graphic file (type pdf)
+
+<use data/switchright.pdf>
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 179.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 179.
+
+<data/randswitchright.pdf, id=282, 444.66125pt x 407.5225pt>
+File: data/randswitchright.pdf Graphic file (type pdf)
+
+<use data/randswitchright.pdf> [7 <./data/switchright.pdf> <./data/randswitchri
+ght.pdf>] <data/evenswitchright.pdf, id=300, 444.66125pt x 407.5225pt>
+File: data/evenswitchright.pdf Graphic file (type pdf)
+
+<use data/evenswitchright.pdf>
+Overfull \hbox (12.2228pt too wide) in paragraph at lines 209--210
+\OT1/cmr/m/n/10 To val-i-date the re-sults ob-tained in the pre-vi-ous sec-tion
+, we mod-elled the scheduling-
+ []
+
+[8 <./data/evenswitchright.pdf>]
+Overfull \hbox (72.8061pt too wide) detected at line 229
+\OML/cmm/m/it/10 Q \OT1/cmr/m/n/10 = []
+ []
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 235.
+
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 235.
+
+
+Overfull \hbox (72.8061pt too wide) detected at line 252
+\OML/cmm/m/it/10 Q \OT1/cmr/m/n/10 = []
+ []
+
+[9] [10] (../matlab/rightchain.m) (../matlab/randswitchchain.m [11]
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 8.
+
+(/usr/share/texmf-texlive/tex/latex/base/omlcmr.fd
+File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <8> not available
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 8.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 32.
 
 (/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 138.
- [5]
-<data/right.pdf, id=102, 415.5525pt x 407.5225pt>
-File: data/right.pdf Graphic file (type pdf)
- <use data/right.pdf>
-<data/switchright.pdf, id=103, 432.61626pt x 407.5225pt>
-File: data/switchright.pdf Graphic file (type pdf)
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 32.
+) (../matlab/rprimechain.m
+[12]) (../matlab/runvisitedchain.m [13]) (../matlab/avghops.m)
+(../matlab/ruavghops.m [14]) (../matlab/ctmcsteadystate.m)
+(../matlab/lumpavghops.m [15]) (../matlab/lump.m) (../matlab/makestates.m
+[16] [17]) [18]
 
-<use data/switchright.pdf>
-<data/randswitchright.pdf, id=104, 444.66125pt x 407.5225pt>
-File: data/randswitchright.pdf Graphic file (type pdf)
+! LaTeX Error: \begin{[} on input line 133 ended by \end{document}.
 
-<use data/randswitchright.pdf>
-<data/evenswitchright.pdf, id=105, 444.66125pt x 407.5225pt>
-File: data/evenswitchright.pdf Graphic file (type pdf)
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.352 \end{document}
+                    
+Your command was ignored.
+Type  I <command> <return>  to replace it with another command,
+or  <return>  to continue without it.
 
-<use data/evenswitchright.pdf> [6 <./data/right.pdf>]
-Overfull \hbox (12.2228pt too wide) in paragraph at lines 202--203
-\OT1/cmr/m/n/10 To val-i-date the re-sults ob-tained in the pre-vi-ous sec-tion
-, we mod-elled the scheduling-
- []
+(./thesis.aux)
 
-[7 <./data/switchright.pdf> <./data/randswitchright.pdf>]
-Overfull \hbox (72.8061pt too wide) detected at line 222
-\OML/cmm/m/it/10 Q \OT1/cmr/m/n/10 = []
- []
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
 
-[8 <./data/evenswitchright.pdf>]
-Overfull \hbox (72.8061pt too wide) detected at line 245
-\OML/cmm/m/it/10 Q \OT1/cmr/m/n/10 = []
- []
+ )
+(\end occurred inside a group at level 1)
 
-[9] [10] (./thesis.aux)
-
-LaTeX Warning: There were multiply-defined labels.
-
- ) 
+### semi simple group (level 1) entered at line 133 (\begingroup)
+### bottom level 
 Here is how much of TeX's memory you used:
- 7551 strings out of 493848
- 109075 string characters out of 1152823
- 310712 words of memory out of 3000000
- 10747 multiletter control sequences out of 15000+50000
+ 11811 strings out of 493848
+ 171302 string characters out of 1152823
+ 679970 words of memory out of 3000000
+ 14443 multiletter control sequences out of 15000+50000
  12318 words of font info for 48 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 30i,7n,32p,863b,1296s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sha
-re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-te
-xlive/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texmf-texlive/font
-s/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/pub
-lic/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfont
-s/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.
-pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/sh
-are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-te
-xlive/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/
-type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-texlive/fonts/type1/public/
-amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/c
-mr8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></u
-sr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/tex
-mf-texlive/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-texlive/f
-onts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-texlive/fonts/type1/
-public/amsfonts/cm/cmtt10.pfb>
-Output written on thesis.pdf (11 pages, 557615 bytes).
+ 38i,7n,40p,863b,1856s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10
+.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/
+share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texm
+f-texlive/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/f
+onts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/
+public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsf
+onts/cm/cmmi7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi
+8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/
+share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-
+texlive/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/font
+s/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-texlive/fonts/type1/publi
+c/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
+/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
+/usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/t
+exmf-texlive/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-texlive
+/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-texlive/fonts/type
+1/public/amsfonts/cm/cmtt10.pfb>
+Output written on thesis.pdf (19 pages, 691122 bytes).
 PDF statistics:
- 206 PDF objects out of 1000 (max. 8388607)
- 0 named destinations out of 1000 (max. 500000)
- 32 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 918 PDF objects out of 1000 (max. 8388607)
+ 453 named destinations out of 1000 (max. 500000)
+ 272 words of extra memory for PDF output out of 10000 (max. 10000000)
 
