@@ -1,9 +1,11 @@
 function [r, refindex, coverage] = makestates(rsize)
 %Generate lumped states
-%	RETURN:
-%		r:	a vector of the remaining states, ordered
-%		refindex:	a reference index, each old state points to the new lumped state
-%		coverade:	a count how many states a lumped state represents
+%Parameters:
+%	rsize		Size of the ring (or log2 of the number of states of the matrix)
+%Return:
+%	r		Vector of the remaining states, ordered
+%	refindex	Reference index, each old state points to the new lumped state
+%	coverage	How many states the lumped state with the same index represents
 
 	powers = 2.^[0:rsize-1];
 	
@@ -26,9 +28,6 @@ function [r, refindex, coverage] = makestates(rsize)
 	for i=0:(2^rsize)-1
 		refindex = [refindex makesmallest(i)];
 	end
-	%refindex = arrayfun(arrayfun(@(x) makesmallest(x), 0:(2^rsize)-1));
-	%refindex = arrayfun(makesmallest, 0:(2^rsize)-1);
-	
 	
 	function [c] = cover(a, size)
 		c=1;
@@ -42,11 +41,8 @@ function [r, refindex, coverage] = makestates(rsize)
 
 	function [r] = smallest(a, size)
 		r=a;
-		%disp('smallest')
-		%size
 		for i=1:(size-1)
 			a=rotate(a,size);
-			%dec2bin(a);
 			if a<r
 				r=a;
 			end
@@ -68,12 +64,10 @@ function [r, refindex, coverage] = makestates(rsize)
 
 	function [r] = makecombs(k, n)
 		leadzeros = ceil(n/k)-1;
-		%disp('Leadingzeros: '); disp(leadzeros);
 		fullsize = n - leadzeros - 1;
 		r = f(0,k-1,1,fullsize)*2 + 1;
 	end
 
-	%r = f(0,2,1)
 	r=[0 2^(rsize)-1];
 	for i=1:rsize-1
 		r = [r makecombs(i, rsize)];

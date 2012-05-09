@@ -1,5 +1,8 @@
 function [ Q ] = runvisitedchain( size, rate )
 %RUNVISITEDCHAIN Generate a Markov Chain that forwards to an unvisited node
+%Parameters:
+%	size	The size of the ring
+%	rate	The arrival rate
 
 	rate = rate*size;
 

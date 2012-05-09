@@ -8,6 +8,8 @@
 \usepackage{appendix}
 \usepackage{listings}
 \usepackage{biblatex}
+\usepackage{hyperref}
+
 \bibliography{refs.bib}
 \usepackage{color}
 \definecolor{dkgreen}{rgb}{0,0.6,0}
@@ -15,7 +17,7 @@
 \definecolor{mauve}{rgb}{0.58,0,0.82}
 
 \lstset{ %
-%  language=Octave,                % the language of the code
+  language=Octave,                % the language of the code
   basicstyle=\footnotesize,           % the size of the fonts that are used for the code
   numbers=left,                   % where to put the line-numbers
   numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
@@ -71,7 +73,7 @@ Note that the cost of forwarding a job is neglected. Together with the presumpti
 \centering
 \includegraphics[width=0.8\textwidth,clip=true,trim=0px 225px 0px 0px]{resources/ring.pdf}
 \caption{A ring structured network}
-\label{figlr}
+\label{figring}
 \end{figure}
 
 The performance of a forwarding algorithms is measured by the average number of hops a job must visit before being executed. The goal of the algorithms is to minimize this number by spreading the load evenly along the ring. 
@@ -98,32 +100,36 @@ A variant to the previous algorithm is the Left/Right forward technique. Instead
 \subsubsection{Random Left/Right forward with parameter $p$}
 This technique is a variant of the Left/Right forward algorithm. However, instead of alternating the direction for each new job, a node will forward a job to its right with probability $p$ and to its left with probability $1-p$. As the previous technique, the direction is saved in the job's metadata and subsequent nodes must maintain this direction when forwarding.
 
-%\subsubsection{Position-dependant forwarding}
-%Another technique consists of always choosing the same direction at the incoming node, but alternating that direction for every node. This technique gives a certain node ID 0, its right neighbour ID 1, and so one, until every node in the ring has an ID. When a node its ID is even, it will always forward new jobs right, if its ID is odd, if will forward them left.
+\subsubsection{Position-dependant forwarding}
+As shown in figure \ref{figring}, each node in the ring has an unique ID. Except the for node with id $0$ and $N-1$, neigbouring are succeeding. When nodes uses this algorithm, nodes will always forward a new job in the same direction: to the right when the node's id is even, to the left otherwise. As previous algorithms, the direction is saved in the job's metadata and this direction must be used if other nodes must forward the job.
 
 \subsection{Forward anywhere}
-The ring strucure can be used in real networks, however in many cases the ring is no more than a virtual overlay over another structure (e.g. the internet). In these networks each node is able to connect to each other node. In these networks, other forwarding algorithms can be used.
+The ring strucure can be used in real networks, however in many cases the ring is no more than a virtual overlay over another structure (e.g. the internet). In these networks each node is able to connect to each other node and other forwarding algorithms can be used.
 
 \subsubsection{Random unvisited}
-
-
-When nodes aply this technique, a forwarding node will save its ID in the jobs metadata. When another busy node must forward the job it will choose a random node that has not been visited before.
-
-%TODO This is analogue to an erlang thing
+The Random unvisited algorithm is the most basic algorithm in this category. Everytime a job is forwarded, a list of unvisited nodes is generated and a random node is choosen from this list. The current node is added to the list of visited nodes, which is found in the job's metadata.
 
 \subsubsection{Round Robin unvisited}
+This algorithm is similar to Random unvisited, but instead of choosing the next node at random a different technique is used. When a node must forward a job, it saves its id. When another job is forwarded, it will be forwarded to the the saved id + 1. However, when that id is a visited node, the job will be forwarded to the next node that is unvisited.
 
 \subsubsection{Coprime offset}
-Another technique uses coprimes. When the ring initialises, a list of numbers is generated. Every number from 1 to the size of the ring minus one, that is coprime to the size of the ring is saved in this list. For example, when the ring has 10 nodes, the list contains $\{1, 3 , 7 , 9\}$. When a busy node receives a job, the next number from the list is choosen and saved in the jobs metadata, the job will travel in steps equal to this number.
+Another algorithm is Coprime offset. This algorithm generates a list of all numbers smaller than $N$, and coprime to $N$. The first time a job is forwarded the next number of this list is selected. This is the job's forward offset and saved in the its metadata. When a job is forwarded, it is sent exactly this many hops farther. Because this number and $N$ are coprime, it will visit all nodes exactly once before being returned to its originating node. 
+
+Example:
+Consider a ring size of $N=10$ in which every node is busy. The list of coprimes is than generated: ${1, 3, 7, 9}$. Assume a job arrives at node $3$ and the last time node $3$ forwarded a job it was given offet $1$.
+Because this node is busy, the next number on the list ($3$) is selected and saved in the job's metadata. All nodes are busy so the job visits these nodes before being dropped: $3$ (arrival), $6, 9, 2, 5, 8, 1, 4, 7, 0$. Node $0$ will drop the job because the next node would be $3$, which is the node on wich the job arrived.
 
 \subsubsection{Random Coprime offset}
-This technique is analogue to the previous one. But instead of taking the next number from the list, a random value from this list is choosen.
-
+The Random Coprime offset algorithm is almost equal to Coprime offset. The difference between them is the decision of the offset value. Where it is the next number on the list in Coprime offset, a random value is taken from the list when using Random Coprime offset.
 
 \section{Simulation}
-The continuous time simulator is written in C++ wihtout any requirements except the STL. It's behavour can be controlled using a command line interface. The source code of the code can be found in appendix \ref{sourcecode}. The program can be used using the options given in the usage description given below.
+To evaluate the different algorithms discussed in the previous section, 2 methods will be used. Firstly using a simulation, the second method is the evaluation of this simulation using MATLAB. The validation method is further discussed in section \ref{secvalidation}.
 
-\lstset{caption={Simulator usage description}}
+The simulation is accomplished using a custom simulator. A continuous time simulator is written in C++, using no external requirements but the STL. The source code of the simulator can be found in appenix \ref{sourcecode} or on \url{http://code.google.com/p/powerofpaths/}.
+
+The simulator can be controlled using a command line interface, its usage is described below.
+
+\lstset{language=C,caption={Simulator usage description}}
 \begin{lstlisting}
 Usage: -r -s long -j double -a double -n long -p long -l long -t long -h type
 	-r	Random seed
@@ -138,10 +144,9 @@ Usage: -r -s long -j double -a double -n long -p long -l long -t long -h type
 	 type	right | switch | randswitch | evenswitch | prime | randprime | randunvisited | totop
 \end{lstlisting}
 
-All results are obtained using a ring size of 100 and random seeds.
-
-
 \subsection{Measure}
+The goal of the algorithms is to distribute the jobs evenly along the ring. This implies the number of hops a job must travel should be low. As a measure for our experiments, we will be using the average number of hops a job has travelled before being executed. Since 
+
 
 The goal is to destinguish algorithms on how well they distribute the incoming jobs. To achieve this we will compute how much a node is forwarded within the ring. We will only take jobs into account that could be succesfully completed to make the results more clear.
 
@@ -157,6 +162,9 @@ The baseline for these results will be the Forward Right technique, all other te
 \caption{The Forward Right baseline result}
 \label{baseline}
 \end{figure}
+
+All results are obtained using a ring size of 100 and random seeds.
+
 
 \subsection{Forward to neighbour}
 
@@ -199,6 +207,7 @@ This technique groups nodes in virtual clusters. When a job arrives in a node an
 This algorithm in the most straight forward and is the best performing from any of these techniques. However, it should be noted that each visited node must be stored into the job's metadata.
 
 \section{Numerical Validation}
+\label{secvalidation}
 To validate the results obtained in the previous section, we modelled the scheduling-techniques into Markov Chains. Using the steady state distribution of these chains, we can derive the average number of hops and the average loss. For $N$ nodes in a ring, the markov chain consists of $2^N$ number of states, where the bits represent whether a server is busy or idle. To optimize the computation time and memory requirements, we used sparse matrixes for the validation. The validation code is written in MATLAB.
 
 \subsection{Forward Right}
@@ -311,6 +320,35 @@ dit is de inhoud
 
 \section{MATLAB Numerical evaluation code}
 \label{matlabcode}
-een appendix
+
+\lstset{caption={rightchain.m}}
+\lstinputlisting{../matlab/rightchain.m}
+
+\lstset{caption={randswitchchain.m}}
+\lstinputlisting{../matlab/randswitchchain.m}
+
+\lstset{caption={rprimechain.m}}
+\lstinputlisting{../matlab/rprimechain.m}
+
+\lstset{caption={runvisitedchain.m}}
+\lstinputlisting{../matlab/runvisitedchain.m}
+
+\lstset{caption={avghops.m}}
+\lstinputlisting{../matlab/avghops.m}
+
+\lstset{caption={ruavghops.m}}
+\lstinputlisting{../matlab/ruavghops.m}
+
+\lstset{caption={ctmcsteadystate.m}}
+\lstinputlisting{../matlab/ctmcsteadystate.m}
+
+\lstset{caption={lumpavghops.m}}
+\lstinputlisting{../matlab/lumpavghops.m}
+
+\lstset{caption={lump.m}}
+\lstinputlisting{../matlab/lump.m}
+
+\lstset{caption={makestates.m}}
+\lstinputlisting{../matlab/makestates.m}
 
 \end{document}

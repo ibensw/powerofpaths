@@ -1,5 +1,7 @@
 function [ avg ] = lumpavghops(Q)
-%Get the average number of times a job is forwarded when the state matrix is lumped
+%LUMPAVGHOPS Get the average number of times a job is forwarded when the state matrix is lumped
+%Parameters:
+%	Q	A lumped matrix representation of a markov Chain
 
 	fullsize=length(Q);
 	[Q S]=lump(Q);
@@ -24,9 +26,8 @@ function [ avg ] = lumpavghops(Q)
 		end
 	end
 
-	fprintf('Sum:\t%f\n',sum(hops));
+	%fprintf('Sum:\t%f\n',sum(hops));
 
 	avg=(hops(1:nodes)*[0:nodes-1]')/(1-steady(lumpsize));
 
 end
-
