@@ -87,7 +87,7 @@ The performance of a forwarding algorithms is measured by the average number of 
 \subsection{Forwarding algorithms}
 Nodes that must forward a job must choose another node of the ring. Nodes have no information about other nodes, so is has no idea whether the node is idle or busy. The algorithms are grouped in two categories: forward to neighbour and forward anywhere.
 The first techniques allows a busy node to forward an incoming job to either its left or right neighbour, where the latter may forward these jobs to any node in the ring. 
-Since the amount of dropped jobs is equal for each forwarding algorithm. These jobs will be ignored when computing the average number of hops.
+Since the amount of dropped jobs is equal for each forwarding algorithm. These jobs will be ignored when computing the average number of hops. One should note that the loss rate of jobs in the system is the same a the Erlang-b loss rate.
 
 
 \subsection{Forward to neighbour}
@@ -145,16 +145,13 @@ Usage: -r -s long -j double -a double -n long -p long -l long -t long -h type
 \end{lstlisting}
 
 \subsection{Measure}
-The goal of the algorithms is to distribute the jobs evenly along the ring. This implies the number of hops a job must travel should be low. As a measure for our experiments, we will be using the average number of hops a job has travelled before being executed. Since 
+The goal of the algorithms is to distribute the jobs evenly along the ring. This implies the number of hops a job must travel should be low. As a measure for our experiments, we will be using the number of times a job was forwarded before it was executed. Since the number of forwards of a job that could not be executed is the same for each algorithm, and the loss rate of each algorithm is the same, we will not take these jobs into account when computing the average.
 
+It is clear that when the system load approaches $0$, the probability that a node is busy will also approach $0$ and the average number of forwards will therefore also approach $0$. On the other hand, when the load approaches $\infty$, each node's probability of being busy will approach $1$ and therefore the number of forwards will be $N-1$ and the job will fail. A system with load $> 1$ is called an overloaded system.
 
-The goal is to destinguish algorithms on how well they distribute the incoming jobs. To achieve this we will compute how much a node is forwarded within the ring. We will only take jobs into account that could be succesfully completed to make the results more clear.
+We will compare each algorithms to a baseline result. The baseline used in this thesis is the Forward right algorithm, meaning that each graph will show its result relative to the Forward right results. The results given by the simulator were obtained using a ring size of 100 and using a random seed for each run.
 
-One should note that the success rate measure is useless here since every job will be executed as long as any node in the system is idle, which is just the Erlang loss probability. 
-
-It is clear that when the load approaches $0$, the probability that a node is busy will also approach $0$ and the average number of hops will therefor also approach $0$. On the other hand, when the load approaches $\infty$, the node's probability to be busy will approach $1$ and therefor the number of hops will be $N-1$ and the job will fail. A system with load $> 1$ is called an overloaded system.
-
-The baseline for these results will be the Forward Right technique, all other techniques will be depicted relative to the Forward Right baseline result. The absolute performance can be seen in figure \ref{baseline}.
+The absolute performance of the baseline algorithm is shown in figure \ref{baseline}.
 
 \begin{figure}[h!tb]
 \centering
@@ -163,13 +160,10 @@ The baseline for these results will be the Forward Right technique, all other te
 \label{baseline}
 \end{figure}
 
-All results are obtained using a ring size of 100 and random seeds.
+\subsection{Results}
 
-
-\subsection{Forward to neighbour}
-
-\subsubsection{Left/Right Forward}
-It is intuitivly clear that alternating the direction of incoming jobs distributes the load slightly better than keeping the same direction. The performance measure is better than the baseline result for every load level (figure \ref{figlr}). But the improvement is most clear below $0.8$.
+\subsubsection*{Left/Right Forward}
+It is intuitively clear that alternating the forwarding direction of arriving jobs should distribute the load better than keeping the same direction. Figure \ref{figlr} shows the improvement made by the Left/Right forward algorithm over the Forward right method. The performance gain is at least 1\% and up to over 4\% under medium load.
 
 \begin{figure}[h!tb]
 \centering
@@ -178,8 +172,9 @@ It is intuitivly clear that alternating the direction of incoming jobs distribut
 \label{figlr}
 \end{figure}
 
-\subsubsection{Random Left/Right forward with parameter $p$}
-For $p=0.5$, this technique is similar to the previous one. Thus one would expect similar results. However, the results (figure \ref{figrandswitch}) are even worse than our baseline results.
+
+\subsubsection*{Random Left/Right forward with parameter $p$}
+For $p=0.5$, one would expect the results of this algorithm being similar to those obtained in the previous simulation. However, it seems the small change in the algorithm worsened the results significantly.
 
 \begin{figure}[h!tb]
 \centering
@@ -188,9 +183,16 @@ For $p=0.5$, this technique is similar to the previous one. Thus one would expec
 \label{figrandswitch}
 \end{figure}
 
-This results raises the question how much the parameter influences this result. Since for $p=0$, the algorithm is equal to the Forward Right technique and for $p=0.5$ the results are measurable worse. We will look further into this in section %insert section here%.
+Figure \ref{figrandswitch} shows the results of this algorithm for $p=0.5$. How this parameter influenced the performance is shown in figure \ref{figrandswitchp}. For $p=0$, this algorithm is equivalent to the Forward right method. The performance decreases fast when increasing $p$, until around $0.4$, where is increases a little until arriving at $0.5$.
 
-\subsubsection{Position-dependant forwarding}
+\begin{figure}[h!tb]
+\centering
+\includegraphics[width=0.6\textwidth]{data/randswitchp.pdf}
+\caption{Random Left/Right forward with load $0.8$}
+\label{figrandswitchp}
+\end{figure}
+
+\subsubsection*{Position-dependant forwarding}
 This technique groups nodes in virtual clusters. When a job arrives in a node and that node is busy, the job will be forwarded to the other node in the cluster. Jobs leaving a cluster will do this in a random direction ($p=0.5$). Since the load is concentrated per cluster instead of being distributed over the whole system, this technique performs worse than other techniques The results are represented in figure \ref{figevenswitch}.
 
 \begin{figure}[h!tb]
@@ -201,9 +203,7 @@ This technique groups nodes in virtual clusters. When a job arrives in a node an
 \end{figure}
 
 
-\subsection{Forward anywhere}
-
-\subsubsection{Random unvisited}
+\subsubsection*{Random unvisited}
 This algorithm in the most straight forward and is the best performing from any of these techniques. However, it should be noted that each visited node must be stored into the job's metadata.
 
 \section{Numerical Validation}
