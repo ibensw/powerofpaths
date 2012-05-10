@@ -28,33 +28,23 @@
 \defcounter {refsection}{0}
 \contentsline {subsection}{\numberline {2.1}Measure}{6}{subsection.2.1}
 \defcounter {refsection}{0}
-\contentsline {subsection}{\numberline {2.2}Forward to neighbour}{6}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.2}Results}{6}{subsection.2.2}
 \defcounter {refsection}{0}
-\contentsline {subsubsection}{\numberline {2.2.1}Left/Right Forward}{6}{subsubsection.2.2.1}
-\defcounter {refsection}{0}
-\contentsline {subsubsection}{\numberline {2.2.2}Random Left/Right forward with parameter $p$}{7}{subsubsection.2.2.2}
-\defcounter {refsection}{0}
-\contentsline {subsubsection}{\numberline {2.2.3}Position-dependant forwarding}{8}{subsubsection.2.2.3}
-\defcounter {refsection}{0}
-\contentsline {subsection}{\numberline {2.3}Forward anywhere}{8}{subsection.2.3}
-\defcounter {refsection}{0}
-\contentsline {subsubsection}{\numberline {2.3.1}Random unvisited}{8}{subsubsection.2.3.1}
-\defcounter {refsection}{0}
-\contentsline {section}{\numberline {3}Numerical Validation}{8}{section.3}
+\contentsline {section}{\numberline {3}Numerical Validation}{9}{section.3}
 \defcounter {refsection}{0}
 \contentsline {subsection}{\numberline {3.1}Forward Right}{9}{subsection.3.1}
 \defcounter {refsection}{0}
-\contentsline {subsection}{\numberline {3.2}Random Left/Right forward with parameter $p$}{9}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.2}Random Left/Right forward with parameter $p$}{10}{subsection.3.2}
 \defcounter {refsection}{0}
-\contentsline {subsection}{\numberline {3.3}Random Coprime offset}{9}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.3}Random Coprime offset}{10}{subsection.3.3}
 \defcounter {refsection}{0}
 \contentsline {subsection}{\numberline {3.4}Random Unvisited}{10}{subsection.3.4}
 \defcounter {refsection}{0}
 \contentsline {subsection}{\numberline {3.5}Lumped states}{10}{subsection.3.5}
 \defcounter {refsection}{0}
-\contentsline {subsection}{\numberline {3.6}Equivalent techniques}{10}{subsection.3.6}
+\contentsline {subsection}{\numberline {3.6}Equivalent techniques}{11}{subsection.3.6}
 \defcounter {refsection}{0}
-\contentsline {section}{\numberline {4}Conclusion}{10}{section.4}
+\contentsline {section}{\numberline {4}Conclusion}{11}{section.4}
 \defcounter {refsection}{0}
 \contentsline {section}{\numberline {A}Simulator source code}{11}{appendix.A}
 \defcounter {refsection}{0}
