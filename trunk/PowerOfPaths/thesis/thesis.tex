@@ -1,10 +1,11 @@
-\documentclass[10pt,a4paper,titlepage]{article}
+\documentclass[10pt,a4paper]{article}
 \usepackage[latin1]{inputenc}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
 \usepackage{blkarray}
 \usepackage{graphicx}
+\usepackage{caption}
 \usepackage{appendix}
 \usepackage{listings}
 \usepackage{biblatex}
@@ -24,10 +25,6 @@
   stepnumber=1,                   % the step between two line-numbers. If it's 1, each line 
                                   % will be numbered
   numbersep=5pt,                  % how far the line-numbers are from the code
-  backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
-  showspaces=false,               % show spaces adding particular underscores
-  showstringspaces=false,         % underline spaces within strings
-  showtabs=false,                 % show tabs within strings adding particular underscores
   frame=single,                   % adds a frame around the code
   rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
   tabsize=8,                      % sets default tabsize to 2 spaces
@@ -40,16 +37,38 @@
   commentstyle=\color{dkgreen},       % comment style
   stringstyle=\color{mauve},         % string literal style
   escapeinside={\%*}{*)},            % if you want to add a comment within your code
-  morekeywords={*,...}               % if you want to add more keywords to the set
+  morekeywords={*,...},               % if you want to add more keywords to the set
 }
 
-\author{Wouter ibens \\ University of Antwerp}
+\author{Wouter ibens \\ University of Antwerp \\ Supervisor: Prof. dr. Benny Van Houdt}
 \title{The power of two paths in grid computing networks}
+\date{May 28, 2012}
 \begin{document}
 \maketitle
+\thispagestyle{empty}
+\vspace{34em}
+\begin{center}
+\includegraphics[scale=1.0]{resources/ua.pdf}
+\end{center}
+\newpage
 
 \section*{Abstract}
-a
+In ring structured distributed systems, busy nodes will forward new jobs to other nodes. This thesis focusses on the algorithms for choosing a successor node for a job. ...
+
+\newpage
+
+\section*{Acknowledgements}
+This thesis is not only the work of myself, I could never accomplish this without the people around me. I would like to take this opportunity to thank some of them specifically.
+
+First and foremost, my supervisor Professor dr. Benny Van Houdt. Firstly, he taught me a whole new field in the area of computer science, the part that interested me the most during the course of my studies. Secondly, for being my supervisor: he helped me out when he could and suggested ideas when I was stuck. I was always welcome to drop by and reflect thoughts.
+
+I would also like to thank my family, especially my parents. They gave me the chance to complete my education without worrying just one second about the financial cost. They gave me the freedom of making my own choices and motivated me when I needed it. My sister Anneleen should be mentioned for proofreading this thesis and other tasks in english during my education.
+
+Also, my friends have been a great help to me. Playing games, eating toghether every evening and just having fun together is what made the past 5 years with no doubt the best years of my life so far. Thank you all.
+
+Finally, I would like to thank my girlfriend Nicky. Although she might have caused some failed exams at the beginning of our relationship, she has been a great help further on. She motivated me to take hard but rewarding options when easy ones were available. A girl that understands me and never fails to cheer me up.
+
+
 
 \newpage
 
@@ -58,16 +77,26 @@ a
 \newpage
 
 \section*{Introduction}
-Write at the end
+This thesis researches the behaviour of forwarding algorithms in a ring-structured distributed system. Section \ref{secsetup} precisely describes the setup of the system. It specifies the general assumptions made in this document and gives a short overview of the different algorithms we have reviewed.
 
+Section \ref{secsimulation} gives a short introduction about the simulator we wrote and how to use it. Furthermore, it contains the results of the tests, performed by the simulator.
+
+In the next part, section \ref{secvalidation}, we reviewed the output of the simulator. Using numerical algorithms we try to match our results with a Markov Chain model.
+
+Finally, section \ref{secconclusion} contains the conclusions and other thoughts on the algorithms.
+
+** COMPLETE LATER ON
 
 \section{Setup}
+\label{secsetup}
 We are using a ring-structured network of $N$ nodes. Each node is connected to two neighbours, left and right. The purpose of these nodes is to process incoming jobs. When a node is busy while a job arrives, it must forward to another node. When a job has visited all nodes and none of them was found empty, the job is dropped.
 
 Jobs have an arrival time, a length and optional metadata. They arrive at each node indepentently as a poisson process at rate $\lambda$. Their length is exponentially distributed with mean $\mu$ (unless otherwise noted, assume $\mu=1$). Although each job has a length, this length may not known in advance. Finally, the metadata is optional and may be used by the nodes to pass information among the job (e.g. a list of visited nodes).
 
 Nodes can use different algorithms to determine whereto a job will be forwarded. The performance of these algorithms is the main focus of this thesis. Different techniques will be discussed and simulated. Afterwards, some results of the simulation will be validated.
 Note that the cost of forwarding a job is neglected. Together with the presumption a job must visit each node before being dropped, this means a job arriving at any node will be processed if and only if at least one server is idle.
+
+** AANTAL NODES IN FIGURE IS FOUT
 
 \begin{figure}[h!tb]
 \centering
@@ -123,6 +152,7 @@ Because this node is busy, the next number on the list ($3$) is selected and sav
 The Random Coprime offset algorithm is almost equal to Coprime offset. The difference between them is the decision of the offset value. Where it is the next number on the list in Coprime offset, a random value is taken from the list when using Random Coprime offset.
 
 \section{Simulation}
+\label{secsimulation}
 To evaluate the different algorithms discussed in the previous section, 2 methods will be used. Firstly using a simulation, the second method is the evaluation of this simulation using MATLAB. The validation method is further discussed in section \ref{secvalidation}.
 
 The simulation is accomplished using a custom simulator. A continuous time simulator is written in C++, using no external requirements but the STL. The source code of the simulator can be found in appenix \ref{sourcecode} or on \url{http://code.google.com/p/powerofpaths/}.
@@ -207,12 +237,18 @@ This technique groups nodes in virtual clusters. When a job arrives in a node an
 This algorithm in the most straight forward and is the best performing from any of these techniques. However, it should be noted that each visited node must be stored into the job's metadata.
 
 \section{Numerical Validation}
+** BEPAALDE ALGORITMES NIET BESPROKEN, WAAROM?
+
 \label{secvalidation}
-To validate the results obtained in the previous section, we modelled the scheduling-techniques into Markov Chains. Using the steady state distribution of these chains, we can derive the average number of hops and the average loss. For $N$ nodes in a ring, the markov chain consists of $2^N$ number of states, where the bits represent whether a server is busy or idle. To optimize the computation time and memory requirements, we used sparse matrixes for the validation. The validation code is written in MATLAB.
+
+To validate the results obtained in the previous section, we modelled the scheduling-techniques into Markov Chains. Using the steady state distribution of these chains, we can derive the average number of hops and the average loss.
+For $N$ nodes in a ring, the markov chain consists of $2^N$ states, where the $n$-th bit represents whether the $n$-th server is busy ($1$) or idle ($0$). To optimize the computation time and memory requirements, we used sparse matrixes for the validation. The validation code is written in MATLAB, it can be found in appendix \ref{matlabcode} or on \url{http://code.google.com/p/powerofpaths/}.
+
+The validation of the results happens in a different environment than the simulation. Because of the non-polynomial execution time of the algorithm, the size of the ring is reduced to $10$. Therefore, the results of this validation are smaller but the relative results can still be analysed.
 
 \subsection{Forward Right}
 \label{validateright}
-As for this technique, the matrix representing the Markov chain is easily determined. The example given below is for a ring of 3 nodes. For convenience, the states are representes by their binary form.
+Modelling a technique into a Markov Chain is an easy operation for most algorithms. The example given below is for a ring of 3 nodes. For convenience, the states are represented by their binary form.
 
 \[ Q =
   \begin{blockarray}{ccccccccc}
@@ -230,7 +266,12 @@ As for this technique, the matrix representing the Markov chain is easily determ
   \end{blockarray}
 \]
 
-%Include graph here
+\begin{figure}[h!tb]
+\centering
+\includegraphics[clip=true, trim=9em 24em 9em 24em, width=0.9\textwidth]{resources/plotright.pdf}
+\caption{Validation of Forward right}
+\label{validright}
+\end{figure}
 
 Analogue to the simulation section, this method will be the baseline result in our other results.
 
@@ -253,16 +294,55 @@ This matrix is very similar to the one above. But we need to take into account t
   \end{blockarray}
 \]
 
-The lumped matrix of $Q$ is equal to the lumped matrix of the example above (\ref{lump}), i.e. the matrix defines the exact same problem. However, for $N > 6$ the matrices and so the results of the steady state distribution begin to differ.
+The lumped matrix (section \ref{lump}) of $Q$ is equal to the lumped matrix of the example above, i.e. the matrix defines the exact same behaviour. However, for $N > 6$ the matrices and so the results of the steady state distribution begin to differ.
 
-%Include relative graph here
+\begin{figure}[h!tb]
+\centering
+\includegraphics[clip=true, trim=9em 24em 9em 24em, width=0.9\textwidth]{resources/plotrandlr.pdf}
+\caption{Validation of Random Left/Right with p=$0.5$}
+\label{validrlr}
+\end{figure}
+
+As in the simulation section, we have validated the results for different values for $p$. These results are shown in figure \ref{validrlrp}.
+
+\begin{figure}[h!tb]
+\centering
+\includegraphics[clip=true, trim=9em 24em 9em 24em, width=0.9\textwidth]{resources/plotrandlrp.pdf}
+\caption{Performance of Random Left/Right with load$=0.8$}
+\label{validrlrp}
+\end{figure}
 
 \subsection{Random Coprime offset}
 Modelling this technique yields different results for various ring sizes. The performance of this algorithm is very dependant on the number of coprimes that can be used. This technique yields the same results as Forward Right for ring sizes of up 4. For $N = 3$, the matrix $Q$ is identical to Random Left/Right forward with parameter $0.5$, as the coprimes of 3 are 1 and 2. Which means forwarding a job left or right, both with the same probability.
 
+\begin{figure}[h!tb]
+\centering
+\includegraphics[clip=true, trim=9em 24em 9em 24em, width=0.9\textwidth]{resources/plotrandcoprime.pdf}
+\caption{Validation of Coprime algorithm for $N=10$}
+\label{validcp}
+\end{figure}
+
+As shown in figure \ref{validcp}, the performance gain of this algorithm is up to 5\% for a ring size of $N=10$. The list of coprimes in that scenario is ${1, 3, 7, 9}$, thus 4 possible choices. When increasing the ring size to $11$, a prime number, the list of coprimes expands to ${1..10}$ (because 11 is prime), thus 10 possible choices. This increases the relative performance gain up to 8\%. To make clear the increased performance is not due to the increase of $N$, figure \ref{validcp12} shows the performance gain for $N=12$.
+
+\begin{figure}[h!tb]
+\centering
+\includegraphics[clip=true, trim=9em 24em 9em 24em, width=0.9\textwidth]{resources/plotrandcoprime11.pdf}
+\caption{Validation of Coprime algorithm for $N=11$}
+\label{validcp11}
+\end{figure}
+
+\begin{figure}[h!tb]
+\centering
+\includegraphics[clip=true, trim=9em 24em 9em 24em, width=0.9\textwidth]{resources/plotrandcoprime12.pdf}
+\caption{Validation of Coprime algorithm for $N=12$}
+\label{validcp12}
+\end{figure}
+
+The performance gain is dependant on the number of different paths a job can follow. For $N=10$ and $N=12$, a job can follow 4 possible routes, for $N=11$, 10 different routes can be chosen.
+
 
 \subsection{Random Unvisited}
-This problem can be modelled much more efficiently than the techniques above. Since the next node is choosen randomly, the information we need to save consists only of the number of servers which are currently busy. This problem is analogue to modelling an Erlang-B loss system. The number of states in this Markov Chain is linear to $N$ and is much more dense. For $N=3$, the matrix is given below.
+This problem can be modelled much more efficiently than the techniques. Since the next node is chosen at random, the information we need to save consists only of the number of servers which are currently busy. This problem is analogue to modelling an Erlang-B loss system. The number of states in this Markov Chain is linear to $N$, is much more dense and already represents a lumped Markov Chain. For $N=3$, the matrix is given below.
 
 \[ Q =
   \begin{blockarray}{ccccc}
@@ -279,12 +359,10 @@ This problem can be modelled much more efficiently than the techniques above. Si
 \subsection{Lumped states}
 \label{lump}
 
-Except for Random Unvisited, each discribed technique is modelled into a matrix with $N^2$ states. However, may of these states are redundant: for example, for $N=3$ the states $001$, $010$ and $100$ all represent one of the nodes being busy. For states where multiple nodes are busy, the space between these servers is critical information, therefor states are lumped when rotating the bits of one state becomes equal to another state. The states below are analogue and can be lumped:
+Except for Random Unvisited, each discribed technique is modelled into a Markov Chain with $N^2$ states. However, many of these states are redundant: for example, for $N=3$ the states $001$, $010$ and $100$ all represent one of the nodes being busy. For states representing multiple busy nodes, the space between these servers is critical information. Multiple states can be lumped when bitrotating one state can result in another state. Example: the states below are analogue and can therefore be lumped into one state:
 \begin{verbatim}
 001101 = 011010 = 110100 = 101001 = 010011 = 100110
 \end{verbatim}
-
-The number of states in a lumped MC is $\frac{1}{N} \sum_{d|N} (2^{N/d} \cdot phi(d) )$ with $phi(d) = d \cdot \prod_{p|d, p\text{ is prime}} (1-\frac{1}{p})$ \cite{A000031}. This result greatly reduces the number of states, however its complexity is still non-polynomial.
 
 The example model in \ref{validateright} can be lumped into the following Markov Chain:
 
@@ -300,16 +378,35 @@ The example model in \ref{validateright} can be lumped into the following Markov
   \end{blockarray}
 \]
 
+Computing the steady state distribution of a Markov Chain is subject to time constraints. Using sparse matrices for our algorithm already solved the memory constraints.
+Two factors are important when working with matrices: the number of elements and the number of nonzero elements. We will show that both factors are reduced significantly.
 
+For unlumped Markov Chains modelling the Random forward algorithm, a matrix consists of $2^N$ states, an exponential growth. Lumping these matrices results in a number of states equal to:  $\frac{1}{N} \sum_{d|N} (2^{N/d} \cdot phi(d) )$ with $phi(d) = d \cdot \prod_{p|d, p\text{ is prime}} (1-\frac{1}{p})$ \cite{A000031}. Although this result greatly reduces the number of states, its complexity is still non-polynomial.
+
+The number of nonzero elements for unlumped Markov Chains is $(N+1) 2^N$. For lumped matrices, we were not able to derive an exact formula, however, figure \ref{lumpnnz} shows a clear reduction as well. Yet, this result doesn't seem polynomial either.
+
+\begin{figure}[h!tb]
+\centering
+\includegraphics[clip=true, trim=9em 24em 9em 24em, width=0.9\textwidth]{resources/plotlumping.pdf}
+\caption{A}
+\label{lump}
+\end{figure}
+
+\begin{figure}[h!tb]
+\centering
+\includegraphics[clip=true, trim=9em 24em 9em 24em, width=0.9\textwidth]{resources/plotlumpingnnz.pdf}
+\caption{B}
+\label{lumpnnz}
+\end{figure}
+
+It seems lumping is a good technique to push the bounderies of the validation by reducing two important factors of the compution time. However, it is no silver bullet: both the number of states and the number of nonzero elements are nonpolynomial after lumping the matrices.
 
 \subsection{Equivalent techniques}
 Lumping states of a Markov Chain produces an equivalent Markov Chain. This can be used to prove some forwarding techniques are equal up to a certain $N$.
 
 \section{Conclusion}
+\label{secconclusion}
 Which techniques work best in which environments? Why? Runner up? Why do some techniques don't work as expected?
-
-\section*{Acknowledgements}
-Thanks to everyone
 
 \printbibliography
 
@@ -321,7 +418,7 @@ dit is de inhoud
 \section{MATLAB Numerical evaluation code}
 \label{matlabcode}
 
-\lstset{caption={rightchain.m}}
+\lstset{language=Octave,caption={rightchain.m}}
 \lstinputlisting{../matlab/rightchain.m}
 
 \lstset{caption={randswitchchain.m}}

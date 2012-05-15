@@ -1,21 +1,28 @@
-x=1:13;
-y1=[];
-y2=[];
-y3=[];
-y4=[];
-for v=x
-	v
-	R=randswitchchain(v, 0.5, 0.5);
-	[L M]=lump(R);
-	y1=[y1 2^v];
-	y2=[y2 length(M)];
-	y3=[y3 length(find(R))];
-	y4=[y4 length(find(L))];
+l=0.10:0.10:1;
+s=10;
+r=zeros(1, length(l));
+rs=r;
+ru=r;
+rp=r;
+
+lr=r;
+
+j=1;
+for i=l
+	fprintf('%f ', i);
+%	r(j)=avghops(rightchain(s, i), 0);
+%	rs(j)=avghops(randswitchchain(s, i), 0);
+%	rp(j)=avghops(rprimechain(s, i), 0);
+%	ru(j)=ruavghops(runvisitedchain(s, i), 0);
+
+%	lr(j)=lumpavghops(rightchain(s, i));
+%	lrs(j)=lumpavghops(randswitchchain(s, i));
+%	lrp(j)=lumpavghops(rprimechain(s, i));
+	j=j+1;
 end
-plot(x,y1,x,y2)
-pause
-plot(x,y2./y1)
-pause
-plot(x, y3, x, y4)
-pause
-plot(x, y4./y3)
+fprintf('\n');
+
+plot(l, lr)
+%plot(l, r./r, l, rs./r);
+%plot(l, r./r, l, rs./r, l, rp./r, l, ru./r);
+
