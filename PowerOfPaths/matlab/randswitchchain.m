@@ -3,7 +3,8 @@ function [Q] = randswitchchain(size, rate, p)
 %Parameters:
 %	size	The size of the Markov Chain
 %	rate	The rate of arrivals
-%	p		The probability a job is forwarded right	
+%	p		The probability a job is forwarded right
+%			(Default: 0.5)	
 
 	if nargin < 3
 		p=0.5;
