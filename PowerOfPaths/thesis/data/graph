@@ -7,6 +7,6 @@ fi
 
 filename=$1
 
-graph -T ps -X "Load" -Y "Average # hops" < $filename > $filename.ps
+graph -C -T ps -X "Load" -Y "Relative # hops" < $filename > $filename.ps
 epstopdf $filename.ps
 rm $filename.ps

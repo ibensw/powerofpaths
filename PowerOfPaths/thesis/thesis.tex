@@ -6,6 +6,7 @@
 \usepackage{blkarray}
 \usepackage{graphicx}
 \usepackage{caption}
+\usepackage{subcaption}
 \usepackage{appendix}
 \usepackage{listings}
 \usepackage{biblatex}
@@ -136,9 +137,6 @@ The ring strucure can be used in real networks, however in many cases the ring i
 \subsubsection{Random unvisited}
 The Random unvisited algorithm is the most basic algorithm in this category. Everytime a job is forwarded, a list of unvisited nodes is generated and a random node is choosen from this list. The current node is added to the list of visited nodes, which is found in the job's metadata.
 
-\subsubsection{Round Robin unvisited}
-This algorithm is similar to Random unvisited, but instead of choosing the next node at random a different technique is used. When a node must forward a job, it saves its id. When another job is forwarded, it will be forwarded to the the saved id + 1. However, when that id is a visited node, the job will be forwarded to the next node that is unvisited.
-
 \subsubsection{Coprime offset}
 Another algorithm is Coprime offset. This algorithm generates a list of all numbers smaller than $N$, and coprime to $N$. The first time a job is forwarded the next number of this list is selected. This is the job's forward offset and saved in the its metadata. When a job is forwarded, it is sent exactly this many hops farther. Because this number and $N$ are coprime, it will visit all nodes exactly once before being returned to its originating node. 
 
@@ -234,7 +232,41 @@ This technique groups nodes in virtual clusters. When a job arrives in a node an
 
 
 \subsubsection*{Random unvisited}
-This algorithm in the most straight forward and is the best performing from any of these techniques. However, it should be noted that each visited node must be stored into the job's metadata.
+This algorithm in the most straight forward and is the best performing from any of these techniques. However, it should be noted that each visited node must be stored into the job's metadata, at least $N$ should be available to store this information.
+
+\begin{figure}[h!tb]
+\centering
+\includegraphics[width=0.6\textwidth]{data/randunvisitedright.pdf}
+\caption{Random unvisited forwarding}
+\label{figrandunvisited}
+\end{figure}
+
+Figure \ref{figrandunvisited} shows the results of this algorithms. It is the first algorithm tested that could forward jobs to nodes other than its neighbors. We see that lifting that constraint allows a serious performance boost.
+
+\subsubsection*{(Random) Coprime offset}
+Two other algorithms that are not restricuted to forwarding to a neighbor are Coprime offset and Random Coprime offset. Figure \ref{figprimes} shows the results of both these algorithms. The difference of these algorithms with themselves and the random unvisited algorithms is not clearly visible when comparing both to the Forward Right algorithm. To put these results in perspective, we included figure \ref{figruprp} where Coprime offset and Random Coprime offset are depicted relative to Random unvisited. Although the difference is small, it seems the Random unvisited algorithm shows a better performance than the other two. However, Coprime offset and Random Coprime offset require $\lceil log_2 N \rceil$ bits in the job's metadata instead of $N$ for Random unvisited.
+
+\begin{figure}[h!tb]
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{data/primeright.pdf}
+                \caption{Coprime offset}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{data/randprimeright.pdf}
+                \caption{Random Coprime offset}
+        \end{subfigure}
+\caption{(Random) Coprime offset}
+\label{figprimes}
+\end{figure}
+
+\begin{figure}[h!tb]
+\centering
+\includegraphics[width=0.8\textwidth]{data/randunvisited_prime_randprime.pdf}
+\caption{Random unvisited (green), Coprime offset (blue), Random Coprime offset (Red)}
+\label{figrandunvisited}
+\end{figure}
 
 \subsection{Multiple execution units}
 So far, all simulations were executed using 1 cpu per server. This is not a realistic assumption for most distributed systems. This section is intended to research the behaviour of the algorithms when using multiple cpu's, and comparing the results to a system with 1 cpu per server, and to each other.
@@ -243,7 +275,7 @@ Per algorithm, the two simulations are performed and compared, see table \ref{ta
 \begin{table}[h!]
 \centering
 \begin{tabular}{|p{0.2\textwidth}|p{0.4\textwidth}|p{0.4\textwidth}|} \hline
-Algorithm & \multicolumn{2}{|p{0.8\textwidth}|}{Forward right, Left/Right, Random left/right (0.5), Random unvisited, Random Coprime offset} \\ \hline
+Algorithms & \multicolumn{2}{|p{0.8\textwidth}|}{Forward right, Left/Right, Random left/right (0.5), Random unvisited, Random Coprime offset} \\ \hline
 Ring size & 100 & 25 \\ \hline
 Cpu's per node	& 1 & 4 \\ \hline
 Load	& \multicolumn{2}{|c|}{$0.1 - 1.0$} \\ \hline
@@ -254,12 +286,72 @@ Load	& \multicolumn{2}{|c|}{$0.1 - 1.0$} \\ \hline
 
 Since the ring size for the second test is 25 instead of 100, the number of forwards of the second test will be multiplied by 4 to get meaningful results. This actually makes sense because a job that is forwarded once has encountered 4 busy cpu's. The baseline for the tests is the basic result of the algorithm found in section \ref{simresults}, where the second test is drawn relative to the basic result.
 
-\subsubsection*{Forward right}
+\begin{figure}
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{data/4rightright.pdf}
+                \caption{Forward right}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{data/4switchswitch.pdf}
+                \caption{Forward Left/Right}
+        \end{subfigure}
+        
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{data/4randswitchrandswitch.pdf}
+                \caption{Random Left/Right (0.5)}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{data/4randunvisitedrandunvisited.pdf}
+                \caption{Random unvisited}
+        \end{subfigure}
+        
+        \begin{subfigure}[b]{0.5\textwidth}
+                \centering
+                \includegraphics[width=\textwidth]{data/4randprimerandprime.pdf}
+                \caption{Random Coprime offset}
+        \end{subfigure}
+        \caption{4 cpu's per server versus 1}\label{figcpus}
+\end{figure}
+
+Figure \ref{figcpus} shows the performance of 4 cpu's versus 1 cpu for different algorithms. For each of the tested algorithms, we see the same result. This means the results of each algorithm is influenced in the same way when using multiple cpu's per server. We can use this knowledge to generalize the results of section \ref{simresults}.
+
+Since we assume each algorithm is infuenced the same way, let us investigate one of them in depth. We will try to transform the results of an algorithm with ring size $N$ and $1$ cpu per server into the results of the same algorithm with ring size $N/c$ and $c$ cpu's per server. The load of the system should be the same.
+
+Let $d$ be the distribution of the number of forwards, stored as a rowvector. We will build a transformation vector $M$ in the form $[ \lfloor 0/c \rfloor,  \lfloor 1/c \rfloor, \ldots, \lfloor (N-1)/c \rfloor]'$. This vector represents the number of times a job would be forwarded if there would be $c$ cpu's per server. $d*M$ equals the average number of forwards when using such a system. To negate the dropped jobs, the results must be weighted for only the completed jobs.
+In our example, we will transform the results of the Forward Right algorithm using ring size $N=10$ and 1 cpu into the results of a ring with size $N=5$ and $c=2$ cpu's per server, see table \ref{tabcpus} for a worked out example and figure \ref{figcpusmatch} for a comparison of the transformation and a real simulation.
+
+
+\begin{table}
+\centering
+\begin{tabular}{|r|l|r|l|} \hline
+\# hops & Distribution & M & Result \\ \hline
+0 & 0.5092 & 0 & 0 \\ \hline
+1 & 0.2118 & 0 & 0 \\ \hline
+2 & 0.1082 & 1 & 0.1082 \\ \hline
+3 & 0.0609 & 1 & 0.0609 \\ \hline
+4 & 0.0363 & 2 & 0.0726 \\ \hline
+5 & 0.0224 & 2 & 0.0449 \\ \hline
+6 & 0.0142 & 3 & 0.0426 \\ \hline
+7 & 0.0091 & 3 & 0.0272 \\ \hline
+8 & 0.0058 & 4 & 0.0233 \\ \hline
+9 & 0.0037 & 4 & 0.0147 \\ \hline
+Total &  0.9816 & &  0.3944 \\ \hline
+Weighted total & \multicolumn{3}{|c|}{$0.3944/0.9816 = 0.4018 $} \\ \hline
+Simulation result & \multicolumn{3}{|c|}{$0.4171$} \\ \hline
+\end{tabular}
+\caption{Comparison when load=0.5}
+\label{tabcpus}
+\end{table}
+
 \begin{figure}[h!tb]
 \centering
-\includegraphics[width=0.6\textwidth]{data/4rightright.pdf}
-\caption{Forward Right, 4 cpu's vs 1}
-\label{figevenswitch}
+\includegraphics[width=0.8\textwidth]{data/right_5_2.pdf}
+\caption{Multiple cpu's result derived of the result for 1 cpu (green) versus the actual simulation result (red)}
+\label{figcpusmatch}
 \end{figure}
 
 
@@ -415,14 +507,14 @@ The number of nonzero elements for unlumped Markov Chains is $(N+1) 2^N$. For lu
 \begin{figure}[h!tb]
 \centering
 \includegraphics[clip=true, trim=9em 24em 9em 24em, width=0.9\textwidth]{resources/plotlumping.pdf}
-\caption{A}
+\caption{Number of states}
 \label{figlump}
 \end{figure}
 
 \begin{figure}[h!tb]
 \centering
 \includegraphics[clip=true, trim=9em 24em 9em 24em, width=0.9\textwidth]{resources/plotlumpingnnz.pdf}
-\caption{B}
+\caption{Number of nonzero elements}
 \label{lumpnnz}
 \end{figure}
 
@@ -433,7 +525,35 @@ Lumping states of a Markov Chain produces an equivalent Markov Chain. This can b
 
 \section{Conclusion}
 \label{secconclusion}
-Which techniques work best in which environments? Why? Runner up? Why do some techniques don't work as expected?
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|p{0.25\textwidth}|p{0.25\textwidth}|p{0.25\textwidth}|p{0.25\textwidth}|} \hline
+							& Max. gain		& Space requirement (bits)	& Notes \\ \hline
+Forward Right				& 0 (baseline)	& 0							&		\\ \hline
+Left/Right forward			& $> 4\%$		& 1 (job) + 1 (node)		&		\\ \hline
+Random Left/Right forward	& 0 (worse)		& 1 (job)					&		\\ \hline\end{tabular}
+Position dependant forward	& 0 (worse)		& 1 (job)					& Creates loaded clusters \\ \hline\end{tabular}
+\caption{Forward to neighbor}
+\end{table}
+
+%\begin{table}
+%\centering
+%\begin{tabular}{|p{0.25}|p{0.25}|p{0.25}|p{0.25}|}
+% & Max gain & Space requirement & Notes
+%\end{tabular}
+%\caption{Forward anywhere}
+%\end{table}
+%
+%\begin{table}
+%\centering
+%\begin{tabular}{|p{0.25}|p{0.25}|p{0.25}|p{0.25}|}
+% & Performance gain at load=0.5 & Number of possible paths & Notes
+%\end{tabular}
+%\caption{Performance vs number of paths}
+%\end{table}
+
+Which techniques work best in which environments? Why? Runner up? Why do some techniques don't work as expected? performance results in function of number of paths
 
 \printbibliography
 

@@ -1,4 +1,4 @@
-function [ avg ] = avghops(Q, d)
+function [ avg,distribution ] = avghops(Q, d)
 %AVGHOPS Calculate average number of times a job is forwarded
 %Parameters:
 %	Q	The matrix representing a markov chain
@@ -10,6 +10,7 @@ function [ avg ] = avghops(Q, d)
 	end
 
 	steady=full(ctmcsteadystate(Q));
+	distribution=zeros(1,d);
 
 	len=length(Q);
 	states=log2(len);
@@ -26,6 +27,7 @@ function [ avg ] = avghops(Q, d)
 		if d
 			fprintf('%d hops:\t%f\n', i, c);
 		end
+		distribution(i+1)=c;
 		avg=avg+(c*i);
 	end
 

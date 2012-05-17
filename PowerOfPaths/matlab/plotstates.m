@@ -1,28 +1,15 @@
-l=0.10:0.10:1;
+x=0.1:0.1:1.0;
 s=10;
-r=zeros(1, length(l));
-rs=r;
-ru=r;
-rp=r;
-
-lr=r;
+y=zeros(1, length(x));
+m=[0; 0; 1; 1; 2; 2; 3; 3; 4; 4];
 
 j=1;
-for i=l
-	fprintf('%f ', i);
-%	r(j)=avghops(rightchain(s, i), 0);
-%	rs(j)=avghops(randswitchchain(s, i), 0);
-%	rp(j)=avghops(rprimechain(s, i), 0);
-%	ru(j)=ruavghops(runvisitedchain(s, i), 0);
-
-%	lr(j)=lumpavghops(rightchain(s, i));
-%	lrs(j)=lumpavghops(randswitchchain(s, i));
-%	lrp(j)=lumpavghops(rprimechain(s, i));
+for i=x
+	i
+	[a,b]=avghops(rightchain(10,i),0);
+	y(j)= (b*m);
 	j=j+1;
 end
-fprintf('\n');
 
-plot(l, lr)
-%plot(l, r./r, l, rs./r);
-%plot(l, r./r, l, rs./r, l, rp./r, l, ru./r);
+[x' y']
 

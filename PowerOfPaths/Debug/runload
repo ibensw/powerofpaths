@@ -11,7 +11,7 @@ for load in 0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.0; do
 	echo -n -e "$load\t"
 	echo  -n -e "$load\t" >> $f
 	runtime=`echo 600/$load | bc`
-	result=`./PowerOfPaths -l $runtime -r -t 50 -n 100 -a $load $options | grep "Avg. hops/job (finished):" | cut -d: -f2`
+	result=`./PowerOfPaths -l $runtime -r -t 200 -n 5 -c 2 -a $load $options | grep "Avg. hops/job (finished):" | cut -d: -f2`
 #	result=`echo $result*4 | bc`
 	echo $result >> $f
 	echo $result
