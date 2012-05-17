@@ -251,6 +251,69 @@
        inkscape:vp_y="0 : 1000 : 0"
        inkscape:vp_x="0 : 0.5 : 1"
        sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2934"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2948"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2948-1"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2948-8"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective2948-81"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3005"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3005-7"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3005-1"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
+    <inkscape:perspective
+       id="perspective3005-4"
+       inkscape:persp3d-origin="0.5 : 0.33333333 : 1"
+       inkscape:vp_z="1 : 0.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 0.5 : 1"
+       sodipodi:type="inkscape:persp3d" />
   </defs>
   <sodipodi:namedview
      id="base"
@@ -416,5 +479,99 @@
          width="74.292686"
          xlink:href="file:///home/ibensw/school/2ma/thesis/simulator/PowerOfPaths/thesis/resources/server-icon.png" />
     </g>
-  </g>
+    <image
+       y="778.60608"
+       x="56.731709"
+       id="image2936"
+       height="57.268291"
+       width="57.268291"
+       xlink:href="file:///home/ibensw/school/2ma/thesis/simulator/PowerOfPaths/thesis/resources/gears.png" />
+    <image
+       y="773.97192"
+       x="638.58539"
+       id="image2936-4"
+       height="57.268291"
+       width="57.268291"
+       xlink:href="file:///home/ibensw/school/2ma/thesis/simulator/PowerOfPaths/thesis/resources/gears.png" />
+    <image
+       y="653.97192"
+       x="132.58537"
+       id="image2936-7"
+       height="57.268291"
+       width="57.268291"
+       xlink:href="file:///home/ibensw/school/2ma/thesis/simulator/PowerOfPaths/thesis/resources/gears.png" />
+    <image
+       y="653.97192"
+       x="592.58539"
+       id="image2936-78"
+       height="57.268291"
+       width="57.268291"
+       xlink:href="file:///home/ibensw/school/2ma/thesis/simulator/PowerOfPaths/thesis/resources/gears.png" />
+    <image
+       y="573.97192"
+       x="358.58539"
+       id="image2936-2"
+       height="57.268291"
+       width="57.268291"
+       xlink:href="file:///home/ibensw/school/2ma/thesis/simulator/PowerOfPaths/thesis/resources/gears.png" />
+    <flowRoot
+       xml:space="preserve"
+       id="flowRoot2989"
+       style="font-size:16;font-style:normal;font-weight:bold;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Charter Bold"><flowRegion
+         id="flowRegion2991"><rect
+           id="rect2993"
+           width="81.707314"
+           height="18.292683"
+           x="346.34146"
+           y="793.82562"
+           style="font-weight:bold;-inkscape-font-specification:Bitstream Charter Bold;font-size:16" /></flowRegion><flowPara
+         id="flowPara2995">ID: 0</flowPara></flowRoot>    <flowRoot
+       transform="translate(168.88043,89.645427)"
+       xml:space="preserve"
+       id="flowRoot2989-2"
+       style="font-size:16px;font-style:normal;font-weight:bold;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Charter Bold"><flowRegion
+         id="flowRegion2991-4"><rect
+           id="rect2993-4"
+           width="81.707314"
+           height="18.292683"
+           x="346.34146"
+           y="793.82562"
+           style="font-size:16px;font-weight:bold;-inkscape-font-specification:Bitstream Charter Bold" /></flowRegion><flowPara
+         id="flowPara2995-7">ID: 1</flowPara></flowRoot>    <flowRoot
+       transform="translate(270.29506,206.52348)"
+       xml:space="preserve"
+       id="flowRoot2989-1"
+       style="font-size:16px;font-style:normal;font-weight:bold;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Charter Bold"><flowRegion
+         id="flowRegion2991-1"><rect
+           id="rect2993-7"
+           width="81.707314"
+           height="18.292683"
+           x="346.34146"
+           y="793.82562"
+           style="font-size:16px;font-weight:bold;-inkscape-font-specification:Bitstream Charter Bold" /></flowRegion><flowPara
+         id="flowPara2995-9">ID: 2</flowPara></flowRoot>    <flowRoot
+       transform="translate(-193.2711,86.345555)"
+       xml:space="preserve"
+       id="flowRoot2989-4"
+       style="font-size:16px;font-style:normal;font-weight:bold;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Charter Bold"><flowRegion
+         id="flowRegion2991-10"><rect
+           id="rect2993-3"
+           width="81.707314"
+           height="18.292683"
+           x="346.34146"
+           y="793.82562"
+           style="font-size:16px;font-weight:bold;-inkscape-font-specification:Bitstream Charter Bold" /></flowRegion><flowPara
+         id="flowPara2995-1">ID: N-1</flowPara></flowRoot>    <flowRoot
+       transform="translate(-283.2711,206.34555)"
+       xml:space="preserve"
+       id="flowRoot2989-8"
+       style="font-size:16px;font-style:normal;font-weight:bold;text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Bitstream Vera Sans;-inkscape-font-specification:Bitstream Charter Bold"><flowRegion
+         id="flowRegion2991-14"><rect
+           id="rect2993-2"
+           width="81.707314"
+           height="18.292683"
+           x="346.34146"
+           y="793.82562"
+           style="font-size:16px;font-weight:bold;-inkscape-font-specification:Bitstream Charter Bold" /></flowRegion><flowPara
+         id="flowPara2995-97">ID: N-2</flowPara></flowRoot>  </g>
 </svg>

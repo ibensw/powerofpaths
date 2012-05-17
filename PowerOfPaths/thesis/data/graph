@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [[ $# -lt 1 ]]; then
+	echo "Usage: filename"
+	exit
+fi
+
+filename=$1
+
+graph -T ps -X "Load" -Y "Average # hops" < $filename > $filename.ps
+epstopdf $filename.ps
+rm $filename.ps
