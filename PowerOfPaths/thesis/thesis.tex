@@ -1,5 +1,6 @@
 \documentclass[10pt,a4paper]{article}
 \usepackage[latin1]{inputenc}
+\usepackage[english]{babel}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
@@ -17,6 +18,19 @@
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
 \definecolor{mauve}{rgb}{0.58,0,0.82}
+
+\newenvironment{changemargin}[3]{%
+\begin{list}{}{%
+\setlength{\topsep}{0pt}%
+\setlength{\leftmargin}{#1}%
+\setlength{\rightmargin}{#1}%
+\addtolength{\topmargin}{#2}
+\addtolength{\textheight}{#3}
+\setlength{\listparindent}{\parindent}%
+\setlength{\itemindent}{\parindent}%
+\setlength{\parsep}{\parskip}%
+}%
+\item[]}{\end{list}}
 
 \lstset{ %
   language=Octave,                % the language of the code
@@ -45,9 +59,10 @@
 \title{The power of two paths in grid computing networks}
 \date{May 28, 2012}
 \begin{document}
+\vspace{8em}
 \maketitle
 \thispagestyle{empty}
-\vspace{34em}
+\vspace{32em}
 \begin{center}
 \includegraphics[scale=1.0]{resources/ua.pdf}
 \end{center}
@@ -532,8 +547,9 @@ Lumping states of a Markov Chain produces an equivalent Markov Chain. This can b
 							& Max. gain		& Space requirement (bits)	& Notes \\ \hline
 Forward Right				& 0 (baseline)	& 0							&		\\ \hline
 Left/Right forward			& $> 4\%$		& 1 (job) + 1 (node)		&		\\ \hline
-Random Left/Right forward	& 0 (worse)		& 1 (job)					&		\\ \hline\end{tabular}
-Position dependant forward	& 0 (worse)		& 1 (job)					& Creates loaded clusters \\ \hline\end{tabular}
+Random Left/Right forward	& 0 (worse)		& 1 (job)					&		\\ \hline
+Position dependant forward	& 0 (worse)		& 1 (job)					& Creates loaded clusters \\ \hline
+\end{tabular}
 \caption{Forward to neighbor}
 \end{table}
 
@@ -545,17 +561,28 @@ Position dependant forward	& 0 (worse)		& 1 (job)					& Creates loaded clusters 
 %\caption{Forward anywhere}
 %\end{table}
 %
-%\begin{table}
-%\centering
-%\begin{tabular}{|p{0.25}|p{0.25}|p{0.25}|p{0.25}|}
-% & Performance gain at load=0.5 & Number of possible paths & Notes
-%\end{tabular}
-%\caption{Performance vs number of paths}
-%\end{table}
+
+
+
+\begin{table}
+\centering
+\begin{tabular}{|p{0.4\textwidth}|p{0.3\textwidth}|p{0.25\textwidth}|p{0.3\textwidth}|} \hline
+ 							& Performance gain at load=0.5	& Number of possible paths	\\ \hline
+Forward Right				& 0								& 1							\\ \hline
+Left/Right forward			& $\approx 4.5\%$				& 2							\\ \hline
+Random Left/Right (0.5)		& no gain						& 2							\\ \hline
+Position-dependant forwarding & no gain						& 1							\\ \hline
+Random unvisited			& $\approx 24\%$						& $(N-1)!$					\\ \hline
+(Random) Coprime offset		& $\approx 24\%$						& $\sum_{p < N,gcd(p, N) = 1} 1$ \\ \hline
+\end{tabular}
+\caption{Performance gain vs number of paths}
+\end{table}
 
 Which techniques work best in which environments? Why? Runner up? Why do some techniques don't work as expected? performance results in function of number of paths
 
 \printbibliography
+
+\begin{changemargin}{-2cm}{-2cm}{4cm}
 
 \appendix
 \section{Simulator source code}
@@ -653,5 +680,7 @@ Which techniques work best in which environments? Why? Runner up? Why do some te
 
 \lstset{caption={makestates.m}}
 \lstinputlisting{../matlab/makestates.m}
+
+\end{changemargin}
 
 \end{document}

@@ -1,5 +1,7 @@
 \boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}
 \defcounter {refsection}{0}
+\select@language {english}
+\defcounter {refsection}{0}
 \contentsline {section}{\numberline {1}Setup}{5}{section.1}
 \defcounter {refsection}{0}
 \contentsline {subsection}{\numberline {1.1}Forwarding algorithms}{5}{subsection.1.1}
@@ -48,4 +50,4 @@
 \defcounter {refsection}{0}
 \contentsline {section}{\numberline {A}Simulator source code}{22}{appendix.A}
 \defcounter {refsection}{0}
-\contentsline {section}{\numberline {B}MATLAB Numerical evaluation code}{44}{appendix.B}
+\contentsline {section}{\numberline {B}MATLAB Numerical evaluation code}{40}{appendix.B}

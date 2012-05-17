@@ -13,12 +13,8 @@ function [Q] = randswitchchain(size, rate, p)
     totalsize = 2^size;
     Q = sparse(totalsize, totalsize);
     
-    BITS = zeros(1, size);
-    
-    for i=1:size
-        BITS(i) = 2^(i-1);
-    end
-    
+    BITS = 2.^[0:size-1];
+
     for i=0:(totalsize-1)
 	t=0;
         for b=1:size
