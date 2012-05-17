@@ -4,6 +4,9 @@ function [ avg,distribution ] = avghops(Q, d)
 %	Q	The matrix representing a markov chain
 %Optional:
 %	d	Debug mode, default=1, disable debug output=0
+%Return:
+%	avg	The average number of forwards
+%	distribution	The distribution for each possible outcome
 
 	if nargin < 2
 		d=1;
