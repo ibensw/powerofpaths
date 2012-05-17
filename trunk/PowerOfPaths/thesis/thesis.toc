@@ -30,7 +30,9 @@
 \defcounter {refsection}{0}
 \contentsline {subsection}{\numberline {2.2}Results}{9}{subsection.2.2}
 \defcounter {refsection}{0}
-\contentsline {section}{\numberline {3}Numerical Validation}{11}{section.3}
+\contentsline {subsection}{\numberline {2.3}Multiple execution units}{11}{subsection.2.3}
+\defcounter {refsection}{0}
+\contentsline {section}{\numberline {3}Numerical Validation}{12}{section.3}
 \defcounter {refsection}{0}
 \contentsline {subsection}{\numberline {3.1}Forward Right}{12}{subsection.3.1}
 \defcounter {refsection}{0}
@@ -48,4 +50,4 @@
 \defcounter {refsection}{0}
 \contentsline {section}{\numberline {A}Simulator source code}{18}{appendix.A}
 \defcounter {refsection}{0}
-\contentsline {section}{\numberline {B}MATLAB Numerical evaluation code}{18}{appendix.B}
+\contentsline {section}{\numberline {B}MATLAB Numerical evaluation code}{40}{appendix.B}

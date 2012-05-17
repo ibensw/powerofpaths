@@ -10,7 +10,7 @@ void help(){
 	cout << "\t-r\tRandom seed" << endl;
 	cout << "\t-s\tSet seed\t\t\t(default: 0)" << endl;
 	cout << "\t-j\tJob length\t\t\t(default: 1.0)" << endl;
-	cout << "\t-a\tInterarrival time\t\t(default: 1.0)" << endl;
+	cout << "\t-a\tLoad\t\t\t\t(default: 1.0)" << endl;
 	cout << "\t-n\tRing size\t\t\t(default: 100)" << endl;
 	cout << "\t-c\tProcessing units per node\t(default: 1)" << endl;
 	cout << "\t-p\tPrint progress interval\t\t(default: -1 - disabled)" << endl;
@@ -37,6 +37,7 @@ Configuration::Configuration(int argc, char** argv):
 {
 	int c;
 	int index;
+	double load = 1.0;
 	while ((c = getopt (argc, argv, "rs:j:a:n:c:p:l:hv:t:")) != -1){
 		switch (c){
 		case 'r':
@@ -49,7 +50,7 @@ Configuration::Configuration(int argc, char** argv):
 			joblength = atof(optarg);
 			break;
 		case 'a':
-			arrival = atof(optarg);
+			load = atof(optarg);
 			break;
 		case 'n':
 			nodes = atol(optarg);
@@ -79,8 +80,11 @@ Configuration::Configuration(int argc, char** argv):
 		}
 	}
 
+	arrival = joblength/load/nodeSize;
+
 	srand(seed);
-	cout << "Seed: " << seed << endl;
+	cout << "Seed: " << seed << endl
+			<< "Interarrival time: " << arrival << endl;
 
 	for (index = optind; index < argc; index++){
 		string arg = argv[index];

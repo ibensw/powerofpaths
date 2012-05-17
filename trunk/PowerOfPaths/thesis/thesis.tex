@@ -96,11 +96,9 @@ Jobs have an arrival time, a length and optional metadata. They arrive at each n
 Nodes can use different algorithms to determine whereto a job will be forwarded. The performance of these algorithms is the main focus of this thesis. Different techniques will be discussed and simulated. Afterwards, some results of the simulation will be validated.
 Note that the cost of forwarding a job is neglected. Together with the presumption a job must visit each node before being dropped, this means a job arriving at any node will be processed if and only if at least one server is idle.
 
-** AANTAL NODES IN FIGURE IS FOUT
-
 \begin{figure}[h!tb]
 \centering
-\includegraphics[width=0.8\textwidth,clip=true,trim=0px 225px 0px 0px]{resources/ring.pdf}
+\includegraphics[width=0.8\textwidth,clip=true,trim=0px 225px 0px 0px]{resources/drawing.pdf}
 \caption{A ring structured network}
 \label{figring}
 \end{figure}
@@ -116,7 +114,7 @@ The performance of a forwarding algorithms is measured by the average number of 
 \subsection{Forwarding algorithms}
 Nodes that must forward a job must choose another node of the ring. Nodes have no information about other nodes, so is has no idea whether the node is idle or busy. The algorithms are grouped in two categories: forward to neighbour and forward anywhere.
 The first techniques allows a busy node to forward an incoming job to either its left or right neighbour, where the latter may forward these jobs to any node in the ring. 
-Since the amount of dropped jobs is equal for each forwarding algorithm. These jobs will be ignored when computing the average number of hops. One should note that the loss rate of jobs in the system is the same a the Erlang-b loss rate.
+Since the amount of dropped jobs is equal for each forwarding algorithm. These jobs will be ignored when computing the average number of hops. One should note that the loss rate of jobs in the system is the same as the Erlang-b loss rate.
 
 
 \subsection{Forward to neighbour}
@@ -155,21 +153,22 @@ The Random Coprime offset algorithm is almost equal to Coprime offset. The diffe
 \label{secsimulation}
 To evaluate the different algorithms discussed in the previous section, 2 methods will be used. Firstly using a simulation, the second method is the evaluation of this simulation using MATLAB. The validation method is further discussed in section \ref{secvalidation}.
 
-The simulation is accomplished using a custom simulator. A continuous time simulator is written in C++, using no external requirements but the STL. The source code of the simulator can be found in appenix \ref{sourcecode} or on \url{http://code.google.com/p/powerofpaths/}.
+The simulation is accomplished using a custom simulator. A continuous time simulator is written in C++, using no external requirements but the STL and OpenMP \cite{OPENMP}. The source code of the simulator can be found in appenix \ref{sourcecode} or on \url{http://code.google.com/p/powerofpaths/}.
 
 The simulator can be controlled using a command line interface, its usage is described below.
 
-\lstset{language=C,caption={Simulator usage description}}
+\lstset{language=sh,caption={Simulator usage description}}
 \begin{lstlisting}
 Usage: -r -s long -j double -a double -n long -p long -l long -t long -h type
 	-r	Random seed
 	-s	Set seed			(default: 0)
 	-j	Job length			(default: 1.0)
-	-a	Interarrival time		(default: 1.0)
+	-a	Load				(default: 1.0)
 	-n	Ring size			(default: 100)
-	-p	Print progress interval	(default: -1 - disabled)
+	-c	Processing units per node	(default: 1)
+	-p	Print progress interval		(default: -1 - disabled)
 	-l	Simulation length		(default: 3600)
-	-t	Repetition		(default: 1)
+	-t	Repetition			(default: 1)
 	-h	Print this help
 	 type	right | switch | randswitch | evenswitch | prime | randprime | randunvisited | totop
 \end{lstlisting}
@@ -191,6 +190,7 @@ The absolute performance of the baseline algorithm is shown in figure \ref{basel
 \end{figure}
 
 \subsection{Results}
+\label{simresults}
 
 \subsubsection*{Left/Right Forward}
 It is intuitively clear that alternating the forwarding direction of arriving jobs should distribute the load better than keeping the same direction. Figure \ref{figlr} shows the improvement made by the Left/Right forward algorithm over the Forward right method. The performance gain is at least 1\% and up to over 4\% under medium load.
@@ -236,6 +236,33 @@ This technique groups nodes in virtual clusters. When a job arrives in a node an
 \subsubsection*{Random unvisited}
 This algorithm in the most straight forward and is the best performing from any of these techniques. However, it should be noted that each visited node must be stored into the job's metadata.
 
+\subsection{Multiple execution units}
+So far, all simulations were executed using 1 cpu per server. This is not a realistic assumption for most distributed systems. This section is intended to research the behaviour of the algorithms when using multiple cpu's, and comparing the results to a system with 1 cpu per server, and to each other.
+
+Per algorithm, the two simulations are performed and compared, see table \ref{tabcpus} for more information about the tests.
+\begin{table}[h!]
+\centering
+\begin{tabular}{|p{0.2\textwidth}|p{0.4\textwidth}|p{0.4\textwidth}|} \hline
+Algorithm & \multicolumn{2}{|p{0.8\textwidth}|}{Forward right, Left/Right, Random left/right (0.5), Random unvisited, Random Coprime offset} \\ \hline
+Ring size & 100 & 25 \\ \hline
+Cpu's per node	& 1 & 4 \\ \hline
+Load	& \multicolumn{2}{|c|}{$0.1 - 1.0$} \\ \hline
+\end{tabular}
+\caption{Comparison of algorithms using multiple cpu's per server}
+\label{tabcpus}
+\end{table}
+
+Since the ring size for the second test is 25 instead of 100, the number of forwards of the second test will be multiplied by 4 to get meaningful results. This actually makes sense because a job that is forwarded once has encountered 4 busy cpu's. The baseline for the tests is the basic result of the algorithm found in section \ref{simresults}, where the second test is drawn relative to the basic result.
+
+\subsubsection*{Forward right}
+\begin{figure}[h!tb]
+\centering
+\includegraphics[width=0.6\textwidth]{data/4rightright.pdf}
+\caption{Forward Right, 4 cpu's vs 1}
+\label{figevenswitch}
+\end{figure}
+
+
 \section{Numerical Validation}
 ** BEPAALDE ALGORITMES NIET BESPROKEN, WAAROM?
 
@@ -244,7 +271,7 @@ This algorithm in the most straight forward and is the best performing from any 
 To validate the results obtained in the previous section, we modelled the scheduling-techniques into Markov Chains. Using the steady state distribution of these chains, we can derive the average number of hops and the average loss.
 For $N$ nodes in a ring, the markov chain consists of $2^N$ states, where the $n$-th bit represents whether the $n$-th server is busy ($1$) or idle ($0$). To optimize the computation time and memory requirements, we used sparse matrixes for the validation. The validation code is written in MATLAB, it can be found in appendix \ref{matlabcode} or on \url{http://code.google.com/p/powerofpaths/}.
 
-The validation of the results happens in a different environment than the simulation. Because of the non-polynomial execution time of the algorithm, the size of the ring is reduced to $10$. Therefore, the results of this validation are smaller but the relative results can still be analysed.
+The validation of the results happens in a different environment than the simulation. Because of the non-polynomial execution time of the algorithm, the size of the ring is reduced to $10$. Therefore, the results of this validation are smaller but the relative results are still relevant.
 
 \subsection{Forward Right}
 \label{validateright}
@@ -389,7 +416,7 @@ The number of nonzero elements for unlumped Markov Chains is $(N+1) 2^N$. For lu
 \centering
 \includegraphics[clip=true, trim=9em 24em 9em 24em, width=0.9\textwidth]{resources/plotlumping.pdf}
 \caption{A}
-\label{lump}
+\label{figlump}
 \end{figure}
 
 \begin{figure}[h!tb]
@@ -413,12 +440,71 @@ Which techniques work best in which environments? Why? Runner up? Why do some te
 \appendix
 \section{Simulator source code}
 \label{sourcecode}
-dit is de inhoud
+
+\lstset{tabsize=4,language=C++,caption={nodes.h}}
+\lstinputlisting{../src/nodes.h}
+
+\lstset{caption={servernode.cpp}}
+\lstinputlisting{../src/servernode.cpp}
+
+\lstset{caption={randswitchchain.m}}
+\lstinputlisting{../src/configuration.h}
+
+\lstset{caption={randswitchchain.m}}
+\lstinputlisting{../src/nodes.cpp}
+
+\lstset{caption={randswitchchain.m}}
+\lstinputlisting{../src/Main.cpp}
+
+\lstset{caption={randswitchchain.m}}
+\lstinputlisting{../src/servernode.h}
+
+\lstset{caption={randswitchchain.m}}
+\lstinputlisting{../src/ring/ring.cpp}
+
+\lstset{caption={randswitchchain.m}}
+\lstinputlisting{../src/ring/job.h}
+
+\lstset{caption={randswitchchain.m}}
+\lstinputlisting{../src/ring/node.h}
+
+\lstset{caption={randswitchchain.m}}
+\lstinputlisting{../src/ring/ring.h}
+
+\lstset{caption={randswitchchain.m}}
+\lstinputlisting{../src/ring/node.cpp}
+
+\lstset{caption={randswitchchain.m}}
+\lstinputlisting{../src/ring/arriveevent.h}
+
+\lstset{caption={randswitchchain.m}}
+\lstinputlisting{../src/ring/job.cpp}
+
+\lstset{caption={randswitchchain.m}}
+\lstinputlisting{../src/ring/finishevent.h}
+
+\lstset{caption={randswitchchain.m}}
+\lstinputlisting{../src/configuration.cpp}
+
+\lstset{caption={randswitchchain.m}}
+\lstinputlisting{../src/simulator/schedule.h}
+
+\lstset{caption={randswitchchain.m}}
+\lstinputlisting{../src/simulator/event.h}
+
+\lstset{caption={randswitchchain.m}}
+\lstinputlisting{../src/simulator/simulator.h}
+
+\lstset{caption={randswitchchain.m}}
+\lstinputlisting{../src/simulator/simulator.cpp}
+
+\lstset{caption={randswitchchain.m}}
+\lstinputlisting{../src/simulator/schedule.cpp}
 
 \section{MATLAB Numerical evaluation code}
 \label{matlabcode}
 
-\lstset{language=Octave,caption={rightchain.m}}
+\lstset{tabsize=8,language=Octave,caption={rightchain.m}}
 \lstinputlisting{../matlab/rightchain.m}
 
 \lstset{caption={randswitchchain.m}}

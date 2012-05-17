@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.5.14)  15 MAY 2012 23:07
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.5.14)  17 MAY 2012 10:58
 entering extended mode
  %&-line parsing enabled.
 **thesis.tex
@@ -445,11 +445,7 @@ Package biblatex Info: ... file 'english.lbx' found.
 File: english.lbx 2010/03/19 v0.9a biblatex localization
 )
 \@quotelevel=\count187
- (./thesis.aux
-
-LaTeX Warning: Label `lump' multiply defined.
-
-)
+ (./thesis.aux)
 \openout1 = `thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 46.
@@ -466,7 +462,8 @@ LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 46.
 LaTeX Font Info:    ... okay on input line 46.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 46.
 LaTeX Font Info:    ... okay on input line 46.
- (/usr/share/texmf/tex/context/base/supp-pdf.mkii
+
+(/usr/share/texmf/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count188
 \scratchdimen=\dimen133
@@ -517,7 +514,7 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 48.
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
-<resources/ua.pdf, id=103, 68.55383pt x 55.31607pt>
+<resources/ua.pdf, id=107, 68.55383pt x 55.31607pt>
 File: resources/ua.pdf Graphic file (type pdf)
  <use resources/ua.pdf>
 [1
@@ -533,149 +530,171 @@ Overfull \hbox (2.02835pt too wide) in paragraph at lines 80--81
 ithms in a ring-structured
  []
 
-<resources/ring.pdf, id=161, 510.69818pt x 585.4916pt>
-File: resources/ring.pdf Graphic file (type pdf)
+<resources/drawing.pdf, id=166, 515.38403pt x 599.29929pt>
+File: resources/drawing.pdf Graphic file (type pdf)
 
-<use resources/ring.pdf> [5]
-
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 129.
-
+<use resources/drawing.pdf> [5]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 129.
+(hyperref)                removing `math shift' on input line 127.
 
-[6 <./resources/ring.pdf>] [7]
+
+Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
+(hyperref)                removing `math shift' on input line 127.
+
+[6 <./resources/drawing.pdf>] [7]
 (/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
-(/usr/share/texmf-texlive/tex/latex/listings/lstmisc.sty
-File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
-)
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 174.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 173.
 
 
 (/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 174.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 173.
 
-<data/right.pdf, id=254, 415.5525pt x 407.5225pt>
+<data/right.pdf, id=260, 415.5525pt x 407.5225pt>
 File: data/right.pdf Graphic file (type pdf)
  <use data/right.pdf> [8]
-<data/switchright.pdf, id=278, 432.61626pt x 407.5225pt>
+<data/switchright.pdf, id=285, 432.61626pt x 407.5225pt>
 File: data/switchright.pdf Graphic file (type pdf)
 
 <use data/switchright.pdf> [9 <./data/right.pdf> <./data/switchright.pdf>]
-<data/randswitchright.pdf, id=295, 444.66125pt x 407.5225pt>
+<data/randswitchright.pdf, id=302, 444.66125pt x 407.5225pt>
 File: data/randswitchright.pdf Graphic file (type pdf)
 
 <use data/randswitchright.pdf>
-<data/randswitchp.pdf, id=298, 432.61626pt x 407.5225pt>
+<data/randswitchp.pdf, id=305, 432.61626pt x 407.5225pt>
 File: data/randswitchp.pdf Graphic file (type pdf)
 
 <use data/randswitchp.pdf> [10 <./data/randswitchright.pdf> <./data/randswitchp
-.pdf>] <data/evenswitchright.pdf, id=317, 444.66125pt x 407.5225pt>
+.pdf>] <data/evenswitchright.pdf, id=324, 444.66125pt x 407.5225pt>
 File: data/evenswitchright.pdf Graphic file (type pdf)
 
-<use data/evenswitchright.pdf> [11 <./data/evenswitchright.pdf>]
-Overfull \hbox (72.8061pt too wide) detected at line 267
+<use data/evenswitchright.pdf>
+Overfull \hbox (35.99474pt too wide) in paragraph at lines 244--250
+ [][] 
+ []
+
+[11 <./data/evenswitchright.pdf>]
+Overfull \hbox (72.8061pt too wide) detected at line 285
 \OML/cmm/m/it/10 Q \OT1/cmr/m/n/10 = []
  []
 
-<resources/plotright.pdf, id=333, 614.295pt x 794.97pt>
+<resources/plotright.pdf, id=341, 614.295pt x 794.97pt>
 File: resources/plotright.pdf Graphic file (type pdf)
 
 <use resources/plotright.pdf>
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 278.
+(hyperref)                removing `math shift' on input line 296.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `math shift' on input line 278.
+(hyperref)                removing `math shift' on input line 296.
 
 
-Overfull \hbox (72.8061pt too wide) detected at line 295
+Overfull \hbox (72.8061pt too wide) detected at line 313
 \OML/cmm/m/it/10 Q \OT1/cmr/m/n/10 = []
  []
 
-[12 <./resources/plotright.pdf>]
-<resources/plotrandlr.pdf, id=347, 614.295pt x 794.97pt>
+[12] <resources/plotrandlr.pdf, id=351, 614.295pt x 794.97pt>
 File: resources/plotrandlr.pdf Graphic file (type pdf)
 
 <use resources/plotrandlr.pdf>
-<resources/plotrandlrp.pdf, id=350, 614.295pt x 794.97pt>
+<resources/plotrandlrp.pdf, id=354, 614.295pt x 794.97pt>
 File: resources/plotrandlrp.pdf Graphic file (type pdf)
 
 <use resources/plotrandlrp.pdf>
-<resources/plotrandcoprime.pdf, id=352, 614.295pt x 794.97pt>
+<resources/plotrandcoprime.pdf, id=356, 614.295pt x 794.97pt>
 File: resources/plotrandcoprime.pdf Graphic file (type pdf)
 
-<use resources/plotrandcoprime.pdf> [13 <./resources/plotrandlr.pdf>]
-<resources/plotrandcoprime11.pdf, id=368, 614.295pt x 794.97pt>
+<use resources/plotrandcoprime.pdf> [13 <./resources/plotright.pdf>]
+<resources/plotrandcoprime11.pdf, id=371, 614.295pt x 794.97pt>
 File: resources/plotrandcoprime11.pdf Graphic file (type pdf)
 
-<use resources/plotrandcoprime11.pdf> [14 <./resources/plotrandlrp.pdf> <./reso
-urces/plotrandcoprime.pdf>]
-<resources/plotrandcoprime12.pdf, id=384, 614.295pt x 794.97pt>
+<use resources/plotrandcoprime11.pdf> [14 <./resources/plotrandlr.pdf> <./resou
+rces/plotrandlrp.pdf>]
+<resources/plotrandcoprime12.pdf, id=388, 614.295pt x 794.97pt>
 File: resources/plotrandcoprime12.pdf Graphic file (type pdf)
 
-<use resources/plotrandcoprime12.pdf> [15 <./resources/plotrandcoprime11.pdf> <
-./resources/plotrandcoprime12.pdf>]
-<resources/plotlumping.pdf, id=402, 614.295pt x 794.97pt>
+<use resources/plotrandcoprime12.pdf> [15 <./resources/plotrandcoprime.pdf> <./
+resources/plotrandcoprime11.pdf>] [16 <./resources/plotrandcoprime12.pdf>]
+<resources/plotlumping.pdf, id=415, 614.295pt x 794.97pt>
 File: resources/plotlumping.pdf Graphic file (type pdf)
 
 <use resources/plotlumping.pdf>
-<resources/plotlumpingnnz.pdf, id=404, 614.295pt x 794.97pt>
+<resources/plotlumpingnnz.pdf, id=417, 614.295pt x 794.97pt>
 File: resources/plotlumpingnnz.pdf Graphic file (type pdf)
 
-<use resources/plotlumpingnnz.pdf> [16] [17 <./resources/plotlumping.pdf> <./re
-sources/plotlumpingnnz.pdf>] (../matlab/rightchain.m [18])
-(../matlab/randswitchchain.m
-LaTeX Font Info:    Try loading font information for OML+cmr on input line 9.
- (/usr/share/texmf-texlive/tex/latex/base/omlcmr.fd
+<use resources/plotlumpingnnz.pdf> [17 <./resources/plotlumping.pdf>]
+LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 429.
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 429.
+
+(/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2004/09/05 1.3 listings language file
+)
+(/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2004/09/05 1.3 listings language file
+)
+(/usr/share/texmf-texlive/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2007/02/22 1.4 (Carsten Heinz)
+) (../src/nodes.h
+[18 <./resources/plotlumpingnnz.pdf>]
+LaTeX Font Info:    Try loading font information for OML+cmr on input line 14.
+
+(/usr/share/texmf-texlive/tex/latex/base/omlcmr.fd
 File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <8> not available
-(Font)              Font shape `OML/cmm/m/it' tried instead on input line 9.
-) (../matlab/rprimechain.m [19]) (../matlab/runvisitedchain.m [20])
-(../matlab/avghops.m) (../matlab/ruavghops.m [21]) (../matlab/ctmcsteadystate.m
-) (../matlab/lumpavghops.m [22]) (../matlab/lump.m) (../matlab/makestates.m
-[23] [24]) [25] (./thesis.aux)
-
-LaTeX Warning: There were multiply-defined labels.
-
- ) 
+(Font)              Font shape `OML/cmm/m/it' tried instead on input line 14.
+ [19] [20])
+(../src/servernode.cpp) [21] (../src/configuration.h) (../src/nodes.cpp
+[22] [23] [24] [25]) (../src/Main.cpp [26] [27]) (../src/servernode.h [28])
+(../src/ring/ring.cpp) (../src/ring/job.h [29]) (../src/ring/node.h [30])
+(../src/ring/ring.h [31]) (../src/ring/node.cpp [32])
+(../src/ring/arriveevent.h) (../src/ring/job.cpp [33])
+(../src/ring/finishevent.h [34]) (../src/configuration.cpp [35] [36])
+(../src/simulator/schedule.h [37]) (../src/simulator/event.h)
+(../src/simulator/simulator.h [38]) (../src/simulator/simulator.cpp [39])
+(../src/simulator/schedule.cpp) (../matlab/rightchain.m [40])
+(../matlab/randswitchchain.m [41]) (../matlab/rprimechain.m)
+(../matlab/runvisitedchain.m [42]) (../matlab/avghops.m) [43]
+(../matlab/ruavghops.m) (../matlab/ctmcsteadystate.m) [44]
+(../matlab/lumpavghops.m) (../matlab/lump.m) [45] (../matlab/makestates.m
+[46]) [47] (./thesis.aux) ) 
 Here is how much of TeX's memory you used:
- 13002 strings out of 493848
- 191753 string characters out of 1152823
- 674363 words of memory out of 3000000
- 15586 multiletter control sequences out of 15000+50000
+ 14790 strings out of 493848
+ 217181 string characters out of 1152823
+ 791363 words of memory out of 3000000
+ 16030 multiletter control sequences out of 15000+50000
  12318 words of font info for 48 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 38i,7n,49p,863b,2344s stack positions out of 5000i,500n,10000p,200000b,50000s
-</usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/sha
-re/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texmf-te
-xlive/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr/share/texmf-texlive/font
-s/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf-texlive/fonts/type1/pub
-lic/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfont
-s/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.
-pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/sh
-are/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-te
-xlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/
-type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/public
-/amsfonts/cm/cmr5.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/
-cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></us
-r/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/tex
-mf-texlive/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-texlive/f
-onts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texmf-texlive/fonts/type1/p
-ublic/amsfonts/cm/cmti10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfo
-nts/cm/cmtt10.pfb>
-Output written on thesis.pdf (25 pages, 716015 bytes).
+ 41i,11n,58p,863b,2336s stack positions out of 5000i,500n,10000p,200000b,50000s
+</usr/share/texmf-texlive/fonts/type1/public/amsfont
+s/cm/cmbx10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmbx12
+.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmcsc10.pfb></usr
+/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texm
+f-texlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/f
+onts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/type1/
+public/amsfonts/cm/cmmi7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfo
+nts/cm/cmmi8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10
+.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/s
+hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-t
+exlive/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texmf-texlive/fonts/
+type1/public/amsfonts/cm/cmr7.pfb></usr/share/texmf-texlive/fonts/type1/public/
+amsfonts/cm/cmr8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/c
+msy10.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy7.pfb></
+usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/te
+xmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texmf-texlive
+/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
+Output written on thesis.pdf (47 pages, 985816 bytes).
 PDF statistics:
- 1019 PDF objects out of 1200 (max. 8388607)
- 481 named destinations out of 1000 (max. 500000)
- 330 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2636 PDF objects out of 2984 (max. 8388607)
+ 1764 named destinations out of 2073 (max. 500000)
+ 338 words of extra memory for PDF output out of 10000 (max. 10000000)
 
