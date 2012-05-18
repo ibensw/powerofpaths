@@ -151,12 +151,13 @@ Example:
 Consider a ring size of $N=10$ in which every node is busy. The list of coprimes is than generated: ${1, 3, 7, 9}$. Assume a job arrives at node $3$ and the last time node $3$ forwarded a job it was given offet $1$.
 Because this node is busy, the next number on the list ($3$) is selected and saved in the job's metadata. All nodes are busy so the job visits these nodes before being dropped: $3$ (arrival), $6, 9, 2, 5, 8, 1, 4, 7, 0$. Node $0$ will drop the job because the next node would be $3$, which is the node on wich the job arrived.
 
-Because the list of coprimes can be regenerated each time a job arrives, it must not be saved. Both the job and the node must keep an index to a coprime. The size of this list $\tau(N)$ thus an index to an element in this list requires $\lceil log_2 \tau(N) \rceil$ bits.
+Because the list of coprimes can be regenerated each time a job arrives, it must not be saved. Both the job and the node must keep an index to a coprime. The size of this list $\tau(N)$ thus an index to an element in this list requires $\lceil log_2 \tau(N) \rceil$ bits (see section \ref{secprops} for the definition of $\tau(N)$).
 
 \subsubsection*{Random Coprime offset}
 The Random Coprime offset algorithm is almost equal to Coprime offset. The difference between them is the decision of the offset value. Where it is the next number on the list in Coprime offset, a random value is taken from the list when using Random Coprime offset. As Coprime offset, the offset must be saved in the job's metadata. Since the offset for incoming jobs is choosen at random, the nodes do not need to keep state information.
 
 \subsection{Properties of Algorithms}
+\label{secprops}
 
 We have reviewed some of the basic properties for each algorithm, they can be found in table \ref{tabprops}. The function $\tau(N)$ represents the number of values smaller than $N$ and coprime to $N$.
 
@@ -272,9 +273,7 @@ This technique groups every 2 nodes into small virtual clusters. When a job arri
 
 
 \subsubsection*{Random unvisited}
-This algorithm is not bound to its neighbors when forwarding a job. Lifting this constraint allows a serious performance boost. ***********
-
-This algorithm in the most straight forward and is the best performing from any of these techniques. However, it should be noted that each visited node must be stored into the job's metadata, at least $N$ bits should be available to store this information.
+Unlike the previous algorithms, this algorithm is not bound to its neighbors when forwarding a job. Lifting this constraint allows a serious performance boost.
 
 \begin{figure}[h!tb]
 \centering
@@ -283,10 +282,10 @@ This algorithm in the most straight forward and is the best performing from any 
 \label{figrandunvisited}
 \end{figure}
 
-Figure \ref{figrandunvisited} shows the results of this algorithms. It is the first algorithm tested that could forward jobs to nodes other than its neighbors. We see that lifting that constraint allows a serious performance boost.
+Figure \ref{figrandunvisited} shows the results of this algorithm. The performance benifit is at least $10 \%$ in the range $0.20 - 1.00$, and even up to $30 \%$ under medium load.
 
 \subsubsection*{(Random) Coprime offset}
-Two other algorithms that are not restricuted to forwarding to a neighbor are Coprime offset and Random Coprime offset. Figure \ref{figprimes} shows the results of both these algorithms. The difference of these algorithms with themselves and the random unvisited algorithms is not clearly visible when comparing both to the Forward Right algorithm. To put these results in perspective, we included figure \ref{figruprp} where Coprime offset and Random Coprime offset are depicted relative to Random unvisited. Although the difference is small, it seems the Random unvisited algorithm shows a better performance than the other two. However, Coprime offset and Random Coprime offset require $\lceil log_2 N \rceil$ bits in the job's metadata instead of $N$ for Random unvisited.
+Two other algorithms that are not restricuted to forwarding to a neighbor are Coprime offset and Random Coprime offset. Figure \ref{figprimes} shows the results of both these algorithms. The difference of these algorithms with themselves and the random unvisited algorithms is not clearly visible when comparing both to the Forward Right algorithm. To put these results in perspective, we included figure \ref{figruprp} where Coprime offset and Random Coprime offset are depicted relative to Random unvisited. Although the difference is very small, it seems the Random unvisited algorithm shows a better performance than the other two. However, Coprime offset and Random Coprime offset require $\lceil log_2 \tau(N) \rceil$ bits in the job's metadata instead of $N$ for Random unvisited.
 
 \begin{figure}[h!tb]
         \begin{subfigure}[b]{0.5\textwidth}
@@ -298,6 +297,7 @@ Two other algorithms that are not restricuted to forwarding to a neighbor are Co
                 \centering
                 \includegraphics[width=\textwidth]{data/randprimeright.pdf}
                 \caption{Random Coprime offset}
+                \label{figsimrcp}
         \end{subfigure}
 \caption{(Random) Coprime offset}
 \label{figprimes}
@@ -311,22 +311,24 @@ Two other algorithms that are not restricuted to forwarding to a neighbor are Co
 \end{figure}
 
 \subsection{Multiple execution units}
-So far, all simulations were executed using 1 cpu per server. This is not a realistic assumption for most distributed systems. This section is intended to research the behaviour of the algorithms when using multiple cpu's, and comparing the results to a system with 1 cpu per server, and to each other.
+So far, all simulations were executed using 1 CPU per server. This is not a realistic assumption for most distributed systems. This section is intended to research the behaviour of the algorithms when using multiple CPUs, and comparing the results to a system with 1 CPU per server, and to each other.
 
-Per algorithm, the two simulations are performed and compared, see table \ref{tabcpus} for more information about the tests.
+Per algorithm, two simulations were performed and compared. One using a 1 CPU and one using 4 CPUs per server. See table \ref{tabcpus} for more information about the tests.
+
 \begin{table}[h!]
 \centering
-\begin{tabular}{|p{0.2\textwidth}|p{0.4\textwidth}|p{0.4\textwidth}|} \hline
+\begin{tabular}{|p{0.3\textwidth}|p{0.35\textwidth}|p{0.35\textwidth}|} \hline
 Algorithms & \multicolumn{2}{|p{0.8\textwidth}|}{Forward right, Left/Right, Random left/right (0.5), Random unvisited, Random Coprime offset} \\ \hline
 Ring size & 100 & 25 \\ \hline
-Cpu's per node	& 1 & 4 \\ \hline
+CPUs per node	& 1 & 4 \\ \hline
+Total CPUs in system & \multicolumn{2}{|c|}{100} \\ \hline
 Load	& \multicolumn{2}{|c|}{$0.1 - 1.0$} \\ \hline
 \end{tabular}
-\caption{Comparison of algorithms using multiple cpu's per server}
+\caption{Comparison of algorithms using multiple CPUs per server}
 \label{tabcpus}
 \end{table}
 
-Since the ring size for the second test is 25 instead of 100, the number of forwards of the second test will be multiplied by 4 to get meaningful results. This actually makes sense because a job that is forwarded once has encountered 4 busy cpu's. The baseline for the tests is the basic result of the algorithm found in section \ref{simresults}, where the second test is drawn relative to the basic result.
+Since the ring size for the second test is 25 instead of 100, the number of forwards of the second test will be multiplied by 4 to get meaningful results. This actually makes sense because a job that is forwarded once has encountered 4 busy CPUs. The baseline for the tests is the result of the algorithm using 1 CPU (found in section \ref{simresults}), where the results of the simulation using multiple CPUs is drawn relative to the baseline result.
 
 \begin{figure}
         \begin{subfigure}[b]{0.5\textwidth}
@@ -356,15 +358,15 @@ Since the ring size for the second test is 25 instead of 100, the number of forw
                 \includegraphics[width=\textwidth]{data/4randprimerandprime.pdf}
                 \caption{Random Coprime offset}
         \end{subfigure}
-        \caption{4 cpu's per server versus 1}\label{figcpus}
+        \caption{4 CPUs per server versus 1}\label{figcpus}
 \end{figure}
 
-Figure \ref{figcpus} shows the performance of 4 cpu's versus 1 cpu for different algorithms. For each of the tested algorithms, we see the same result. This means the results of each algorithm is influenced in the same way when using multiple cpu's per server. We can use this knowledge to generalize the results of section \ref{simresults}.
+Figure \ref{figcpus} shows the performance of 4 CPUs versus 1 CPU for different algorithms. For each tested algorithm, we see the same result. This means the results of each algorithm is influenced in the same way when using multiple CPUs per server. We can use this knowledge to generalize the results of section \ref{simresults}.
 
-Since we assume each algorithm is infuenced the same way, let us investigate one of them in depth. We will try to transform the results of an algorithm with ring size $N$ and $1$ cpu per server into the results of the same algorithm with ring size $N/c$ and $c$ cpu's per server. The load of the system should be the same.
+Since we assume each algorithm is infuenced the same way, we will investigate one of them in depth. We will try to transform the results of an algorithm with ring size $N$ and $1$ CPU per server into the results of the same algorithm with ring size $N/c$ and $c$ CPUs per server. Every other parameter should be unchanged.
 
-Let $d$ be the distribution of the number of forwards, stored as a rowvector. We will build a transformation vector $M$ in the form $[ \lfloor 0/c \rfloor,  \lfloor 1/c \rfloor, \ldots, \lfloor (N-1)/c \rfloor]'$. This vector represents the number of times a job would be forwarded if there would be $c$ cpu's per server. $d*M$ equals the average number of forwards when using such a system. To negate the dropped jobs, the results must be weighted for only the completed jobs.
-In our example, we will transform the results of the Forward Right algorithm using ring size $N=10$ and 1 cpu into the results of a ring with size $N=5$ and $c=2$ cpu's per server, see table \ref{tabcpus} for a worked out example and figure \ref{figcpusmatch} for a comparison of the transformation and a real simulation.
+Let $d$ be the distribution of the number of forwards, stored as a rowvector. We will build a transformation vector $M$ in the form $[ \lfloor 0/c \rfloor,  \lfloor 1/c \rfloor, \ldots, \lfloor (N-1)/c \rfloor]'$. This vector represents the number of times a job would be forwarded if there would be $c$ CPUs per server. $d*M$ equals the average number of forwards when using such a system. To negate the dropped jobs, the results must be weighted for only the completed jobs.
+In our example, we will transform the results of the Forward Right algorithm using ring size $N=10$ and 1 CPU into the results of a ring with size $N=5$ and $c=2$ CPUs per server, see table \ref{tabcpus} for a worked out example and figure \ref{figcpusmatch} for a comparison of the transformation and a simulation result.
 
 
 \begin{table}
@@ -392,14 +394,12 @@ Simulation result & \multicolumn{3}{|c|}{$0.4171$} \\ \hline
 \begin{figure}[h!tb]
 \centering
 \includegraphics[width=0.8\textwidth]{data/right_5_2.pdf}
-\caption{Multiple cpu's result derived of the result for 1 cpu (green) versus the actual simulation result (red)}
+\caption{Multiple CPUs result derived of the result for 1 CPU (green) versus an actual simulation result using 4 CPUs (red)}
 \label{figcpusmatch}
 \end{figure}
 
 
 \section{Numerical Validation}
-** BEPAALDE ALGORITMES NIET BESPROKEN, WAAROM?
-
 \label{secvalidation}
 
 To validate the results obtained in the previous section, we modelled the scheduling-techniques into Markov Chains. Using the steady state distribution of these chains, we can derive the average number of hops and the average loss.
@@ -407,8 +407,10 @@ For $N$ nodes in a ring, the markov chain consists of $2^N$ states, where the $n
 
 The validation of the results happens in a different environment than the simulation. Because of the non-polynomial execution time of the algorithm, the size of the ring is reduced to $10$. Therefore, the results of this validation are smaller but the relative results are still relevant.
 
-\subsection{Forward Right}
-\label{validateright}
+Not every algorithms can be effeciently modelled into a Markov Chain. Computing the results of algorithms requiring state information in the nodes is infeasable for a decent ring size, therefore we did not model Left/Right forward and the Coprime offset algorithms. We also ignored the Position dependant forwarding algorithm since its results seemed logic and further investigation would not reveal useful information.
+
+\subsection{Comparison}
+\subsubsection*{Forward Right}
 Modelling a technique into a Markov Chain is an easy operation for most algorithms. The example given below is for a ring of 3 nodes. For convenience, the states are represented by their binary form.
 
 \[ Q =
@@ -436,7 +438,7 @@ Modelling a technique into a Markov Chain is an easy operation for most algorith
 
 Analogue to the simulation section, this method will be the baseline result in our other results.
 
-\subsection{Random Left/Right forward with parameter $p$}
+\subsubsection*{Random Left/Right forward with parameter $p$}
 This matrix is very similar to the one above. But we need to take into account the parameters $p$ and $1-p$ instead of $1$ and $0$.
 
 \[ Q =
@@ -455,14 +457,14 @@ This matrix is very similar to the one above. But we need to take into account t
   \end{blockarray}
 \]
 
-The lumped matrix (section \ref{lump}) of $Q$ is equal to the lumped matrix of the example above, i.e. the matrix defines the exact same behaviour. However, for $N > 6$ the matrices and so the results of the steady state distribution begin to differ.
-
 \begin{figure}[h!tb]
 \centering
 \includegraphics[clip=true, trim=9em 24em 9em 24em, width=0.9\textwidth]{resources/plotrandlr.pdf}
 \caption{Validation of Random Left/Right with p=$0.5$}
 \label{validrlr}
 \end{figure}
+
+It seems the simulation result was right. Although the results in \ref{validrlr} are much smoother those is \ref{figrandswitch}, we must take into account that these results are computed exact and using a smaller ring size.
 
 As in the simulation section, we have validated the results for different values for $p$. These results are shown in figure \ref{validrlrp}.
 
@@ -473,37 +475,41 @@ As in the simulation section, we have validated the results for different values
 \label{validrlrp}
 \end{figure}
 
-\subsection{Random Coprime offset}
-Modelling this technique yields different results for various ring sizes. The performance of this algorithm is very dependant on the number of coprimes that can be used. This technique yields the same results as Forward Right for ring sizes of up 4. For $N = 3$, the matrix $Q$ is identical to Random Left/Right forward with parameter $0.5$, as the coprimes of 3 are 1 and 2. Which means forwarding a job left or right, both with the same probability.
+The Random Left/Right forward algorithm does not seem a viable choice for real implementations. It has a small performance drawback compared to Forward Right and has no other benifits. Furthermore, it is a little harder to implement.
 
-\begin{figure}[h!tb]
+\subsubsection*{Random Coprime offset}
+Modelling this technique yields different results for various ring sizes. The performance of this algorithm depends on $\tau(N)$. The results in figure \ref{validcp} are very simular to those found in the simulation (figure \ref{figsimrcp}).
+
+\begin{figure}
 \centering
-\includegraphics[clip=true, trim=9em 24em 9em 24em, width=0.9\textwidth]{resources/plotrandcoprime.pdf}
-\caption{Validation of Coprime algorithm for $N=10$}
+        \begin{subfigure}[b]{0.9\textwidth}
+			\centering
+			\includegraphics[clip=true, trim=9em 24em 9em 24em,width=\textwidth]{resources/plotrandcoprime.pdf}
+			\caption{$N=10$}
+			\label{validcp10}
+        \end{subfigure}
+
+		\begin{subfigure}[b]{0.49\textwidth}
+			\centering
+			\includegraphics[clip=true, trim=9em 24em 9em 24em, width=\textwidth]{resources/plotrandcoprime11.pdf}
+			\caption{$N=11$}
+			\label{validcp11}
+		\end{subfigure}
+		\begin{subfigure}[b]{0.49\textwidth}
+			\centering
+			\includegraphics[clip=true, trim=9em 24em 9em 24em, width=\textwidth]{resources/plotrandcoprime12.pdf}
+			\caption{$N=12$}
+			\label{validcp12}
+		\end{subfigure}
+\caption{Validation of the Random Coprime offset algorithm}
 \label{validcp}
 \end{figure}
 
-As shown in figure \ref{validcp}, the performance gain of this algorithm is up to 5\% for a ring size of $N=10$. The list of coprimes in that scenario is ${1, 3, 7, 9}$, thus 4 possible choices. When increasing the ring size to $11$, a prime number, the list of coprimes expands to ${1..10}$ (because 11 is prime), thus 10 possible choices. This increases the relative performance gain up to 8\%. To make clear the increased performance is not due to the increase of $N$, figure \ref{validcp12} shows the performance gain for $N=12$.
-
-\begin{figure}[h!tb]
-\centering
-\includegraphics[clip=true, trim=9em 24em 9em 24em, width=0.9\textwidth]{resources/plotrandcoprime11.pdf}
-\caption{Validation of Coprime algorithm for $N=11$}
-\label{validcp11}
-\end{figure}
-
-\begin{figure}[h!tb]
-\centering
-\includegraphics[clip=true, trim=9em 24em 9em 24em, width=0.9\textwidth]{resources/plotrandcoprime12.pdf}
-\caption{Validation of Coprime algorithm for $N=12$}
-\label{validcp12}
-\end{figure}
-
-The performance gain is dependant on the number of different paths a job can follow. For $N=10$ and $N=12$, a job can follow 4 possible routes, for $N=11$, 10 different routes can be chosen.
+The results show a performance gain up to 5\% for a ring size of $N=10$. The list of coprimes in that scenario is ${1, 3, 7, 9}$, thus 4 possible choices. When increasing the ring size to $11$, a prime number, the list of coprimes expands to ${1..10}$ (because 11 is prime), thus 10 possible choices. This increases the relative performance gain up to 8\% (figure \ref{validcp11}). To make clear the increased performance is not due to the increase of $N$, figure \ref{validcp12} shows the performance gain for $N=12$. For $N=10$ and $N=12$, a job can follow 4 possible routes, for $N=11$, 10 different routes can be chosen.
 
 
-\subsection{Random Unvisited}
-This problem can be modelled much more efficiently than the techniques. Since the next node is chosen at random, the information we need to save consists only of the number of servers which are currently busy. This problem is analogue to modelling an Erlang-B loss system. The number of states in this Markov Chain is linear to $N$, is much more dense and already represents a lumped Markov Chain. For $N=3$, the matrix is given below.
+\subsection*{Random Unvisited}
+This problem can be modelled much more efficiently than the techniques. Since the next node is chosen at random, it is not necessary to store the position of the nodes. The information we need to save consists only of the number of servers which are currently busy. This problem is similar to modelling an Erlang-B loss system. The number of states in this Markov Chain is linear to $N$, which is much more dense than the previous given models. For $N=3$, the matrix is given below.
 
 \[ Q =
   \begin{blockarray}{ccccc}
@@ -520,7 +526,8 @@ This problem can be modelled much more efficiently than the techniques. Since th
 \subsection{Lumped states}
 \label{lump}
 
-Except for Random Unvisited, each discribed technique is modelled into a Markov Chain with $N^2$ states. However, many of these states are redundant: for example, for $N=3$ the states $001$, $010$ and $100$ all represent one of the nodes being busy. For states representing multiple busy nodes, the space between these servers is critical information. Multiple states can be lumped when bitrotating one state can result in another state. Example: the states below are analogue and can therefore be lumped into one state:
+Except for Random Unvisited, each discribed technique is modelled into a Markov Chain with $N^2$ states. However, many of these states are redundant: for example, for $N=3$ the states $001$, $010$ and $100$ all represent one of the nodes being busy. For states representing multiple busy nodes, the space between these servers is critical information. Redundant states can be generated from one state: bitrotate the state by 1 until you get the original state, each encountered state is redundant.
+Example: the states below are redundant and can therefore be lumped into one state:
 \begin{verbatim}
 001101 = 011010 = 110100 = 101001 = 010011 = 100110
 \end{verbatim}
@@ -539,8 +546,8 @@ The example model in \ref{validateright} can be lumped into the following Markov
   \end{blockarray}
 \]
 
-Computing the steady state distribution of a Markov Chain is subject to time constraints. Using sparse matrices for our algorithm already solved the memory constraints.
-Two factors are important when working with matrices: the number of elements and the number of nonzero elements. We will show that both factors are reduced significantly.
+Computing the steady state distribution of a Markov Chain is subject to both time and memory constraints. Using sparse matrices for our algorithms reduces the memory constraint so much it is no longer a bottleneck.
+Two factors are important when working with matrices: the number of elements and the number of nonzero elements. We will show that both factors are reduced significantly by lumping the matrices.
 
 For unlumped Markov Chains modelling the Random forward algorithm, a matrix consists of $2^N$ states, an exponential growth. Lumping these matrices results in a number of states equal to:  $\frac{1}{N} \sum_{d|N} (2^{N/d} \cdot \phi(d) )$ where $\phi(d) = d \cdot \prod_{p|d, p\text{ is prime}} (1-\frac{1}{p})$ \cite{A000031}. Although this result greatly reduces the number of states, its complexity is still non-polynomial.
 
@@ -563,6 +570,24 @@ The number of nonzero elements for unlumped Markov Chains is $(N+1) 2^N$. For lu
 It seems lumping is a good technique to push the bounderies of the validation by reducing two important factors of the compution time. However, it is no silver bullet: both the number of states and the number of nonzero elements are nonpolynomial after lumping the matrices.
 
 \subsection{Equivalent techniques}
+Various algorithms are equivalent or very similar under special conditions. We will discuss some of these equivalencies.
+
+For $N \leq 3$ all algorithms are equivalent. This is obvious for $N=2$. For $N=3$, there are 4 possible states with the same behaviour for each algorithm:
+\begin{description}
+\item[All nodes idle] All 3 nodes are idle, an incoming job will be executed by first node.
+\item[1 node busy] Each node is as likely to be the next node receiving a job. For an idle node, the job is executed by that node. For the busy node, the job will need to make exactly 1 hop.
+\item[2 node busy] Since each node is as likely to be the next node receiving a job, the job will be forwarded 0,1 or 2 times, all with the same probability.
+\item[Saturated] The job will be dropped
+\end{description}
+
+For $N>3$, other equivalencies exist, described below.
+
+\subsubsection*{Random Left/Right with parameter $p$}
+This algorithm is always equivalent to itself using parameter $1-p$. This is intuitivly clear because the probabilities of right and left are swapped, like looking to the ring in a mirror.
+It is clear that for $p=0$ (and so for $p=1$), this algorithm is equivalent to the Forward right algorithm. Furthermore, for arbitrary values of $p$, this algorithm is still equivalent to Forward right as long the ring size $N \leq 5$. This can be proven by lumping the Markov Chains for both techniques.
+***** MAYBE DO THE PROVE? (BUT FOR N=4) ****
+
+
 Lumping states of a Markov Chain produces an equivalent Markov Chain. This can be used to prove some forwarding techniques are equal up to a certain $N$.
 
 \section{Conclusion}
