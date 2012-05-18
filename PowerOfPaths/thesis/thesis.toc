@@ -8,31 +8,19 @@
 \defcounter {refsection}{0}
 \contentsline {subsection}{\numberline {1.2}Forward to neighbour}{6}{subsection.1.2}
 \defcounter {refsection}{0}
-\contentsline {subsubsection}{\numberline {1.2.1}Forward right}{6}{subsubsection.1.2.1}
-\defcounter {refsection}{0}
-\contentsline {subsubsection}{\numberline {1.2.2}Left/Right forward}{6}{subsubsection.1.2.2}
-\defcounter {refsection}{0}
-\contentsline {subsubsection}{\numberline {1.2.3}Random Left/Right forward with parameter $p$}{6}{subsubsection.1.2.3}
-\defcounter {refsection}{0}
-\contentsline {subsubsection}{\numberline {1.2.4}Position-dependant forwarding}{6}{subsubsection.1.2.4}
-\defcounter {refsection}{0}
 \contentsline {subsection}{\numberline {1.3}Forward anywhere}{7}{subsection.1.3}
 \defcounter {refsection}{0}
-\contentsline {subsubsection}{\numberline {1.3.1}Random unvisited}{7}{subsubsection.1.3.1}
+\contentsline {subsection}{\numberline {1.4}Properties of Algorithms}{8}{subsection.1.4}
 \defcounter {refsection}{0}
-\contentsline {subsubsection}{\numberline {1.3.2}Coprime offset}{7}{subsubsection.1.3.2}
+\contentsline {section}{\numberline {2}Simulation}{9}{section.2}
 \defcounter {refsection}{0}
-\contentsline {subsubsection}{\numberline {1.3.3}Random Coprime offset}{7}{subsubsection.1.3.3}
+\contentsline {subsection}{\numberline {2.1}Measure}{9}{subsection.2.1}
 \defcounter {refsection}{0}
-\contentsline {section}{\numberline {2}Simulation}{7}{section.2}
+\contentsline {subsection}{\numberline {2.2}Results}{10}{subsection.2.2}
 \defcounter {refsection}{0}
-\contentsline {subsection}{\numberline {2.1}Measure}{8}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.3}Multiple execution units}{13}{subsection.2.3}
 \defcounter {refsection}{0}
-\contentsline {subsection}{\numberline {2.2}Results}{8}{subsection.2.2}
-\defcounter {refsection}{0}
-\contentsline {subsection}{\numberline {2.3}Multiple execution units}{12}{subsection.2.3}
-\defcounter {refsection}{0}
-\contentsline {section}{\numberline {3}Numerical Validation}{15}{section.3}
+\contentsline {section}{\numberline {3}Numerical Validation}{16}{section.3}
 \defcounter {refsection}{0}
 \contentsline {subsection}{\numberline {3.1}Forward Right}{16}{subsection.3.1}
 \defcounter {refsection}{0}
@@ -40,14 +28,14 @@
 \defcounter {refsection}{0}
 \contentsline {subsection}{\numberline {3.3}Random Coprime offset}{18}{subsection.3.3}
 \defcounter {refsection}{0}
-\contentsline {subsection}{\numberline {3.4}Random Unvisited}{18}{subsection.3.4}
+\contentsline {subsection}{\numberline {3.4}Random Unvisited}{21}{subsection.3.4}
 \defcounter {refsection}{0}
-\contentsline {subsection}{\numberline {3.5}Lumped states}{20}{subsection.3.5}
+\contentsline {subsection}{\numberline {3.5}Lumped states}{21}{subsection.3.5}
 \defcounter {refsection}{0}
-\contentsline {subsection}{\numberline {3.6}Equivalent techniques}{21}{subsection.3.6}
+\contentsline {subsection}{\numberline {3.6}Equivalent techniques}{23}{subsection.3.6}
 \defcounter {refsection}{0}
-\contentsline {section}{\numberline {4}Conclusion}{21}{section.4}
+\contentsline {section}{\numberline {4}Conclusion}{23}{section.4}
 \defcounter {refsection}{0}
-\contentsline {section}{\numberline {A}Simulator source code}{22}{appendix.A}
+\contentsline {section}{\numberline {A}Simulator source code}{24}{appendix.A}
 \defcounter {refsection}{0}
-\contentsline {section}{\numberline {B}MATLAB Numerical evaluation code}{40}{appendix.B}
+\contentsline {section}{\numberline {B}MATLAB Numerical evaluation code}{42}{appendix.B}

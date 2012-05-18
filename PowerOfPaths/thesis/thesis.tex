@@ -12,7 +12,6 @@
 \usepackage{listings}
 \usepackage{biblatex}
 \usepackage{hyperref}
-
 \bibliography{refs.bib}
 \usepackage{color}
 \definecolor{dkgreen}{rgb}{0,0.6,0}
@@ -105,11 +104,11 @@ Finally, section \ref{secconclusion} contains the conclusions and other thoughts
 
 \section{Setup}
 \label{secsetup}
-We are using a ring-structured network of $N$ nodes. Each node is connected to two neighbours, left and right. The purpose of these nodes is to process incoming jobs. When a node is busy while a job arrives, it must forward to another node. When a job has visited all nodes and none of them was found empty, the job is dropped.
+We are using a ring-structured distributed system of $N$ nodes. Each node is connected to two neighbours, left and right. The purpose of these nodes is to process incoming jobs. When a node is busy while a job arrives, it must forward the incoming job to another node. When a job has visited all nodes and none of them was found idle, the job is dropped.
 
-Jobs have an arrival time, a length and optional metadata. They arrive at each node indepentently as a poisson process at rate $\lambda$. Their length is exponentially distributed with mean $\mu$ (unless otherwise noted, assume $\mu=1$). Although each job has a length, this length may not known in advance. Finally, the metadata is optional and may be used by the nodes to pass information among the job (e.g. a list of visited nodes).
+Jobs have an arrival time, a length, the ID of the first node and optional metadata. They arrive at each node indepentently as a poisson process at rate $\lambda$. Their length is exponentially distributed with mean $\mu$ (unless otherwise noted, assume $\mu=1$). Although each job has a length, this length may not known in advance. Finally, the metadata is optional and may be used by the nodes to pass information among the job (e.g. a list of visited nodes).
 
-Nodes can use different algorithms to determine whereto a job will be forwarded. The performance of these algorithms is the main focus of this thesis. Different techniques will be discussed and simulated. Afterwards, some results of the simulation will be validated.
+Nodes can use different algorithms to determine whereto a job will be forwarded. The performance of these algorithms is the main focus of this thesis. Different techniques will be discussed and simulated. Afterwards, some results of the simulation will be validated using numerical techniques.
 Note that the cost of forwarding a job is neglected. Together with the presumption a job must visit each node before being dropped, this means a job arriving at any node will be processed if and only if at least one server is idle.
 
 \begin{figure}[h!tb]
@@ -119,57 +118,83 @@ Note that the cost of forwarding a job is neglected. Together with the presumpti
 \label{figring}
 \end{figure}
 
-The performance of a forwarding algorithms is measured by the average number of hops a job must visit before being executed. The goal of the algorithms is to minimize this number by spreading the load evenly along the ring. 
-
-
-%Explain the setup, the goals, the reasons, explain the balancing-techniques
-%Insert a picture of nodes in a ring
-%
-%Imagine a ring-structured distributed system, consisting of several nodes, each connected its two neighbours. Nodes may have $x$ servers, meaning they can process at most $x$ jobs at a time. External jobs will arrive at each node, independent of eachother. Busy nodes will pass an incoming job on to another node using a specified algorithm. This setup is fixed during the whole thesis. Our goal is to examine how well given algorithms distribute the load of the system. It is measured using the average number of times a job must be forwarded before is can be executed. Jobs that are forwarded to every node in the system are discarded. We assume the jobs have a Poisson arrival rate with parameter $\lambda$, the service time is exponental with parameter $\mu$, and forwarding a job takes no time at all. Unless otherwise noted, we assume $\mu=1$.
+The performance of a forwarding algorithms is measured by the average number of nodes a job must visit before being executed. The goal of the algorithms is to minimize this number by spreading the load evenly along the ring. 
 
 \subsection{Forwarding algorithms}
-Nodes that must forward a job must choose another node of the ring. Nodes have no information about other nodes, so is has no idea whether the node is idle or busy. The algorithms are grouped in two categories: forward to neighbour and forward anywhere.
-The first techniques allows a busy node to forward an incoming job to either its left or right neighbour, where the latter may forward these jobs to any node in the ring. 
-Since the amount of dropped jobs is equal for each forwarding algorithm. These jobs will be ignored when computing the average number of hops. One should note that the loss rate of jobs in the system is the same as the Erlang-b loss rate.
-
+Nodes that must forward a job will choose another node of the ring. Nodes have no information about other nodes, so it has no idea whitch nodes are idle or busy. The algorithms are grouped into two categories: forward to neighbour and forward anywhere.
+The first techniques allows a busy node to forward an incoming job to either its left or its right neighbor, where the latter may forward these jobs to any node in the ring. 
+Since the amount of dropped jobs is equal for each forwarding algorithm. These jobs will be ignored when computing the average number of forwards. One should note that the loss rate of jobs in the system is the same as the Erlang-b loss rate.
 
 \subsection{Forward to neighbour}
-\subsubsection{Forward right}
-A busy node using this technique will forward a job to its right neighbour. The job will keep travelling clockwise until an idle node is found, where it will be processed. This algorithms is used as base line in all further tests.
+\subsubsection*{Forward right}
+A busy node using this technique will forward a job to its right neighbour. The job will keep travelling in this direction until an idle node is found, where it will be processed or it has visited all nodes, when it will be dropped. Unless otherwise noted, this algorithms is used as baseline in all further tests. This algorithm does not use any space in the job's metadata, nor must nodes save states.
 
-\subsubsection{Left/Right forward}
-A variant to the previous algorithm is the Left/Right forward technique. Instead of forwarding each job to its right neighbour, a busy node will alternate the direction after forwarding such a job. To avoid a job coming back, this initial direction is saved in the job's metadata. Busy nodes receiving a job from another neighbour must forward it the same direction as specified in the job's metadata.
+\subsubsection*{Left/Right forward}
+A variant to the previous algorithm is the Left/Right forward technique. Instead of forwarding each job to its right neighbour, a busy node will alternate the direction after forwarding such a job. To avoid a job coming back, this initial direction is saved in the job's metadata. Busy nodes receiving a job from another neighbour must forward it the same direction as specified in the job's metadata. This algorithms requires the 1 bit representing the direction in the job's metadata, it also needs the save 1 bit state information in each nodes to keep track of the last direction a new job was forwarded to.
 
-\subsubsection{Random Left/Right forward with parameter $p$}
-This technique is a variant of the Left/Right forward algorithm. However, instead of alternating the direction for each new job, a node will forward a job to its right with probability $p$ and to its left with probability $1-p$. As the previous technique, the direction is saved in the job's metadata and subsequent nodes must maintain this direction when forwarding.
+\subsubsection*{Random Left/Right forward with parameter $p$}
+This technique is a variant of the Left/Right forward algorithm. However, instead of alternating the direction for each new job, a node will forward a job to its right with probability $p$ and to its left with probability $1-p$. As the previous technique, the direction is saved in the job's metadata and subsequent nodes must maintain this direction when forwarding. On the contrary, nodes do not need to save state information.
 
-\subsubsection{Position-dependant forwarding}
-As shown in figure \ref{figring}, each node in the ring has an unique ID. Except the for node with id $0$ and $N-1$, neigbouring are succeeding. When nodes uses this algorithm, nodes will always forward a new job in the same direction: to the right when the node's id is even, to the left otherwise. As previous algorithms, the direction is saved in the job's metadata and this direction must be used if other nodes must forward the job.
+\subsubsection*{Position-dependant forwarding}
+As shown in figure \ref{figring}, each node in the ring has an unique ID. Except the for node with id $0$ and $N-1$, neigbouring are succeeding. When nodes uses this algorithm, nodes will always forward a new job in the same direction: to the right when the node's id is even, to the left otherwise. As previous algorithms, the direction is saved in the job's metadata and this direction must be used if other nodes must forward the job. The initial direction of incoming jobs can be derived from the node's ID, therefore the node needs no state information.
 
 \subsection{Forward anywhere}
-The ring strucure can be used in real networks, however in many cases the ring is no more than a virtual overlay over another structure (e.g. the internet). In these networks each node is able to connect to each other node and other forwarding algorithms can be used.
+The ring strucure can be used in real networks, however in many cases the ring is no more than a virtual overlay over another structure (e.g. the internet). In these networks each node is able to connect each other node directly and more sophisticated forwarding algorithms can be used.
 
-\subsubsection{Random unvisited}
-The Random unvisited algorithm is the most basic algorithm in this category. Everytime a job is forwarded, a list of unvisited nodes is generated and a random node is choosen from this list. The current node is added to the list of visited nodes, which is found in the job's metadata.
+\subsubsection*{Random unvisited}
+The Random unvisited algorithm is the most basic algorithm in this category. Everytime a job must be forwarded, a list of unvisited nodes is generated and a random node is choosen from that list. The current node is added to the list of visited nodes, which is found in the job's metadata. This list can be saved using $N$ bits.
 
-\subsubsection{Coprime offset}
+\subsubsection*{Coprime offset}
 Another algorithm is Coprime offset. This algorithm generates a list of all numbers smaller than $N$, and coprime to $N$. The first time a job is forwarded the next number of this list is selected. This is the job's forward offset and saved in the its metadata. When a job is forwarded, it is sent exactly this many hops farther. Because this number and $N$ are coprime, it will visit all nodes exactly once before being returned to its originating node. 
 
 Example:
 Consider a ring size of $N=10$ in which every node is busy. The list of coprimes is than generated: ${1, 3, 7, 9}$. Assume a job arrives at node $3$ and the last time node $3$ forwarded a job it was given offet $1$.
 Because this node is busy, the next number on the list ($3$) is selected and saved in the job's metadata. All nodes are busy so the job visits these nodes before being dropped: $3$ (arrival), $6, 9, 2, 5, 8, 1, 4, 7, 0$. Node $0$ will drop the job because the next node would be $3$, which is the node on wich the job arrived.
 
-\subsubsection{Random Coprime offset}
-The Random Coprime offset algorithm is almost equal to Coprime offset. The difference between them is the decision of the offset value. Where it is the next number on the list in Coprime offset, a random value is taken from the list when using Random Coprime offset.
+Because the list of coprimes can be regenerated each time a job arrives, it must not be saved. Both the job and the node must keep an index to a coprime. The size of this list $\tau(N)$ thus an index to an element in this list requires $\lceil log_2 \tau(N) \rceil$ bits.
+
+\subsubsection*{Random Coprime offset}
+The Random Coprime offset algorithm is almost equal to Coprime offset. The difference between them is the decision of the offset value. Where it is the next number on the list in Coprime offset, a random value is taken from the list when using Random Coprime offset. As Coprime offset, the offset must be saved in the job's metadata. Since the offset for incoming jobs is choosen at random, the nodes do not need to keep state information.
+
+\subsection{Properties of Algorithms}
+
+We have reviewed some of the basic properties for each algorithm, they can be found in table \ref{tabprops}. The function $\tau(N)$ represents the number of values smaller than $N$ and coprime to $N$.
+
+\[ \tau(N) = \sum_{0 < p < N, p \perp N} 1\]
+Note that this value is upper bound by $N-1$ and equals $N-1$ when $N$ is prime.
+
+\footnotetext[1]{For Random Left/Right forward for which $p \neq 0.5$, the probabilty of each path is different.}
+\begin{table}[h!]
+\hspace{-0.12\textwidth}
+\begin{tabular}{|p{0.30\textwidth}|p{0.10\textwidth}|p{0.18\textwidth}|p{0.18\textwidth}|p{0.18\textwidth}|p{0.18\textwidth}|} \cline{2-6}
+\multicolumn{1}{l|}{}		& Size known	& First forward	& Possible paths	& Space requirement (job)	& Space requirement (node) \\ \hline
+Forward Right				& N				& 1				& 1					& 0							& 0		\\ \hline
+Left/Right forward			& N				& 2				& 2					& 1							& 1		\\ \hline
+Random Left/Right forward (p) & N			& 2				& 2 $^($\footnotemark$^)$ & 1					& 0		\\ \hline
+Position dependant forward	& N				& 1				& 1					& 1							& 0		\\ \hline
+Random unvisited			& Y				& $N-1$			& $(N-1)!$			& $N$	& 0		\\ \hline
+Coprime offset				& Y				& $\tau(N)$		& $\tau(N)$ 		& $\lceil log_2 \tau(N) \rceil$	& $\lceil log_2 \tau(N) \rceil$ \\ \hline
+Random Coprime offset		& Y				& $\tau(N)$		& $\tau(N)$			& $\lceil log_2 \tau(N) \rceil$	& 0		\\ \hline
+\end{tabular}
+\caption{Properties of forwarding algorithms}
+\label{tabprops}
+\end{table}
+
+\begin{description}
+\item[Size known] Represents whether the size of the ring must be known to the nodes in order to function.
+\item[First forward] When the node on which the incoming job arrives is busy, this number represents the number of candidates to which the node can forward the job.
+\item[Possible paths] Assuming the system is saturated, this number represents the number of possible paths a job can travel until being dropped. The probabilty of each path is the same (unless otherwise noted).
+\item[Space requirement (job)] This value represents the number of bits required in the job's metadata.
+\item[Space requirement (node)] This value represents the number of bits required to save the node's state information.
+\end{description}
 
 \section{Simulation}
 \label{secsimulation}
-To evaluate the different algorithms discussed in the previous section, 2 methods will be used. Firstly using a simulation, the second method is the evaluation of this simulation using MATLAB. The validation method is further discussed in section \ref{secvalidation}.
+To evaluate the different algorithms discussed in the previous section, 2 methods will be used. Firstly using a simulation, the second method is the numerical evaluation of this simulation using MATLAB. The validation method is further discussed in section \ref{secvalidation}.
 
-The simulation is accomplished using a custom simulator. A continuous time simulator is written in C++, using no external requirements but the STL and OpenMP \cite{OPENMP}. The source code of the simulator can be found in appenix \ref{sourcecode} or on \url{http://code.google.com/p/powerofpaths/}.
+The simulation is accomplished using a custom simulator. A continuous time simulator is written in C++, using no external requirements but the STL and OpenMP \cite{OPENMP}. The source code of the simulator can be found in appenix \ref{sourcecode} or at \url{http://code.google.com/p/powerofpaths/}.
 
-The simulator can be controlled using a command line interface, its usage is described below.
-
+The simulator can be controlled using a command line interface of which the usage is described below:
 \lstset{language=sh,caption={Simulator usage description}}
 \begin{lstlisting}
 Usage: -r -s long -j double -a double -n long -p long -l long -t long -h type
@@ -187,11 +212,11 @@ Usage: -r -s long -j double -a double -n long -p long -l long -t long -h type
 \end{lstlisting}
 
 \subsection{Measure}
-The goal of the algorithms is to distribute the jobs evenly along the ring. This implies the number of hops a job must travel should be low. As a measure for our experiments, we will be using the number of times a job was forwarded before it was executed. Since the number of forwards of a job that could not be executed is the same for each algorithm, and the loss rate of each algorithm is the same, we will not take these jobs into account when computing the average.
+The goal of the algorithms is to distribute the jobs evenly along the ring. This implies that the number of nodes a job must visit should be low. As a measure for our experiments, we will be using the average number of times a job is forwarded before it is executed. Since the number of forwards of a job that could not be executed is the same for each algorithm (i.e. $N-1$: traversing each link but one), and the loss rate of each algorithm is the same (because forwards are instantaneous), we will not take these jobs into account when computing the average.
 
-It is clear that when the system load approaches $0$, the probability that a node is busy will also approach $0$ and the average number of forwards will therefore also approach $0$. On the other hand, when the load approaches $\infty$, each node's probability of being busy will approach $1$ and therefore the number of forwards will be $N-1$ and the job will fail. A system with load $> 1$ is called an overloaded system.
+It is clear that when the system load approaches $0$, the probability that a node is busy will also approach $0$ and the average number of forwards will therefore also approach $0$. On the other hand, when the load approaches $\infty$, each node's probability of being busy will approach $1$ and therefore the number of forwards will be $N-1$ and the job will fail. A system with load $> 1$ is called an overloaded system. For the purpose of this thesis, only loads up to $1$ are discussed.
 
-We will compare each algorithms to a baseline result. The baseline used in this thesis is the Forward right algorithm, meaning that each graph will show its result relative to the Forward right results. The results given by the simulator were obtained using a ring size of 100 and using a random seed for each run.
+We will compare each algorithm to a baseline result. The baseline used in this thesis is the Forward right algorithm. This means that each graph will show its result relative to the Forward right results. The results given by the simulator were obtained using a ring size of 100 and using a random seed for each run.
 
 The absolute performance of the baseline algorithm is shown in figure \ref{baseline}.
 
@@ -206,7 +231,7 @@ The absolute performance of the baseline algorithm is shown in figure \ref{basel
 \label{simresults}
 
 \subsubsection*{Left/Right Forward}
-It is intuitively clear that alternating the forwarding direction of arriving jobs should distribute the load better than keeping the same direction. Figure \ref{figlr} shows the improvement made by the Left/Right forward algorithm over the Forward right method. The performance gain is at least 1\% and up to over 4\% under medium load.
+It is intuitively clear that alternating the forwarding direction of incoming jobs should distribute the load better than keeping the same direction, certainly under temporary local heavy load. Figure \ref{figlr} shows the improvement made by the Left/Right forward algorithm over the Forward right method. The performance gain is at least 1\% and up to over 4\% under medium load.
 
 \begin{figure}[h!tb]
 \centering
@@ -226,7 +251,7 @@ For $p=0.5$, one would expect the results of this algorithm being similar to tho
 \label{figrandswitch}
 \end{figure}
 
-Figure \ref{figrandswitch} shows the results of this algorithm for $p=0.5$. How this parameter influenced the performance is shown in figure \ref{figrandswitchp}. For $p=0$, this algorithm is equivalent to the Forward right method. The performance decreases fast when increasing $p$, until around $0.4$, where is increases a little until arriving at $0.5$.
+Figure \ref{figrandswitch} shows the results of this algorithm for $p=0.5$. For $p=0$, the algorithm is equal to the Forward Right algorithm. Hence, we should investigate how different values of $p$ influence the final results. Figure \ref{figrandswitchp} shows the results obtained for $0 \leq p \leq 0.5$. We see there is no value of $p$ for which this algorithms performs better than Forward Right.
 
 \begin{figure}[h!tb]
 \centering
@@ -236,7 +261,7 @@ Figure \ref{figrandswitch} shows the results of this algorithm for $p=0.5$. How 
 \end{figure}
 
 \subsubsection*{Position-dependant forwarding}
-This technique groups nodes in virtual clusters. When a job arrives in a node and that node is busy, the job will be forwarded to the other node in the cluster. Jobs leaving a cluster will do this in a random direction ($p=0.5$). Since the load is concentrated per cluster instead of being distributed over the whole system, this technique performs worse than other techniques The results are represented in figure \ref{figevenswitch}.
+This technique groups every 2 nodes into small virtual clusters. When a job arrives at a busy node, the job will be forwarded to the other node in this cluster. Jobs leaving a cluster will seem to do this in a random direction ($p=0.5$). Since the load is concentrated per cluster instead of being distributed over the whole system, this technique performs worse than other techniques The results are represented in figure \ref{figevenswitch}.
 
 \begin{figure}[h!tb]
 \centering
@@ -247,7 +272,9 @@ This technique groups nodes in virtual clusters. When a job arrives in a node an
 
 
 \subsubsection*{Random unvisited}
-This algorithm in the most straight forward and is the best performing from any of these techniques. However, it should be noted that each visited node must be stored into the job's metadata, at least $N$ should be available to store this information.
+This algorithm is not bound to its neighbors when forwarding a job. Lifting this constraint allows a serious performance boost. ***********
+
+This algorithm in the most straight forward and is the best performing from any of these techniques. However, it should be noted that each visited node must be stored into the job's metadata, at least $N$ bits should be available to store this information.
 
 \begin{figure}[h!tb]
 \centering
@@ -515,7 +542,7 @@ The example model in \ref{validateright} can be lumped into the following Markov
 Computing the steady state distribution of a Markov Chain is subject to time constraints. Using sparse matrices for our algorithm already solved the memory constraints.
 Two factors are important when working with matrices: the number of elements and the number of nonzero elements. We will show that both factors are reduced significantly.
 
-For unlumped Markov Chains modelling the Random forward algorithm, a matrix consists of $2^N$ states, an exponential growth. Lumping these matrices results in a number of states equal to:  $\frac{1}{N} \sum_{d|N} (2^{N/d} \cdot phi(d) )$ with $phi(d) = d \cdot \prod_{p|d, p\text{ is prime}} (1-\frac{1}{p})$ \cite{A000031}. Although this result greatly reduces the number of states, its complexity is still non-polynomial.
+For unlumped Markov Chains modelling the Random forward algorithm, a matrix consists of $2^N$ states, an exponential growth. Lumping these matrices results in a number of states equal to:  $\frac{1}{N} \sum_{d|N} (2^{N/d} \cdot \phi(d) )$ where $\phi(d) = d \cdot \prod_{p|d, p\text{ is prime}} (1-\frac{1}{p})$ \cite{A000031}. Although this result greatly reduces the number of states, its complexity is still non-polynomial.
 
 The number of nonzero elements for unlumped Markov Chains is $(N+1) 2^N$. For lumped matrices, we were not able to derive an exact formula, however, figure \ref{lumpnnz} shows a clear reduction as well. Yet, this result doesn't seem polynomial either.
 
@@ -553,15 +580,16 @@ Position dependant forward	& 0 (worse)		& 1 (job)					& Creates loaded clusters 
 \caption{Forward to neighbor}
 \end{table}
 
-%\begin{table}
-%\centering
-%\begin{tabular}{|p{0.25}|p{0.25}|p{0.25}|p{0.25}|}
-% & Max gain & Space requirement & Notes
-%\end{tabular}
-%\caption{Forward anywhere}
-%\end{table}
-%
-
+\begin{table}[h!]
+\centering
+\begin{tabular}{|p{0.4\textwidth}|p{0.3\textwidth}|p{0.3\textwidth}|} \hline
+							& Max. gain		& Space requirement (bits)	\\ \hline
+Random unvisited			& $> 24\%$		& $N$						\\ \hline
+Coprime offset				& $> 24\%$		& $log_2 N$ (job) + $log_2 (\sum_{p < N,gcd(p, N) = 1} 1)$ (node) \\ \hline
+Random Coprime offset		& $> 24\%$		& $log_2 N$					\\ \hline
+\end{tabular}
+\caption{Forward anywhere}
+\end{table}
 
 
 \begin{table}
