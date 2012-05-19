@@ -6,7 +6,7 @@
 \defcounter {refsection}{0}
 \contentsline {subsection}{\numberline {1.1}Forwarding algorithms}{5}{subsection.1.1}
 \defcounter {refsection}{0}
-\contentsline {subsection}{\numberline {1.2}Forward to neighbour}{6}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.2}Forward to neighbor}{6}{subsection.1.2}
 \defcounter {refsection}{0}
 \contentsline {subsection}{\numberline {1.3}Forward anywhere}{7}{subsection.1.3}
 \defcounter {refsection}{0}
@@ -18,20 +18,18 @@
 \defcounter {refsection}{0}
 \contentsline {subsection}{\numberline {2.2}Results}{10}{subsection.2.2}
 \defcounter {refsection}{0}
-\contentsline {subsection}{\numberline {2.3}Multiple execution units}{13}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.3}Multiple execution units}{14}{subsection.2.3}
 \defcounter {refsection}{0}
 \contentsline {section}{\numberline {3}Numerical Validation}{16}{section.3}
 \defcounter {refsection}{0}
 \contentsline {subsection}{\numberline {3.1}Comparison}{17}{subsection.3.1}
 \defcounter {refsection}{0}
-\contentsline {subsection}{\numberline {3.2}Lumped states}{21}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.2}Lumped states}{22}{subsection.3.2}
 \defcounter {refsection}{0}
-\contentsline {subsection}{\numberline {3.3}Equivalent techniques}{22}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.3}Equivalent algorithms}{23}{subsection.3.3}
 \defcounter {refsection}{0}
-\contentsline {subsubsection}{\numberline {3.3.1}Random Left/Right}{23}{subsubsection.3.3.1}
+\contentsline {section}{\numberline {4}Conclusion}{26}{section.4}
 \defcounter {refsection}{0}
-\contentsline {section}{\numberline {4}Conclusion}{23}{section.4}
+\contentsline {section}{\numberline {A}Simulator source code}{28}{appendix.A}
 \defcounter {refsection}{0}
-\contentsline {section}{\numberline {A}Simulator source code}{24}{appendix.A}
-\defcounter {refsection}{0}
-\contentsline {section}{\numberline {B}MATLAB Numerical evaluation code}{42}{appendix.B}
+\contentsline {section}{\numberline {B}MATLAB Numerical evaluation code}{46}{appendix.B}

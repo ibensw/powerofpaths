@@ -1,15 +1,16 @@
-x=3:1:14;
+x=0.1:0.1:1.0;
 s=10;
-y=zeros(1, length(x));
-y2=y;
+y=x;
+M=floor([0:s-1]./2)';
 
 j=1;
 for i=x
 	i
-	y(j)=lumpavghops(rprimechain(i, 1.0))/i;
-	y2(j)=ruavghops(runvisitedchain(i, 1.0), 0)/i;
+	[a b]=avghops(randswitchchain(s, i),0);
+	success=sum(b);
+	y(j)=(b*M)/success;
 	j=j+1;
 end
 
-plot(x,y,x,y2);
-
+plot(x,y);
+[x' y']

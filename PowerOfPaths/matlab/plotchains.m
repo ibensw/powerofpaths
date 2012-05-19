@@ -16,10 +16,9 @@ for i=l
 %	rp(j)=avghops(rprimechain(s, i), 0);
 	ru(j)=ruavghops(runvisitedchain(s, i), 0);
 
-%	lr(j)=lumpavghops(rightchain(s, i));
+	lr(j)=lumpavghops(rightchain(s, i));
 %	lrs(j)=lumpavghops(randswitchchain(s, i));
 	lrp(j)=lumpavghops(rprimechain(s, i));
-%	lrs(j)=lumpavghops(randswitchchain(s, 0.8, i));
 	j=j+1;
 end
 fprintf('\n');
@@ -32,4 +31,4 @@ fprintf('\n');
 %plot(l, lr)
 %plot(l, lr./lr, l, lrp./lr);
 %plot(l, r./r, l, rs./r, l, rp./r, l, ru./r);
-plot(l, ru./ru, l, lrp./ru);
+plot(l, lr./lr, l, lrp./lr, l, ru./lr);

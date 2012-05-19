@@ -1,9 +1,12 @@
-function [ avg ] = ruavghops( Q, d )
+function [ avg,avgp ] = ruavghops( Q, d )
 %RUAVGHOPS Calculate average number of times a job is forwarded for the random unvisited chain
 %Parameters:
 %	Q	The matrix representing a markov chain using the random unvisited forwarding algorithm
 %Optional:
 %	d	Debug mode, default=1, disable debug output=0
+%Return:
+%	avg		The average number of times a job is forwarded
+%	avgp	The distribution
 
 	if nargin < 2
 		d=1;
@@ -14,7 +17,7 @@ function [ avg ] = ruavghops( Q, d )
 	len=length(Q);
 	
 	avg = 0;
-	avgp = zeros(1, len);
+	avgp = zeros(len,1);
 	
 	for i=0:len-2
 		tmpavg = 0;

@@ -68,22 +68,20 @@
 \newpage
 
 \section*{Abstract}
-In ring structured distributed systems, busy nodes will forward new jobs to other nodes. This thesis focusses on the algorithms for choosing a successor node for a job. ...
+In ring structured distributed systems, busy nodes will forward new jobs to other nodes. This thesis focuses on the algorithms for choosing a successor node for a job. ...
 
 \newpage
 
-\section*{Acknowledgements}
+\section*{Acknowledgments}
 This thesis is not only the work of myself, I could never accomplish this without the people around me. I would like to take this opportunity to thank some of them specifically.
 
 First and foremost, my supervisor Professor dr. Benny Van Houdt. Firstly, he taught me a whole new field in the area of computer science, the part that interested me the most during the course of my studies. Secondly, for being my supervisor: he helped me out when he could and suggested ideas when I was stuck. I was always welcome to drop by and reflect thoughts.
 
-I would also like to thank my family, especially my parents. They gave me the chance to complete my education without worrying just one second about the financial cost. They gave me the freedom of making my own choices and motivated me when I needed it. My sister Anneleen should be mentioned for proofreading this thesis and other tasks in english during my education.
+I would also like to thank my family, especially my parents. It is because of their financial support and trust I could complete my education. They gave me the freedom of making my own choices and motivated me when I needed it. My sisters, Anneleen and Evelien also have been a great help and source of moral support these five years. Anneleen deserves a special note for proofreading this thesis and other assignments in English.
 
-Also, my friends have been a great help to me. Playing games, eating toghether every evening and just having fun together is what made the past 5 years with no doubt the best years of my life so far. Thank you all.
+Next, my friends should be thanked. Playing games, eating in group and going out together is what made the past five years with no doubt the best years of my life so far. Thank you all.
 
-Finally, I would like to thank my girlfriend Nicky. Although she might have caused some failed exams at the beginning of our relationship, she has been a great help further on. She motivated me to take hard but rewarding options when easy ones were available. A girl that understands me and never fails to cheer me up.
-
-
+Finally, I would like to thank my girlfriend Nicky. Although she might have caused some failed exams at the beginning of our relationship, she has been a great help further on. She motivated me to take hard but rewarding options when easy ones were available. She is a girl who understands me and never fails to cheer me up.
 
 \newpage
 
@@ -92,21 +90,21 @@ Finally, I would like to thank my girlfriend Nicky. Although she might have caus
 \newpage
 
 \section*{Introduction}
-This thesis researches the behaviour of forwarding algorithms in a ring-structured distributed system. Section \ref{secsetup} precisely describes the setup of the system. It specifies the general assumptions made in this document and gives a short overview of the different algorithms we have reviewed.
+This thesis researches the behavior of different forwarding algorithms in a ring-structured distributed system.
 
-Section \ref{secsimulation} gives a short introduction about the simulator we wrote and how to use it. Furthermore, it contains the results of the tests, performed by the simulator.
+Section \ref{secsetup} precisely describes the setup of the system. It specifies the general assumptions made in this document and gives a short overview of the different algorithms we have reviewed. The working of each tested algorithms is introduced and their properties are summed up.
 
-In the next part, section \ref{secvalidation}, we reviewed the output of the simulator. Using numerical algorithms we try to match our results with a Markov Chain model.
+Next, section \ref{secsimulation} provides a short introduction about the simulator we wrote and how to use it. Further, it contains the results of the simulations we have performed. Curiosities encountered in the results are simulated using other parameters. The section finishes with the transformation of single CPU servers to multiple CPU servers.
 
-Finally, section \ref{secconclusion} contains the conclusions and other thoughts on the algorithms.
+The following part, section \ref{secvalidation}, is used to validate the results of the simulation using numerical algorithms. Some of the algorithms are modeled into Markov Chains to get numerically exact results. Afterwards, the structure of the Markov Chains are reviewed and optimized. At the end of this section we will try to find equivalencies between the algorithms under certain circumstances.
 
-** COMPLETE LATER ON
+Finally, in section \ref{secconclusion}, we will give our thoughts on the results obtained in this thesis.
 
 \section{Setup}
 \label{secsetup}
-We are using a ring-structured distributed system of $N$ nodes. Each node is connected to two neighbours, left and right. The purpose of these nodes is to process incoming jobs. When a node is busy while a job arrives, it must forward the incoming job to another node. When a job has visited all nodes and none of them was found idle, the job is dropped.
+We are using a ring-structured distributed system of $N$ nodes. Each node is connected to two neighbors, left and right. The purpose of these nodes is to process incoming jobs. When a node is busy while a job arrives, it must forward the incoming job to another node. When a job has visited all nodes and none of them was found idle, the job is dropped.
 
-Jobs have an arrival time, a length, the ID of the first node and optional metadata. They arrive at each node indepentently as a poisson process at rate $\lambda$. Their length is exponentially distributed with mean $\mu$ (unless otherwise noted, assume $\mu=1$). Although each job has a length, this length may not known in advance. Finally, the metadata is optional and may be used by the nodes to pass information among the job (e.g. a list of visited nodes).
+Jobs have an arrival time, a length, the ID of the first node and optional metadata. They arrive at each node independently as a Poisson process at rate $\lambda$. Their length is exponentially distributed with mean $\mu$ (unless otherwise noted, assume $\mu=1$). Although each job has a length, this length may not known in advance. Finally, the metadata is optional and may be used by the nodes to pass information among the job (e.g. a list of visited nodes).
 
 Nodes can use different algorithms to determine whereto a job will be forwarded. The performance of these algorithms is the main focus of this thesis. Different techniques will be discussed and simulated. Afterwards, some results of the simulation will be validated using numerical techniques.
 Note that the cost of forwarding a job is neglected. Together with the presumption a job must visit each node before being dropped, this means a job arriving at any node will be processed if and only if at least one server is idle.
@@ -121,50 +119,54 @@ Note that the cost of forwarding a job is neglected. Together with the presumpti
 The performance of a forwarding algorithms is measured by the average number of nodes a job must visit before being executed. The goal of the algorithms is to minimize this number by spreading the load evenly along the ring. 
 
 \subsection{Forwarding algorithms}
-Nodes that must forward a job will choose another node of the ring. Nodes have no information about other nodes, so it has no idea whitch nodes are idle or busy. The algorithms are grouped into two categories: forward to neighbour and forward anywhere.
+Nodes that must forward a job will choose another node of the ring. Nodes have no information about other nodes, so it has no idea which nodes are idle or busy. The algorithms are grouped into two categories: forward to neighbor and forward anywhere.
 The first techniques allows a busy node to forward an incoming job to either its left or its right neighbor, where the latter may forward these jobs to any node in the ring. 
 Since the amount of dropped jobs is equal for each forwarding algorithm. These jobs will be ignored when computing the average number of forwards. One should note that the loss rate of jobs in the system is the same as the Erlang-b loss rate.
 
-\subsection{Forward to neighbour}
+\subsection{Forward to neighbor}
 \subsubsection*{Forward right}
-A busy node using this technique will forward a job to its right neighbour. The job will keep travelling in this direction until an idle node is found, where it will be processed or it has visited all nodes, when it will be dropped. Unless otherwise noted, this algorithms is used as baseline in all further tests. This algorithm does not use any space in the job's metadata, nor must nodes save states.
+A busy node using this technique will forward a job to its right neighbor. The job will keep traveling in this direction until an idle node is found, where it will be processed or it has visited all nodes, when it will be dropped. Unless otherwise noted, this algorithms is used as baseline in all further tests. This algorithm does not use any space in the job's metadata, nor must nodes save states.
 
 \subsubsection*{Left/Right forward}
-A variant to the previous algorithm is the Left/Right forward technique. Instead of forwarding each job to its right neighbour, a busy node will alternate the direction after forwarding such a job. To avoid a job coming back, this initial direction is saved in the job's metadata. Busy nodes receiving a job from another neighbour must forward it the same direction as specified in the job's metadata. This algorithms requires the 1 bit representing the direction in the job's metadata, it also needs the save 1 bit state information in each nodes to keep track of the last direction a new job was forwarded to.
+A variant to the previous algorithm is the Left/Right forward technique. Instead of forwarding each job to its right neighbor, a busy node will alternate the direction after forwarding such a job. To avoid a job coming back, this initial direction is saved in the job's metadata. Busy nodes receiving a job from another neighbor must forward it the same direction as specified in the job's metadata. This algorithms requires the 1 bit representing the direction in the job's metadata, it also needs the save 1 bit state information in each nodes to keep track of the last direction a new job was forwarded to.
 
 \subsubsection*{Random Left/Right forward with parameter $p$}
 This technique is a variant of the Left/Right forward algorithm. However, instead of alternating the direction for each new job, a node will forward a job to its right with probability $p$ and to its left with probability $1-p$. As the previous technique, the direction is saved in the job's metadata and subsequent nodes must maintain this direction when forwarding. On the contrary, nodes do not need to save state information.
 
-\subsubsection*{Position-dependant forwarding}
-As shown in figure \ref{figring}, each node in the ring has an unique ID. Except the for node with id $0$ and $N-1$, neigbouring are succeeding. When nodes uses this algorithm, nodes will always forward a new job in the same direction: to the right when the node's id is even, to the left otherwise. As previous algorithms, the direction is saved in the job's metadata and this direction must be used if other nodes must forward the job. The initial direction of incoming jobs can be derived from the node's ID, therefore the node needs no state information.
+\subsubsection*{Position-dependent forwarding}
+As shown in figure \ref{figring}, each node in the ring has an unique ID. Except the for node with id $0$ and $N-1$, neighboring are succeeding. When nodes uses this algorithm, nodes will always forward a new job in the same direction: to the right when the node's id is even, to the left otherwise. As previous algorithms, the direction is saved in the job's metadata and this direction must be used if other nodes must forward the job. The initial direction of incoming jobs can be derived from the node's ID, therefore the node needs no state information.
 
 \subsection{Forward anywhere}
-The ring strucure can be used in real networks, however in many cases the ring is no more than a virtual overlay over another structure (e.g. the internet). In these networks each node is able to connect each other node directly and more sophisticated forwarding algorithms can be used.
+The ring structure can be used in real networks, however in many cases the ring is no more than a virtual overlay over another structure (e.g. the internet). In these networks each node is able to connect each other node directly and more sophisticated forwarding algorithms can be used.
 
 \subsubsection*{Random unvisited}
-The Random unvisited algorithm is the most basic algorithm in this category. Everytime a job must be forwarded, a list of unvisited nodes is generated and a random node is choosen from that list. The current node is added to the list of visited nodes, which is found in the job's metadata. This list can be saved using $N$ bits.
+The Random unvisited algorithm is the most basic algorithm in this category. Every time a job must be forwarded, a list of unvisited nodes is generated and a random node is chosen from that list. The current node is added to the list of visited nodes, which is found in the job's metadata. This list can be saved using $N$ bits.
 
 \subsubsection*{Coprime offset}
-Another algorithm is Coprime offset. This algorithm generates a list of all numbers smaller than $N$, and coprime to $N$. The first time a job is forwarded the next number of this list is selected. This is the job's forward offset and saved in the its metadata. When a job is forwarded, it is sent exactly this many hops farther. Because this number and $N$ are coprime, it will visit all nodes exactly once before being returned to its originating node. 
+Another algorithm is Coprime offset. This algorithm generates a list of all numbers smaller than $N$, and coprime to $N$. The first time a job is forwarded the next number of this list is selected. This is the job's forwarding offset and is saved in the job's metadata. When a job is forwarded, it is sent exactly this many hops farther. Because this number and $N$ are coprime, it will visit all nodes exactly once before being returned to its originating node. 
 
 Example:
-Consider a ring size of $N=10$ in which every node is busy. The list of coprimes is than generated: ${1, 3, 7, 9}$. Assume a job arrives at node $3$ and the last time node $3$ forwarded a job it was given offet $1$.
-Because this node is busy, the next number on the list ($3$) is selected and saved in the job's metadata. All nodes are busy so the job visits these nodes before being dropped: $3$ (arrival), $6, 9, 2, 5, 8, 1, 4, 7, 0$. Node $0$ will drop the job because the next node would be $3$, which is the node on wich the job arrived.
+Consider a ring size of $N=10$ in which every node is busy. The list of coprimes is than generated: ${1, 3, 7, 9}$. Assume a job arrives at node $3$ and the last time node $3$ forwarded a job it was given offer $1$.
+Because this node is busy, the next number on the list ($3$) is selected and saved in the job's metadata. All nodes are busy so the job visits these nodes before being dropped: $3$ (arrival), $6, 9, 2, 5, 8, 1, 4, 7, 0$. Node $0$ will drop the job because the next node would be $3$, which is the node on which the job arrived.
 
-Because the list of coprimes can be regenerated each time a job arrives, it must not be saved. Both the job and the node must keep an index to a coprime. The size of this list $\tau(N)$ thus an index to an element in this list requires $\lceil log_2 \tau(N) \rceil$ bits (see section \ref{secprops} for the definition of $\tau(N)$).
+Because the list of coprimes can be regenerated each time a job arrives, it must not be saved. Both the job and the node must keep an index to a coprime. The size of this list $\varphi(N)$ thus an index to an element in this list requires $\lceil log_2 \varphi(N) \rceil$ bits (see section \ref{secprops} for the definition of $\varphi(N)$).
 
 \subsubsection*{Random Coprime offset}
-The Random Coprime offset algorithm is almost equal to Coprime offset. The difference between them is the decision of the offset value. Where it is the next number on the list in Coprime offset, a random value is taken from the list when using Random Coprime offset. As Coprime offset, the offset must be saved in the job's metadata. Since the offset for incoming jobs is choosen at random, the nodes do not need to keep state information.
+The Random Coprime offset algorithm is almost equal to Coprime offset. The difference between them is the decision of the offset value. Where it is the next number on the list in Coprime offset, a random value is taken from the list when using Random Coprime offset. As Coprime offset, the offset must be saved in the job's metadata. Since the offset for incoming jobs is chosen at random, the nodes do not need to keep state information.
 
 \subsection{Properties of Algorithms}
 \label{secprops}
 
-We have reviewed some of the basic properties for each algorithm, they can be found in table \ref{tabprops}. The function $\tau(N)$ represents the number of values smaller than $N$ and coprime to $N$.
+We have reviewed some of the basic properties for each algorithm, they can be found in table \ref{tabprops}. The function $\varphi(N)$ is Euler's totient function and counts the coprimes of $N$ up to $N$ \cite{EULER}.
 
-\[ \tau(N) = \sum_{0 < p < N, p \perp N} 1\]
+\begin{eqnarray}
+\varphi(N) &=& \sum_{0 < p < N, p \perp N} 1 \nonumber \\
+&=&  N \cdot \prod_{p|N, p\text{ is prime}} (1-\frac{1}{p}) \nonumber
+\end{eqnarray}
+
 Note that this value is upper bound by $N-1$ and equals $N-1$ when $N$ is prime.
 
-\footnotetext[1]{For Random Left/Right forward for which $p \neq 0.5$, the probabilty of each path is different.}
+\footnotetext[1]{For Random Left/Right forward for which $p \neq 0.5$, the probability of each path is different.}
 \begin{table}[h!]
 \hspace{-0.12\textwidth}
 \begin{tabular}{|p{0.30\textwidth}|p{0.10\textwidth}|p{0.18\textwidth}|p{0.18\textwidth}|p{0.18\textwidth}|p{0.18\textwidth}|} \cline{2-6}
@@ -172,19 +174,19 @@ Note that this value is upper bound by $N-1$ and equals $N-1$ when $N$ is prime.
 Forward Right				& N				& 1				& 1					& 0							& 0		\\ \hline
 Left/Right forward			& N				& 2				& 2					& 1							& 1		\\ \hline
 Random Left/Right forward (p) & N			& 2				& 2 $^($\footnotemark$^)$ & 1					& 0		\\ \hline
-Position dependant forward	& N				& 1				& 1					& 1							& 0		\\ \hline
+Position dependent forward	& N				& 1				& 1					& 1							& 0		\\ \hline
 Random unvisited			& Y				& $N-1$			& $(N-1)!$			& $N$	& 0		\\ \hline
-Coprime offset				& Y				& $\tau(N)$		& $\tau(N)$ 		& $\lceil log_2 \tau(N) \rceil$	& $\lceil log_2 \tau(N) \rceil$ \\ \hline
-Random Coprime offset		& Y				& $\tau(N)$		& $\tau(N)$			& $\lceil log_2 \tau(N) \rceil$	& 0		\\ \hline
+Coprime offset				& Y				& $\varphi(N)$		& $\varphi(N)$ 		& $\lceil log_2 \varphi(N) \rceil$	& $\lceil log_2 \varphi(N) \rceil$ \\ \hline
+Random Coprime offset		& Y				& $\varphi(N)$		& $\varphi(N)$			& $\lceil log_2 \varphi(N) \rceil$	& 0		\\ \hline
 \end{tabular}
 \caption{Properties of forwarding algorithms}
 \label{tabprops}
 \end{table}
 
 \begin{description}
-\item[Size known] Represents whether the size of the ring must be known to the nodes in order to function.
+\item[Size known] Represents whether the size of the ring must be known to the nodes in order for the algorithm to function. This implies that a change in the ring (node joins or leaves) must be propagated over the ring.
 \item[First forward] When the node on which the incoming job arrives is busy, this number represents the number of candidates to which the node can forward the job.
-\item[Possible paths] Assuming the system is saturated, this number represents the number of possible paths a job can travel until being dropped. The probabilty of each path is the same (unless otherwise noted).
+\item[Possible paths] Assuming the system is saturated, this number represents the number of possible paths a job can travel until being dropped. The probability of each path is the same (unless otherwise noted).
 \item[Space requirement (job)] This value represents the number of bits required in the job's metadata.
 \item[Space requirement (node)] This value represents the number of bits required to save the node's state information.
 \end{description}
@@ -193,7 +195,7 @@ Random Coprime offset		& Y				& $\tau(N)$		& $\tau(N)$			& $\lceil log_2 \tau(N)
 \label{secsimulation}
 To evaluate the different algorithms discussed in the previous section, 2 methods will be used. Firstly using a simulation, the second method is the numerical evaluation of this simulation using MATLAB. The validation method is further discussed in section \ref{secvalidation}.
 
-The simulation is accomplished using a custom simulator. A continuous time simulator is written in C++, using no external requirements but the STL and OpenMP \cite{OPENMP}. The source code of the simulator can be found in appenix \ref{sourcecode} or at \url{http://code.google.com/p/powerofpaths/}.
+The simulation is accomplished using a custom simulator. A continuous time simulator is written in C++, using no external requirements but the STL and OpenMP \cite{OPENMP}. The source code of the simulator can be found in appendix \ref{sourcecode} or at \url{http://code.google.com/p/powerofpaths/}.
 
 The simulator can be controlled using a command line interface of which the usage is described below:
 \lstset{language=sh,caption={Simulator usage description}}
@@ -282,10 +284,10 @@ Unlike the previous algorithms, this algorithm is not bound to its neighbors whe
 \label{figrandunvisited}
 \end{figure}
 
-Figure \ref{figrandunvisited} shows the results of this algorithm. The performance benifit is at least $10 \%$ in the range $0.20 - 1.00$, and even up to $30 \%$ under medium load.
+Figure \ref{figrandunvisited} shows the results of this algorithm. The performance benefit is at least $10 \%$ in the range $0.20 - 1.00$, and even up to $30 \%$ under medium load.
 
 \subsubsection*{(Random) Coprime offset}
-Two other algorithms that are not restricuted to forwarding to a neighbor are Coprime offset and Random Coprime offset. Figure \ref{figprimes} shows the results of both these algorithms. The difference of these algorithms with themselves and the random unvisited algorithms is not clearly visible when comparing both to the Forward Right algorithm. To put these results in perspective, we included figure \ref{figruprp} where Coprime offset and Random Coprime offset are depicted relative to Random unvisited. Although the difference is very small, it seems the Random unvisited algorithm shows a better performance than the other two. However, Coprime offset and Random Coprime offset require $\lceil log_2 \tau(N) \rceil$ bits in the job's metadata instead of $N$ for Random unvisited.
+Two other algorithms that are not restricted to forwarding to a neighbor are Coprime offset and Random Coprime offset. Figure \ref{figprimes} shows the results of both these algorithms. The difference of these algorithms with themselves and the random unvisited algorithms is not clearly visible when comparing both to the Forward Right algorithm. To put these results in perspective, we included figure \ref{figrandunvisited} where Coprime offset and Random Coprime offset are depicted relative to Random unvisited. Although the difference is very small, it seems the Random unvisited algorithm shows a better performance than the other two. However, Coprime offset and Random Coprime offset require $\lceil log_2 \varphi(N) \rceil$ bits in the job's metadata instead of $N$ for Random unvisited.
 
 \begin{figure}[h!tb]
         \begin{subfigure}[b]{0.5\textwidth}
@@ -310,15 +312,17 @@ Two other algorithms that are not restricuted to forwarding to a neighbor are Co
 \label{figrandunvisited}
 \end{figure}
 
+
+
 \subsection{Multiple execution units}
-So far, all simulations were executed using 1 CPU per server. This is not a realistic assumption for most distributed systems. This section is intended to research the behaviour of the algorithms when using multiple CPUs, and comparing the results to a system with 1 CPU per server, and to each other.
+So far, all simulations were executed using 1 CPU per server. This is not a realistic assumption for most distributed systems. This section is intended to research the behavior of the algorithms when using multiple CPUs, and comparing the results to a system with 1 CPU per server, and to each other.
 
 Per algorithm, two simulations were performed and compared. One using a 1 CPU and one using 4 CPUs per server. See table \ref{tabcpus} for more information about the tests.
 
 \begin{table}[h!]
 \centering
 \begin{tabular}{|p{0.3\textwidth}|p{0.35\textwidth}|p{0.35\textwidth}|} \hline
-Algorithms & \multicolumn{2}{|p{0.8\textwidth}|}{Forward right, Left/Right, Random left/right (0.5), Random unvisited, Random Coprime offset} \\ \hline
+Algorithms & \multicolumn{2}{|p{0.7\textwidth}|}{Forward right, Left/Right, Random left/right (0.5), Random unvisited, Random Coprime offset} \\ \hline
 Ring size & 100 & 25 \\ \hline
 CPUs per node	& 1 & 4 \\ \hline
 Total CPUs in system & \multicolumn{2}{|c|}{100} \\ \hline
@@ -363,9 +367,9 @@ Since the ring size for the second test is 25 instead of 100, the number of forw
 
 Figure \ref{figcpus} shows the performance of 4 CPUs versus 1 CPU for different algorithms. For each tested algorithm, we see the same result. This means the results of each algorithm is influenced in the same way when using multiple CPUs per server. We can use this knowledge to generalize the results of section \ref{simresults}.
 
-Since we assume each algorithm is infuenced the same way, we will investigate one of them in depth. We will try to transform the results of an algorithm with ring size $N$ and $1$ CPU per server into the results of the same algorithm with ring size $N/c$ and $c$ CPUs per server. Every other parameter should be unchanged.
+Since we assume each algorithm is influenced the same way, we will investigate one of them in depth. We will try to transform the results of an algorithm with ring size $N$ and $1$ CPU per server into the results of the same algorithm with ring size $N/c$ and $c$ CPUs per server. Every other parameter should be unchanged.
 
-Let $d$ be the distribution of the number of forwards, stored as a rowvector. We will build a transformation vector $M$ in the form $[ \lfloor 0/c \rfloor,  \lfloor 1/c \rfloor, \ldots, \lfloor (N-1)/c \rfloor]'$. This vector represents the number of times a job would be forwarded if there would be $c$ CPUs per server. $d*M$ equals the average number of forwards when using such a system. To negate the dropped jobs, the results must be weighted for only the completed jobs.
+Let $d$ be the distribution of the number of forwards, stored as a row vector. We will build a transformation vector $M$ in the form $[ \lfloor 0/c \rfloor,  \lfloor 1/c \rfloor, \ldots, \lfloor (N-1)/c \rfloor]'$. This vector represents the number of times a job would be forwarded if there would be $c$ CPUs per server. $d*M$ equals the average number of forwards when using such a system. To negate the dropped jobs, the results must be weighted for only the completed jobs.
 In our example, we will transform the results of the Forward Right algorithm using ring size $N=10$ and 1 CPU into the results of a ring with size $N=5$ and $c=2$ CPUs per server, see table \ref{tabcpus} for a worked out example and figure \ref{figcpusmatch} for a comparison of the transformation and a simulation result.
 
 
@@ -402,16 +406,16 @@ Simulation result & \multicolumn{3}{|c|}{$0.4171$} \\ \hline
 \section{Numerical Validation}
 \label{secvalidation}
 
-To validate the results obtained in the previous section, we modelled the scheduling-techniques into Markov Chains. Using the steady state distribution of these chains, we can derive the average number of hops and the average loss.
-For $N$ nodes in a ring, the markov chain consists of $2^N$ states, where the $n$-th bit represents whether the $n$-th server is busy ($1$) or idle ($0$). To optimize the computation time and memory requirements, we used sparse matrixes for the validation. The validation code is written in MATLAB, it can be found in appendix \ref{matlabcode} or on \url{http://code.google.com/p/powerofpaths/}.
+To validate the results obtained in the previous section, we modeled the scheduling-techniques into Markov Chains. Using the steady state distribution of these chains, we can derive the average number of hops and the average loss.
+For $N$ nodes in a ring, the Markov chain consists of $2^N$ states, where the $n$-th bit represents whether the $n$-th server is busy ($1$) or idle ($0$). To optimize the computation time and memory requirements, we used sparse matrices for the validation. The validation code is written in MATLAB, it can be found in appendix \ref{matlabcode} or on \url{http://code.google.com/p/powerofpaths/}.
 
 The validation of the results happens in a different environment than the simulation. Because of the non-polynomial execution time of the algorithm, the size of the ring is reduced to $10$. Therefore, the results of this validation are smaller but the relative results are still relevant.
 
-Not every algorithms can be effeciently modelled into a Markov Chain. Computing the results of algorithms requiring state information in the nodes is infeasable for a decent ring size, therefore we did not model Left/Right forward and the Coprime offset algorithms. We also ignored the Position dependant forwarding algorithm since its results seemed logic and further investigation would not reveal useful information.
+Not every algorithms can be efficiently modeled into a Markov Chain. Computing the results of algorithms requiring state information in the nodes is infeasible for a decent ring size, therefore we did not model Left/Right forward and the Coprime offset algorithms. We also ignored the Position dependant forwarding algorithm since its results seemed logic and further investigation would not reveal useful information.
 
 \subsection{Comparison}
 \subsubsection*{Forward Right}
-Modelling a technique into a Markov Chain is an easy operation for most algorithms. The example given below is for a ring of 3 nodes. For convenience, the states are represented by their binary form.
+Modeling a technique into a Markov Chain is an easy operation for most algorithms. The example given below is for a ring of 3 nodes. For convenience, the states are represented in their binary form.
 
 \[ Q =
   \begin{blockarray}{ccccccccc}
@@ -475,10 +479,25 @@ As in the simulation section, we have validated the results for different values
 \label{validrlrp}
 \end{figure}
 
-The Random Left/Right forward algorithm does not seem a viable choice for real implementations. It has a small performance drawback compared to Forward Right and has no other benifits. Furthermore, it is a little harder to implement.
+The Random Left/Right forward algorithm does not seem a viable choice for real implementations. It has a small performance drawback compared to Forward Right and has no other benefits. Furthermore, it is a little harder to implement.
+
+\subsection*{Random Unvisited}
+This problem can be modeled much more efficiently than the techniques. Since the next node is chosen at random, it is not necessary to store the position of the nodes. The information we need to save consists only of the number of servers which are currently busy. This problem is similar to modeling an Erlang-B loss system. The number of states in this Markov Chain is linear to $N$, which is much more dense than the previous given models. For $N=3$, the matrix is given below.
+
+\[ Q =
+  \begin{blockarray}{ccccc}
+    & 0 & 1 & 2 & 3 \\
+    \begin{block}{c[cccc]}
+    0 & -3\lambda & 3\lambda & 0 & 0 \\
+    1 & \mu & -3\lambda-\mu & 3\lambda & 0 \\
+    2 & 0 & \mu & -3\lambda-\mu & 3\lambda \\
+    3 & 0 & 0 & \mu & -\mu \\
+    \end{block}
+  \end{blockarray}
+\]
 
 \subsubsection*{Random Coprime offset}
-Modelling this technique yields different results for various ring sizes. The performance of this algorithm depends on $\tau(N)$. The results in figure \ref{validcp} are very simular to those found in the simulation (figure \ref{figsimrcp}).
+Modeling this technique yields different results for various ring sizes. The performance of this algorithm depends on $\varphi(N)$. The results in figure \ref{validcp} are very similar to those found in the simulation (figure \ref{figsimrcp}).
 
 \begin{figure}
 \centering
@@ -507,32 +526,23 @@ Modelling this technique yields different results for various ring sizes. The pe
 
 The results show a performance gain up to 5\% for a ring size of $N=10$. The list of coprimes in that scenario is ${1, 3, 7, 9}$, thus 4 possible choices. When increasing the ring size to $11$, a prime number, the list of coprimes expands to ${1..10}$ (because 11 is prime), thus 10 possible choices. This increases the relative performance gain up to 8\% (figure \ref{validcp11}). To make clear the increased performance is not due to the increase of $N$, figure \ref{validcp12} shows the performance gain for $N=12$. For $N=10$ and $N=12$, a job can follow 4 possible routes, for $N=11$, 10 different routes can be chosen.
 
-
-\subsection*{Random Unvisited}
-This problem can be modelled much more efficiently than the techniques. Since the next node is chosen at random, it is not necessary to store the position of the nodes. The information we need to save consists only of the number of servers which are currently busy. This problem is similar to modelling an Erlang-B loss system. The number of states in this Markov Chain is linear to $N$, which is much more dense than the previous given models. For $N=3$, the matrix is given below.
-
-\[ Q =
-  \begin{blockarray}{ccccc}
-    & 0 & 1 & 2 & 3 \\
-    \begin{block}{c[cccc]}
-    0 & -3\lambda & 3\lambda & 0 & 0 \\
-    1 & \mu & -3\lambda-\mu & 3\lambda & 0 \\
-    2 & 0 & \mu & -3\lambda-\mu & 3\lambda \\
-    3 & 0 & 0 & \mu & -\mu \\
-    \end{block}
-  \end{blockarray}
-\]
+\begin{figure}[h!tb]
+\centering
+\includegraphics[clip=true, trim=9em 24em 9em 24em, width=0.9\textwidth]{resources/plotrandunvisitedrandprime.pdf}
+\caption{Performance of Random Coprime offset relative to Random unvisited}
+\label{figrurcpo}
+\end{figure}
 
 \subsection{Lumped states}
 \label{lump}
 
-Except for Random Unvisited, each discribed technique is modelled into a Markov Chain with $N^2$ states. However, many of these states are redundant: for example, for $N=3$ the states $001$, $010$ and $100$ all represent one of the nodes being busy. For states representing multiple busy nodes, the space between these servers is critical information. Redundant states can be generated from one state: bitrotate the state by 1 until you get the original state, each encountered state is redundant.
+Except for Random Unvisited, each described technique is modeled into a Markov Chain with $N^2$ states. However, many of these states are redundant: for example, for $N=3$ the states $001$, $010$ and $100$ all represent one of the nodes being busy. For states representing multiple busy nodes, the space between these servers is critical information. Redundant states can be generated from one state: bitrotate the state by 1 until you get the original state, each encountered state is redundant.
 Example: the states below are redundant and can therefore be lumped into one state:
 \begin{verbatim}
 001101 = 011010 = 110100 = 101001 = 010011 = 100110
 \end{verbatim}
 
-The example model in \ref{validateright} can be lumped into the following Markov Chain:
+The example model of the Forward Right algorithm can be lumped into the following Markov Chain:
 
 \[ Q =
   \begin{blockarray}{ccccc}
@@ -549,9 +559,9 @@ The example model in \ref{validateright} can be lumped into the following Markov
 Computing the steady state distribution of a Markov Chain is subject to both time and memory constraints. Using sparse matrices for our algorithms reduces the memory constraint so much it is no longer a bottleneck.
 Two factors are important when working with matrices: the number of elements and the number of nonzero elements. We will show that both factors are reduced significantly by lumping the matrices.
 
-For unlumped Markov Chains modelling the Random forward algorithm, a matrix consists of $2^N$ states, an exponential growth. Lumping these matrices results in a number of states equal to:  $\frac{1}{N} \sum_{d|N} (2^{N/d} \cdot \phi(d) )$ where $\phi(d) = d \cdot \prod_{p|d, p\text{ is prime}} (1-\frac{1}{p})$ \cite{A000031}. Although this result greatly reduces the number of states, its complexity is still non-polynomial.
+For unlumped Markov Chains modeling the Random forward algorithm, a matrix consists of $2^N$ states, an exponential growth. Lumping these matrices results in a number of states equal to  $\frac{1}{N} \sum_{d|N} (2^{N/d} \cdot \varphi(d) )$ \cite{A000031}. Although this result greatly reduces the number of states, its complexity is still non-polynomial.
 
-The number of nonzero elements for unlumped Markov Chains is $(N+1) 2^N$. For lumped matrices, we were not able to derive an exact formula, however, figure \ref{lumpnnz} shows a clear reduction as well. Yet, this result doesn't seem polynomial either.
+The number of nonzero elements for unlumped Markov Chains is $(N+1) 2^N$. For lumped matrices, we were not able to derive an exact formula, however, figure \ref{lumpnnz} shows a clear reduction as well. Yet, this result does not seem polynomial either.
 
 \begin{figure}[h!tb]
 \centering
@@ -567,12 +577,13 @@ The number of nonzero elements for unlumped Markov Chains is $(N+1) 2^N$. For lu
 \label{lumpnnz}
 \end{figure}
 
-It seems lumping is a good technique to push the bounderies of the validation by reducing two important factors of the compution time. However, it is no silver bullet: both the number of states and the number of nonzero elements are nonpolynomial after lumping the matrices.
+It seems lumping is a good technique to push the boundaries of the validation by reducing two important factors of the computing time. However, it is no silver bullet: both the number of states and the number of nonzero elements are non-polynomial after lumping the matrices.
 
-\subsection{Equivalent techniques}
+\subsection{Equivalent algorithms}
 Various algorithms are equivalent or very similar under special conditions. We will discuss some of these equivalencies.
 
-For $N \leq 3$ all algorithms are equivalent. This is obvious for $N=2$. For $N=3$, there are 4 possible states with the same behaviour for each algorithm:
+\subsubsection*{Low N}
+For $N \leq 3$ all algorithms are equivalent. This is obvious for $N=2$. For $N=3$, there are 4 possible states with the same behavior for each algorithm:
 \begin{description}
 \item[All nodes idle] All 3 nodes are idle, an incoming job will be executed by first node.
 \item[1 node busy] Each node is as likely to be the next node receiving a job. For an idle node, the job is executed by that node. For the busy node, the job will need to make exactly 1 hop.
@@ -582,16 +593,100 @@ For $N \leq 3$ all algorithms are equivalent. This is obvious for $N=2$. For $N=
 
 For $N>3$, other equivalencies exist, described below.
 
-\subsubsection*{Random Left/Right with parameter $p$}
-This algorithm is always equivalent to itself using parameter $1-p$. This is intuitivly clear because the probabilities of right and left are swapped, like looking to the ring in a mirror.
+\subsubsection*{High load}
+When the load becomes sufficiently large, all algorithms will yield the same result. In a ring under heavy load, each node will be busy nearly all the time. As long all nodes are busy, incoming jobs will be dropped.
+When a node becomes idle, the first incoming job will claim this node. Each node has the same probability of receiving the next incoming job, so the expected value for the number of forwards is:
+
+\begin{eqnarray}
+\frac{1}{N} \cdot \sum_{i=0}^{N-1} i &=& \frac{1}{N} \cdot \frac{N(N-1)}{2} \nonumber \\
+&=& \frac{N-1}{2} \nonumber
+\end{eqnarray}
+
+\subsubsection*{Random Left/Right with parameter $p$ versus Forward Right}
+This algorithm is always equivalent to itself using parameter $1-p$. This is intuitively clear because the probabilities of right and left are swapped, like looking to the ring in a mirror.
 It is clear that for $p=0$ (and so for $p=1$), this algorithm is equivalent to the Forward right algorithm. Furthermore, for arbitrary values of $p$, this algorithm is still equivalent to Forward right as long the ring size $N \leq 5$. This can be proven by lumping the Markov Chains for both techniques.
-***** MAYBE DO THE PROVE? (BUT FOR N=4) ****
 
+For $N=4$, define the lumped Markov Chain of the Forward Right algorithm.
+\[ Q_1 =
+  \begin{blockarray}{ccccccc}
+    & 0000 & 0001 & 0011 & 0101 & 0111 & 1111 \\
+    \begin{block}{c[cccccc]}
+    0000 & -4\lambda & 4\lambda & 0 & 0 & 0 & 0 \\
+    0001 & \mu & -4\lambda-\mu & 3\lambda & \lambda & 0 & 0 \\
+    0011 & 0 & 2\mu & -4\lambda-2\mu & 0 & 4\lambda & 0 \\
+    0101 & 0 & 2\mu & 0 & -4\lambda-2\mu & 4\lambda & 0  \\
+    0111 & 0 & 0 & 2\mu & \mu & -4\lambda-3\mu & 4\lambda \\
+    1111 & 0 & 0 & 0 & 0 & 4\mu & -4\mu \\
+    \end{block}
+  \end{blockarray}
+\]
 
-Lumping states of a Markov Chain produces an equivalent Markov Chain. This can be used to prove some forwarding techniques are equal up to a certain $N$.
+Now, define the lumped Markov Chain of the Forward Right algorithm with parameter $p$ and simplify.
+
+\[ Q_2 =
+  \begin{blockarray}{ccccccc}
+    & 0000 & 0001 & 0011 & 0101 & 0111 & 1111 \\
+    \begin{block}{c[cccccc]}
+    0000 & -4 \lambda & 4\lambda & 0 & 0 & 0 & 0 \\
+    0001 & \mu & -\mu & \lambda + (1-p)\lambda+p\lambda+\lambda & \lambda & 0 & 0 \\
+    0011 & 0 & 2\mu & -2\mu & 0 & \lambda+2\lambda \cdot ((1-p)+p)+\lambda & 0 \\
+    0101 & 0 & 2\mu & 0 & -2\mu & \lambda+p\lambda+(1-p)\lambda & 0  \\
+    0111 & 0 & 0 & 2\mu & \mu & -x & 4\lambda \\
+    1111 & 0 & 0 & 0 & 0 & 4\mu & -4\mu \\
+    \end{block}
+  \end{blockarray}
+\]
+\[ Q_2 =
+  \begin{blockarray}{ccccccc}
+    & 0000 & 0001 & 0011 & 0101 & 0111 & 1111 \\
+    \begin{block}{c[cccccc]}
+    0000 & -4\lambda & 4\lambda & 0 & 0 & 0 & 0 \\
+    0001 & \mu & -4\lambda-\mu & 3\lambda & \lambda & 0 & 0 \\
+    0011 & 0 & 2\mu & -4\lambda-2\mu & 0 & 4\lambda & 0 \\
+    0101 & 0 & 2\mu & 0 & -4\lambda-2\mu & 4\lambda & 0  \\
+    0111 & 0 & 0 & 2\mu & \mu & -4\lambda-3\mu & 4\lambda \\
+    1111 & 0 & 0 & 0 & 0 & 4\mu & -4\mu \\
+    \end{block}
+  \end{blockarray}
+\]
+
+We find $Q_1 = Q_2$ for $N=4$. This also works for $N=5$, but for $N \geq 6$, the matrices are different.
+
+\subsubsection*{Random Coprime offset versus Forward Right}
+For $N=4$, also this algorithm is equivalent to the Forward Right algorithm. The coprimes of 4 are 1 and 3. Meaning a jump of 1 (right neighbor) or a jump of 3 (left neighbor). It is clear this is the same as Random Left/Right with parameter $0.5$, which is equivalent Forward Right algorithm.
+
+\subsubsection*{Random Coprime offset versus Random unvisited}
+The performance of the Random Coprime offset algorithm depends on $\varphi(N)$, which is $N-1$ when $N$ is prime. Figure \ref{figrcovsru} shows the average ring traversal of this algorithm and the Random unvisited algorithm. It seems for prime values of $N$, the graphs touch. However, when looking at the actual data we see this is only true for $N=5$.
+
+\begin{figure}[h!tb]
+\centering
+\includegraphics[clip=true, trim=9em 24em 9em 24em, width=0.9\textwidth]{resources/plotload10rurpo.pdf}
+\caption{Ring traversal versus $N$ for load=1.0}
+\label{figrcovsru}
+\end{figure}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|l|} \hline
+N	& Random unvisited	& Random Coprime offset \\ \hline
+3	&   0.161764705882353 &  0.161764705882353 \\
+5	&   0.204376460590610 &  0.204376460590610 \\
+7	&   0.219792926622134 &  0.219788935482327 \\
+11	&   0.227265522566042 &  0.227249844727623 \\
+13	&   0.226908433098761 &  0.226887197455899 \\ \hline
+\end{tabular}
+\caption{Relative ring traversal for load=1.0}
+\end{table}
 
 \section{Conclusion}
 \label{secconclusion}
+
+We have simulated all our algorithms and validated the results of some. The ideal algorithm is depends on the specific requirements of the distributed system. However, we can say some algorithms are not ideal for any situation.
+
+\subsubsection*{Forward Right}
+We used this 
+
+
 
 \begin{table}[h!]
 \centering
@@ -600,7 +695,7 @@ Lumping states of a Markov Chain produces an equivalent Markov Chain. This can b
 Forward Right				& 0 (baseline)	& 0							&		\\ \hline
 Left/Right forward			& $> 4\%$		& 1 (job) + 1 (node)		&		\\ \hline
 Random Left/Right forward	& 0 (worse)		& 1 (job)					&		\\ \hline
-Position dependant forward	& 0 (worse)		& 1 (job)					& Creates loaded clusters \\ \hline
+Position dependent forward	& 0 (worse)		& 1 (job)					& Creates loaded clusters \\ \hline
 \end{tabular}
 \caption{Forward to neighbor}
 \end{table}
@@ -634,6 +729,7 @@ Random unvisited			& $\approx 24\%$						& $(N-1)!$					\\ \hline
 Which techniques work best in which environments? Why? Runner up? Why do some techniques don't work as expected? performance results in function of number of paths
 
 \printbibliography
+\newpage
 
 \begin{changemargin}{-2cm}{-2cm}{4cm}
 
@@ -641,66 +737,68 @@ Which techniques work best in which environments? Why? Runner up? Why do some te
 \section{Simulator source code}
 \label{sourcecode}
 
-\lstset{tabsize=4,language=C++,caption={nodes.h}}
+
+\lstset{tabsize=4,language=C++,caption={Main.cpp}}
+\lstinputlisting{../src/Main.cpp}
+
+\lstset{caption={configuration.h}}
+\lstinputlisting{../src/configuration.h}
+
+\lstset{caption={configuration.cpp}}
+\lstinputlisting{../src/configuration.cpp}
+
+\lstset{caption={nodes.h}}
 \lstinputlisting{../src/nodes.h}
+
+\lstset{caption={nodes.cpp}}
+\lstinputlisting{../src/nodes.cpp}
+
+\lstset{caption={servernode.h}}
+\lstinputlisting{../src/servernode.h}
 
 \lstset{caption={servernode.cpp}}
 \lstinputlisting{../src/servernode.cpp}
 
-\lstset{caption={randswitchchain.m}}
-\lstinputlisting{../src/configuration.h}
-
-\lstset{caption={randswitchchain.m}}
-\lstinputlisting{../src/nodes.cpp}
-
-\lstset{caption={randswitchchain.m}}
-\lstinputlisting{../src/Main.cpp}
-
-\lstset{caption={randswitchchain.m}}
-\lstinputlisting{../src/servernode.h}
-
-\lstset{caption={randswitchchain.m}}
-\lstinputlisting{../src/ring/ring.cpp}
-
-\lstset{caption={randswitchchain.m}}
-\lstinputlisting{../src/ring/job.h}
-
-\lstset{caption={randswitchchain.m}}
-\lstinputlisting{../src/ring/node.h}
-
-\lstset{caption={randswitchchain.m}}
-\lstinputlisting{../src/ring/ring.h}
-
-\lstset{caption={randswitchchain.m}}
-\lstinputlisting{../src/ring/node.cpp}
-
-\lstset{caption={randswitchchain.m}}
+\lstset{caption={ring/arriveevent.h}}
 \lstinputlisting{../src/ring/arriveevent.h}
 
-\lstset{caption={randswitchchain.m}}
-\lstinputlisting{../src/ring/job.cpp}
-
-\lstset{caption={randswitchchain.m}}
+\lstset{caption={ring/finishevent.h}}
 \lstinputlisting{../src/ring/finishevent.h}
 
-\lstset{caption={randswitchchain.m}}
-\lstinputlisting{../src/configuration.cpp}
+\lstset{caption={ring/job.h}}
+\lstinputlisting{../src/ring/job.h}
 
-\lstset{caption={randswitchchain.m}}
-\lstinputlisting{../src/simulator/schedule.h}
+\lstset{caption={ring/job.cpp}}
+\lstinputlisting{../src/ring/job.cpp}
 
-\lstset{caption={randswitchchain.m}}
+\lstset{caption={ring/node.h}}
+\lstinputlisting{../src/ring/node.h}
+
+\lstset{caption={ring/node.cpp}}
+\lstinputlisting{../src/ring/node.cpp}
+
+\lstset{caption={ring/ring.h}}
+\lstinputlisting{../src/ring/ring.h}
+
+\lstset{caption={ring/ring.cpp}}
+\lstinputlisting{../src/ring/ring.cpp}
+
+\lstset{caption={simulator/event.h}}
 \lstinputlisting{../src/simulator/event.h}
 
-\lstset{caption={randswitchchain.m}}
-\lstinputlisting{../src/simulator/simulator.h}
+\lstset{caption={simulator/schedule.h}}
+\lstinputlisting{../src/simulator/schedule.h}
 
-\lstset{caption={randswitchchain.m}}
-\lstinputlisting{../src/simulator/simulator.cpp}
-
-\lstset{caption={randswitchchain.m}}
+\lstset{caption={simulator/schedule.cpp}}
 \lstinputlisting{../src/simulator/schedule.cpp}
 
+\lstset{caption={simulator/simulator.h}}
+\lstinputlisting{../src/simulator/simulator.h}
+
+\lstset{caption={simulator/simulator.cpp}}
+\lstinputlisting{../src/simulator/simulator.cpp}
+
+\newpage
 \section{MATLAB Numerical evaluation code}
 \label{matlabcode}
 
