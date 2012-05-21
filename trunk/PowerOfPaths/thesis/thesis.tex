@@ -94,7 +94,7 @@ This thesis researches the behavior of different forwarding algorithms in a ring
 
 Section \ref{secsetup} precisely describes the setup of the system. It specifies the general assumptions made in this document and gives a short overview of the different algorithms we have reviewed. The working of each tested algorithms is introduced and their properties are summed up.
 
-Next, section \ref{secsimulation} provides a short introduction about the simulator we wrote and how to use it. Further, it contains the results of the simulations we have performed. Curiosities encountered in the results are simulated using other parameters. The section finishes with the transformation of single CPU servers to multiple CPU servers.
+Next, section \ref{secsimulation} provides a short introduction about the simulator we wrote and how to use it. Further, it contains the results of the simulations we have performed. Curiosities encountered in the results are simulated using other parameters. The section finishes with the attempt to transform the results of single CPU servers into the results of multiple CPU servers.
 
 The following part, section \ref{secvalidation}, is used to validate the results of the simulation using numerical algorithms. Some of the algorithms are modeled into Markov Chains to get numerically exact results. Afterwards, the structure of the Markov Chains are reviewed and optimized. At the end of this section we will try to find equivalencies between the algorithms under certain circumstances.
 
@@ -402,7 +402,10 @@ Simulation result & \multicolumn{3}{|c|}{$0.4171$} \\ \hline
 \label{figcpusmatch}
 \end{figure}
 
+While deriving the transformation, we did not take into account that for each choice the algorithm makes, $c$ CPUs are bound to this choice. The real simulation chooses a node and must first test all those CPUs where the transformation only counts the $n \cdot c$ forwards using a better choice for each forward. This makes the transformation nothing more than a approximation and lower bound to the real results.
 
+
+%We see this method is an approximation to the results of multiple CPUs, but it performs better. This is because the the approximation is not analogue to the real algorithm. When using multiple CPUs, the choice of the first $c$ CPUs is fixed, w
 \section{Numerical Validation}
 \label{secvalidation}
 
@@ -481,7 +484,7 @@ As in the simulation section, we have validated the results for different values
 
 The Random Left/Right forward algorithm does not seem a viable choice for real implementations. It has a small performance drawback compared to Forward Right and has no other benefits. Furthermore, it is a little harder to implement.
 
-\subsection*{Random Unvisited}
+\subsubsection*{Random Unvisited}
 This problem can be modeled much more efficiently than the techniques. Since the next node is chosen at random, it is not necessary to store the position of the nodes. The information we need to save consists only of the number of servers which are currently busy. This problem is similar to modeling an Erlang-B loss system. The number of states in this Markov Chain is linear to $N$, which is much more dense than the previous given models. For $N=3$, the matrix is given below.
 
 \[ Q =
@@ -681,11 +684,17 @@ N	& Random unvisited	& Random Coprime offset \\ \hline
 \section{Conclusion}
 \label{secconclusion}
 
-We have simulated all our algorithms and validated the results of some. The ideal algorithm is depends on the specific requirements of the distributed system. However, we can say some algorithms are not ideal for any situation.
+We have simulated all our algorithms and validated the results of some. The ideal algorithm is depends on the specific requirements of the distributed system. However, we can say some algorithms are not ideal for any situation. One should also note that in some configurations, different algorithms can yield the same results. In those cases, only memory requirements or the complexity to implement the algorithms should be decisive.
 
-\subsubsection*{Forward Right}
-We used this 
+\subsubsection*{Forward to neighbors}
+When nodes are only directly connected to their neighbors, the choice depend on the memory requirements. When at least 1 bit can be saved in both the job's metadata as the node's state, Left/Right is an ideal choice. This algorithm provides up to 4\% better result than Forward Right under medium load ($N=100$).
 
+When no memory is available, the Forward Right algorithm is the only possible choice while maintaining sufficient results. Furthermore, it is the easiest algorithm to implement.
+
+Both these algorithms allow nodes to come and go. The Random Left/Right and Position dependent forwarding techniques perform worse than Forward Right while having more requirements, therefore they should not be chosen.
+
+\subsubsection*{Forward anywhere}
+If each node can reach each other node directly, forward anywhere algorithms improve the results significantly. The best results can be achieved using the Random unvisited 
 
 
 \begin{table}[h!]
@@ -729,10 +738,8 @@ Random unvisited			& $\approx 24\%$						& $(N-1)!$					\\ \hline
 Which techniques work best in which environments? Why? Runner up? Why do some techniques don't work as expected? performance results in function of number of paths
 
 \printbibliography
-\newpage
-
 \begin{changemargin}{-2cm}{-2cm}{4cm}
-
+\newpage
 \appendix
 \section{Simulator source code}
 \label{sourcecode}
