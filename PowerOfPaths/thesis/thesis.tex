@@ -106,8 +106,8 @@ We are using a ring-structured distributed system of $N$ nodes. Each node is con
 
 Jobs have an arrival time, a length, the ID of the first node and optional metadata. They arrive at each node independently as a Poisson process at rate $\lambda$. Their length is exponentially distributed with mean $\mu$ (unless otherwise noted, assume $\mu=1$). Although each job has a length, this length may not known in advance. Finally, the metadata is optional and may be used by the nodes to pass information among the job (e.g. a list of visited nodes).
 
-Nodes can use different algorithms to determine whereto a job will be forwarded. The performance of these algorithms is the main focus of this thesis. Different techniques will be discussed and simulated. Afterwards, some results of the simulation will be validated using numerical techniques.
-Note that the cost of forwarding a job is neglected. Together with the presumption a job must visit each node before being dropped, this means a job arriving at any node will be processed if and only if at least one server is idle.
+Nodes can use different algorithms to determine whereto a job will be forwarded, some algorithms require the node to keep state information. The performance of the algorithms is the main focus of this thesis. Different techniques will be discussed and simulated. Afterwards, some results of the simulation will be validated using numerical techniques.
+Note that the cost of forwarding a job is ignored. Together with the presumption a job must visit each node before being dropped, this means a job arriving at any node will be processed if and only if at least one server is idle.
 
 \begin{figure}[h!tb]
 \centering
@@ -140,7 +140,7 @@ As shown in figure \ref{figring}, each node in the ring has an unique ID. Except
 The ring structure can be used in real networks, however in many cases the ring is no more than a virtual overlay over another structure (e.g. the internet). In these networks each node is able to connect each other node directly and more sophisticated forwarding algorithms can be used.
 
 \subsubsection*{Random unvisited}
-The Random unvisited algorithm is the most basic algorithm in this category. Every time a job must be forwarded, a list of unvisited nodes is generated and a random node is chosen from that list. The current node is added to the list of visited nodes, which is found in the job's metadata. This list can be saved using $N$ bits.
+The Random unvisited algorithm is the most basic algorithm in this category. Every time a job must be forwarded, a list of unvisited nodes is generated and a random node is chosen from that list. The current node is added to the list of visited nodes, which is found in the job's metadata. This list can be saved using $N-1$ bits ($-1$ because the initial node is saved separately).
 
 \subsubsection*{Coprime offset}
 Another algorithm is Coprime offset. This algorithm generates a list of all numbers smaller than $N$, and coprime to $N$. The first time a job is forwarded the next number of this list is selected. This is the job's forwarding offset and is saved in the job's metadata. When a job is forwarded, it is sent exactly this many hops farther. Because this number and $N$ are coprime, it will visit all nodes exactly once before being returned to its originating node. 
@@ -175,7 +175,7 @@ Forward Right				& N				& 1				& 1					& 0							& 0		\\ \hline
 Left/Right forward			& N				& 2				& 2					& 1							& 1		\\ \hline
 Random Left/Right forward (p) & N			& 2				& 2 $^($\footnotemark$^)$ & 1					& 0		\\ \hline
 Position dependent forward	& N				& 1				& 1					& 1							& 0		\\ \hline
-Random unvisited			& Y				& $N-1$			& $(N-1)!$			& $N$	& 0		\\ \hline
+Random unvisited			& Y				& $N-1$			& $(N-1)!$			& $N-1$	& 0		\\ \hline
 Coprime offset				& Y				& $\varphi(N)$		& $\varphi(N)$ 		& $\lceil log_2 \varphi(N) \rceil$	& $\lceil log_2 \varphi(N) \rceil$ \\ \hline
 Random Coprime offset		& Y				& $\varphi(N)$		& $\varphi(N)$			& $\lceil log_2 \varphi(N) \rceil$	& 0		\\ \hline
 \end{tabular}
@@ -402,10 +402,8 @@ Simulation result & \multicolumn{3}{|c|}{$0.4171$} \\ \hline
 \label{figcpusmatch}
 \end{figure}
 
-While deriving the transformation, we did not take into account that for each choice the algorithm makes, $c$ CPUs are bound to this choice. The real simulation chooses a node and must first test all those CPUs where the transformation only counts the $n \cdot c$ forwards using a better choice for each forward. This makes the transformation nothing more than a approximation and lower bound to the real results.
+While deriving the transformation, we did not take into account that for each choice the algorithm makes, $c$ CPUs are bound to this choice. The real simulation chooses a node and must first test all those CPUs where the transformation only counts the $n \cdot c$ forwards using a better choice for each forward. This makes the transformation nothing more than a approximation and lower bound of the real results.
 
-
-%We see this method is an approximation to the results of multiple CPUs, but it performs better. This is because the the approximation is not analogue to the real algorithm. When using multiple CPUs, the choice of the first $c$ CPUs is fixed, w
 \section{Numerical Validation}
 \label{secvalidation}
 
@@ -694,48 +692,10 @@ When no memory is available, the Forward Right algorithm is the only possible ch
 Both these algorithms allow nodes to come and go. The Random Left/Right and Position dependent forwarding techniques perform worse than Forward Right while having more requirements, therefore they should not be chosen.
 
 \subsubsection*{Forward anywhere}
-If each node can reach each other node directly, forward anywhere algorithms improve the results significantly. The best results can be achieved using the Random unvisited 
+If each node can reach each other node directly, forward anywhere algorithms improve the results significantly. The best results can be achieved using the Random unvisited algorithm. This algorithm performs slightly better than Coprime offset and Random Coprime offset, but at a higher cost: the Random unvisited algorithm requires $N-1$ bits in the job's metadata.
 
+The Coprime offset and Random Coprime offset algorithms require less memory but with worse performance. However, when the ring size is prime, the results are only slightly less than Random unvisited. The memory required in the job's metadata is lowered to $\lceil log_2 \varphi(N) \rceil$ bits ($\lceil log_2 (N-1) \rceil$ bits when $N$ is prime). The Coprime offset algorithm yields better results than the random variant, but the improvement is negligible. Besides, it needs to save $\lceil log_2 \varphi(N) \rceil$ bits in the state of each node.
 
-\begin{table}[h!]
-\centering
-\begin{tabular}{|p{0.25\textwidth}|p{0.25\textwidth}|p{0.25\textwidth}|p{0.25\textwidth}|} \hline
-							& Max. gain		& Space requirement (bits)	& Notes \\ \hline
-Forward Right				& 0 (baseline)	& 0							&		\\ \hline
-Left/Right forward			& $> 4\%$		& 1 (job) + 1 (node)		&		\\ \hline
-Random Left/Right forward	& 0 (worse)		& 1 (job)					&		\\ \hline
-Position dependent forward	& 0 (worse)		& 1 (job)					& Creates loaded clusters \\ \hline
-\end{tabular}
-\caption{Forward to neighbor}
-\end{table}
-
-\begin{table}[h!]
-\centering
-\begin{tabular}{|p{0.4\textwidth}|p{0.3\textwidth}|p{0.3\textwidth}|} \hline
-							& Max. gain		& Space requirement (bits)	\\ \hline
-Random unvisited			& $> 24\%$		& $N$						\\ \hline
-Coprime offset				& $> 24\%$		& $log_2 N$ (job) + $log_2 (\sum_{p < N,gcd(p, N) = 1} 1)$ (node) \\ \hline
-Random Coprime offset		& $> 24\%$		& $log_2 N$					\\ \hline
-\end{tabular}
-\caption{Forward anywhere}
-\end{table}
-
-
-\begin{table}
-\centering
-\begin{tabular}{|p{0.4\textwidth}|p{0.3\textwidth}|p{0.25\textwidth}|p{0.3\textwidth}|} \hline
- 							& Performance gain at load=0.5	& Number of possible paths	\\ \hline
-Forward Right				& 0								& 1							\\ \hline
-Left/Right forward			& $\approx 4.5\%$				& 2							\\ \hline
-Random Left/Right (0.5)		& no gain						& 2							\\ \hline
-Position-dependant forwarding & no gain						& 1							\\ \hline
-Random unvisited			& $\approx 24\%$						& $(N-1)!$					\\ \hline
-(Random) Coprime offset		& $\approx 24\%$						& $\sum_{p < N,gcd(p, N) = 1} 1$ \\ \hline
-\end{tabular}
-\caption{Performance gain vs number of paths}
-\end{table}
-
-Which techniques work best in which environments? Why? Runner up? Why do some techniques don't work as expected? performance results in function of number of paths
 
 \printbibliography
 \begin{changemargin}{-2cm}{-2cm}{4cm}

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.5.14)  21 MAY 2012 11:19
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.5.14)  21 MAY 2012 14:49
 entering extended mode
  %&-line parsing enabled.
 **thesis.tex
@@ -591,23 +591,23 @@ File: data/switchright.pdf Graphic file (type pdf)
 File: data/randswitchright.pdf Graphic file (type pdf)
 
 <use data/randswitchright.pdf> [10 <./data/right.pdf>]
-<data/randswitchp.pdf, id=278, 432.61626pt x 407.5225pt>
+<data/randswitchp.pdf, id=276, 432.61626pt x 407.5225pt>
 File: data/randswitchp.pdf Graphic file (type pdf)
 
-<use data/randswitchp.pdf>
-<data/evenswitchright.pdf, id=280, 444.66125pt x 407.5225pt>
+<use data/randswitchp.pdf> [11 <./data/switchright.pdf> <./data/randswitchright
+.pdf>] <data/evenswitchright.pdf, id=295, 444.66125pt x 407.5225pt>
 File: data/evenswitchright.pdf Graphic file (type pdf)
 
-<use data/evenswitchright.pdf> [11 <./data/switchright.pdf> <./data/randswitchr
-ight.pdf>] <data/randunvisitedright.pdf, id=297, 420.57124pt x 407.5225pt>
+<use data/evenswitchright.pdf>
+<data/randunvisitedright.pdf, id=296, 420.57124pt x 407.5225pt>
 File: data/randunvisitedright.pdf Graphic file (type pdf)
 
 <use data/randunvisitedright.pdf> [12 <./data/randswitchp.pdf> <./data/evenswit
-chright.pdf>] <data/primeright.pdf, id=319, 420.57124pt x 407.5225pt>
+chright.pdf>] <data/primeright.pdf, id=316, 420.57124pt x 407.5225pt>
 File: data/primeright.pdf Graphic file (type pdf)
 
 <use data/primeright.pdf>
-<data/randprimeright.pdf, id=320, 420.57124pt x 407.5225pt>
+<data/randprimeright.pdf, id=317, 420.57124pt x 407.5225pt>
 File: data/randprimeright.pdf Graphic file (type pdf)
 
 <use data/randprimeright.pdf>
@@ -615,20 +615,22 @@ Overfull \hbox (2.22221pt too wide) in paragraph at lines 293--304
 [][] [] 
  []
 
-<data/randunvisited_prime_randprime.pdf, id=321, 444.66125pt x 407.5225pt>
+<data/randunvisited_prime_randprime.pdf, id=318, 444.66125pt x 407.5225pt>
 File: data/randunvisited_prime_randprime.pdf Graphic file (type pdf)
 
-<use data/randunvisited_prime_randprime.pdf> [13 <./data/randunvisitedright.pdf
-> <./data/primeright.pdf> <./data/randprimeright.pdf>]
+<use data/randunvisited_prime_randprime.pdf>
 Overfull \hbox (36.00526pt too wide) in paragraph at lines 324--331
  [][] 
  []
 
-<data/4rightright.pdf, id=346, 420.57124pt x 397.485pt>
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+<data/4rightright.pdf, id=321, 420.57124pt x 397.485pt>
 File: data/4rightright.pdf Graphic file (type pdf)
 
 <use data/4rightright.pdf>
-<data/4switchswitch.pdf, id=347, 420.57124pt x 397.485pt>
+<data/4switchswitch.pdf, id=322, 420.57124pt x 397.485pt>
 File: data/4switchswitch.pdf Graphic file (type pdf)
 
 <use data/4switchswitch.pdf>
@@ -636,11 +638,11 @@ Overfull \hbox (2.22221pt too wide) in paragraph at lines 338--348
 [][] [] 
  []
 
-<data/4randswitchrandswitch.pdf, id=348, 420.57124pt x 397.485pt>
+<data/4randswitchrandswitch.pdf, id=323, 420.57124pt x 397.485pt>
 File: data/4randswitchrandswitch.pdf Graphic file (type pdf)
 
 <use data/4randswitchrandswitch.pdf>
-<data/4randunvisitedrandunvisited.pdf, id=349, 420.57124pt x 397.485pt>
+<data/4randunvisitedrandunvisited.pdf, id=324, 420.57124pt x 397.485pt>
 File: data/4randunvisitedrandunvisited.pdf Graphic file (type pdf)
 
 <use data/4randunvisitedrandunvisited.pdf>
@@ -648,31 +650,33 @@ Overfull \hbox (2.22221pt too wide) in paragraph at lines 349--359
 [][] [] 
  []
 
-<data/4randprimerandprime.pdf, id=350, 420.57124pt x 397.485pt>
+<data/4randprimerandprime.pdf, id=325, 420.57124pt x 397.485pt>
 File: data/4randprimerandprime.pdf Graphic file (type pdf)
 
-<use data/4randprimerandprime.pdf> [14 <./data/randunvisited_prime_randprime.pd
-f>] [15 <./data/4rightright.pdf> <./data/4switchswitch.pdf> <./data/4randswitch
-randswitch.pdf> <./data/4randunvisitedrandunvisited.pdf> <./data/4randprimerand
-prime.pdf>] <data/right_5_2.pdf, id=396, 420.57124pt x 407.5225pt>
+<use data/4randprimerandprime.pdf> [13 <./data/randunvisitedright.pdf>]
+[14 <./data/primeright.pdf> <./data/randprimeright.pdf> <./data/randunvisited_p
+rime_randprime.pdf>] [15 <./data/4rightright.pdf> <./data/4switchswitch.pdf> <.
+/data/4randswitchrandswitch.pdf> <./data/4randunvisitedrandunvisited.pdf> <./da
+ta/4randprimerandprime.pdf>]
+<data/right_5_2.pdf, id=395, 420.57124pt x 407.5225pt>
 File: data/right_5_2.pdf Graphic file (type pdf)
 
 <use data/right_5_2.pdf>
-Overfull \hbox (9.445pt too wide) in paragraph at lines 412--414
+Overfull \hbox (9.445pt too wide) in paragraph at lines 410--412
 \OT1/cmr/m/n/10 To val-i-date the re-sults ob-tained in the pre-vi-ous sec-tion
 , we mod-eled the scheduling-
  []
 
 [16] [17 <./data/right_5_2.pdf>]
-Overfull \hbox (72.8061pt too wide) detected at line 437
+Overfull \hbox (72.8061pt too wide) detected at line 435
 \OML/cmm/m/it/10 Q \OT1/cmr/m/n/10 = []
  []
 
-<resources/plotright.pdf, id=414, 614.295pt x 794.97pt>
+<resources/plotright.pdf, id=413, 614.295pt x 794.97pt>
 File: resources/plotright.pdf Graphic file (type pdf)
 
 <use resources/plotright.pdf>
-Overfull \hbox (72.8061pt too wide) detected at line 465
+Overfull \hbox (72.8061pt too wide) detected at line 463
 \OML/cmm/m/it/10 Q \OT1/cmr/m/n/10 = []
  []
 
@@ -712,7 +716,7 @@ File: resources/plotlumpingnnz.pdf Graphic file (type pdf)
 
 <use resources/plotlumpingnnz.pdf> [23 <./resources/plotlumping.pdf>] [24 <./re
 sources/plotlumpingnnz.pdf>]
-Overfull \hbox (69.01639pt too wide) detected at line 641
+Overfull \hbox (69.01639pt too wide) detected at line 639
 \OML/cmm/m/it/10 Q[] \OT1/cmr/m/n/10 = []
  []
 
@@ -724,51 +728,12 @@ File: resources/plotload10rurpo.pdf Graphic file (type pdf)
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [25] [26 <./resources/plotload10rurpo.pdf>]
-Underfull \hbox (badness 3861) in paragraph at lines 703--703
-[]\OT1/cmr/m/n/10 Space re-quire-ment
- []
-
-
-Overfull \hbox (48.0pt too wide) in paragraph at lines 702--709
- [][] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 715--715
-[]\OT1/cmr/m/n/10 Space re-quire-ment
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 717--717
-[]$\OML/cmm/m/it/10 log[]N$ \OT1/cmr/m/n/10 (job) +
- []
-
-
-Overfull \hbox (0.53035pt too wide) in paragraph at lines 717--717
-\OML/cmm/m/it/10 log[]\OT1/cmr/m/n/10 ([][] 1)$
- []
-
-
-Overfull \hbox (36.0pt too wide) in paragraph at lines 714--720
- [][] 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 727--727
-[]\OT1/cmr/m/n/10 Performance gain at
- []
-
-
-Overfull \hbox (18.74895pt too wide) in paragraph at lines 726--735
- [][] 
- []
-
-[27]
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 740.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 700.
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 740.
- [28] (/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 700.
+ [27]
+(/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
 (/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
@@ -784,27 +749,27 @@ File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <8> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 1.
- [29])
-(../src/configuration.h) (../src/configuration.cpp [30] [31]) (../src/nodes.h
-[32] [33]) [34] (../src/nodes.cpp [35] [36] [37]) (../src/servernode.h)
-(../src/servernode.cpp [38]) (../src/ring/arriveevent.h)
-(../src/ring/finishevent.h [39]) (../src/ring/job.h) (../src/ring/job.cpp
-[40]) (../src/ring/node.h [41]) (../src/ring/node.cpp) (../src/ring/ring.h
-[42]) (../src/ring/ring.cpp [43]) (../src/simulator/event.h)
-(../src/simulator/schedule.h [44]) (../src/simulator/schedule.cpp)
-(../src/simulator/simulator.h) [45] (../src/simulator/simulator.cpp) [46]
-(../matlab/rightchain.m) (../matlab/randswitchchain.m [47])
-(../matlab/rprimechain.m) (../matlab/runvisitedchain.m [48])
-(../matlab/avghops.m) (../matlab/ruavghops.m [49]) (../matlab/ctmcsteadystate.m
-) (../matlab/lumpavghops.m [50]) (../matlab/lump.m) (../matlab/makestates.m
-[51]) [52] (./thesis.aux)
+ [28])
+(../src/configuration.h) (../src/configuration.cpp [29] [30]) (../src/nodes.h
+[31] [32]) [33] (../src/nodes.cpp [34] [35] [36]) (../src/servernode.h)
+(../src/servernode.cpp [37]) (../src/ring/arriveevent.h)
+(../src/ring/finishevent.h [38]) (../src/ring/job.h) (../src/ring/job.cpp
+[39]) (../src/ring/node.h [40]) (../src/ring/node.cpp) (../src/ring/ring.h
+[41]) (../src/ring/ring.cpp [42]) (../src/simulator/event.h)
+(../src/simulator/schedule.h [43]) (../src/simulator/schedule.cpp)
+(../src/simulator/simulator.h) [44] (../src/simulator/simulator.cpp) [45]
+(../matlab/rightchain.m) (../matlab/randswitchchain.m [46])
+(../matlab/rprimechain.m) (../matlab/runvisitedchain.m [47])
+(../matlab/avghops.m) (../matlab/ruavghops.m [48]) (../matlab/ctmcsteadystate.m
+) (../matlab/lumpavghops.m [49]) (../matlab/lump.m) (../matlab/makestates.m
+[50]) [51] (./thesis.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 15244 strings out of 493848
- 223762 string characters out of 1152823
+ 15240 strings out of 493848
+ 223707 string characters out of 1152823
  892766 words of memory out of 3000000
  16423 multiletter control sequences out of 15000+50000
  13863 words of font info for 54 fonts, out of 3000000 for 9000
@@ -831,9 +796,9 @@ ype1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public
 /amsfonts/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
 /cmsy8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb>
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on thesis.pdf (52 pages, 1086829 bytes).
+Output written on thesis.pdf (51 pages, 1084274 bytes).
 PDF statistics:
- 2749 PDF objects out of 2984 (max. 8388607)
- 1797 named destinations out of 2073 (max. 500000)
+ 2741 PDF objects out of 2984 (max. 8388607)
+ 1793 named destinations out of 2073 (max. 500000)
  330 words of extra memory for PDF output out of 10000 (max. 10000000)
 
