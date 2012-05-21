@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.5.14)  20 MAY 2012 00:52
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.5.14)  21 MAY 2012 11:19
 entering extended mode
  %&-line parsing enabled.
 **thesis.tex
@@ -658,22 +658,21 @@ prime.pdf>] <data/right_5_2.pdf, id=396, 420.57124pt x 407.5225pt>
 File: data/right_5_2.pdf Graphic file (type pdf)
 
 <use data/right_5_2.pdf>
-Overfull \hbox (9.445pt too wide) in paragraph at lines 409--411
+Overfull \hbox (9.445pt too wide) in paragraph at lines 412--414
 \OT1/cmr/m/n/10 To val-i-date the re-sults ob-tained in the pre-vi-ous sec-tion
 , we mod-eled the scheduling-
  []
 
-[16]
-Overfull \hbox (72.8061pt too wide) detected at line 434
+[16] [17 <./data/right_5_2.pdf>]
+Overfull \hbox (72.8061pt too wide) detected at line 437
 \OML/cmm/m/it/10 Q \OT1/cmr/m/n/10 = []
  []
 
-[17 <./data/right_5_2.pdf>]
 <resources/plotright.pdf, id=414, 614.295pt x 794.97pt>
 File: resources/plotright.pdf Graphic file (type pdf)
 
 <use resources/plotright.pdf>
-Overfull \hbox (72.8061pt too wide) detected at line 462
+Overfull \hbox (72.8061pt too wide) detected at line 465
 \OML/cmm/m/it/10 Q \OT1/cmr/m/n/10 = []
  []
 
@@ -713,7 +712,7 @@ File: resources/plotlumpingnnz.pdf Graphic file (type pdf)
 
 <use resources/plotlumpingnnz.pdf> [23 <./resources/plotlumping.pdf>] [24 <./re
 sources/plotlumpingnnz.pdf>]
-Overfull \hbox (69.01639pt too wide) detected at line 638
+Overfull \hbox (69.01639pt too wide) detected at line 641
 \OML/cmm/m/it/10 Q[] \OT1/cmr/m/n/10 = []
  []
 
@@ -724,59 +723,52 @@ File: resources/plotload10rurpo.pdf Graphic file (type pdf)
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
-[25]
-Underfull \hbox (badness 3861) in paragraph at lines 694--694
+[25] [26 <./resources/plotload10rurpo.pdf>]
+Underfull \hbox (badness 3861) in paragraph at lines 703--703
 []\OT1/cmr/m/n/10 Space re-quire-ment
  []
 
 
-Overfull \hbox (48.0pt too wide) in paragraph at lines 693--700
+Overfull \hbox (48.0pt too wide) in paragraph at lines 702--709
  [][] 
  []
 
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 706--706
+Underfull \hbox (badness 10000) in paragraph at lines 715--715
 []\OT1/cmr/m/n/10 Space re-quire-ment
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 708--708
+Underfull \hbox (badness 10000) in paragraph at lines 717--717
 []$\OML/cmm/m/it/10 log[]N$ \OT1/cmr/m/n/10 (job) +
  []
 
 
-Overfull \hbox (0.53035pt too wide) in paragraph at lines 708--708
+Overfull \hbox (0.53035pt too wide) in paragraph at lines 717--717
 \OML/cmm/m/it/10 log[]\OT1/cmr/m/n/10 ([][] 1)$
  []
 
 
-Overfull \hbox (36.0pt too wide) in paragraph at lines 705--711
+Overfull \hbox (36.0pt too wide) in paragraph at lines 714--720
  [][] 
  []
 
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 718--718
+Underfull \hbox (badness 10000) in paragraph at lines 727--727
 []\OT1/cmr/m/n/10 Performance gain at
  []
 
 
-Overfull \hbox (18.74895pt too wide) in paragraph at lines 717--726
+Overfull \hbox (18.74895pt too wide) in paragraph at lines 726--735
  [][] 
  []
 
-[26 <./resources/plotload10rurpo.pdf>]
+[27]
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 731.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 740.
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 731.
- [27]
-(/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 740.
+ [28] (/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
 (/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
@@ -792,32 +784,32 @@ File: omlcmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <8> not available
 (Font)              Font shape `OML/cmm/m/it' tried instead on input line 1.
- [28])
-(../src/configuration.h [29]) (../src/configuration.cpp [30]) (../src/nodes.h
-[31] [32] [33]) (../src/nodes.cpp [34] [35] [36]) (../src/servernode.h)
-[37] (../src/servernode.cpp) (../src/ring/arriveevent.h)
-(../src/ring/finishevent.h [38]) (../src/ring/job.h) [39] (../src/ring/job.cpp)
-(../src/ring/node.h [40]) (../src/ring/node.cpp) (../src/ring/ring.h [41])
-(../src/ring/ring.cpp [42]) (../src/simulator/event.h)
-(../src/simulator/schedule.h [43]) (../src/simulator/schedule.cpp)
-(../src/simulator/simulator.h [44]) (../src/simulator/simulator.cpp) [45]
-(../matlab/rightchain.m) (../matlab/randswitchchain.m [46])
-(../matlab/rprimechain.m) (../matlab/runvisitedchain.m [47])
-(../matlab/avghops.m) (../matlab/ruavghops.m [48]) (../matlab/ctmcsteadystate.m
-) (../matlab/lumpavghops.m [49]) (../matlab/lump.m) (../matlab/makestates.m
-[50]) [51] (./thesis.aux)
+ [29])
+(../src/configuration.h) (../src/configuration.cpp [30] [31]) (../src/nodes.h
+[32] [33]) [34] (../src/nodes.cpp [35] [36] [37]) (../src/servernode.h)
+(../src/servernode.cpp [38]) (../src/ring/arriveevent.h)
+(../src/ring/finishevent.h [39]) (../src/ring/job.h) (../src/ring/job.cpp
+[40]) (../src/ring/node.h [41]) (../src/ring/node.cpp) (../src/ring/ring.h
+[42]) (../src/ring/ring.cpp [43]) (../src/simulator/event.h)
+(../src/simulator/schedule.h [44]) (../src/simulator/schedule.cpp)
+(../src/simulator/simulator.h) [45] (../src/simulator/simulator.cpp) [46]
+(../matlab/rightchain.m) (../matlab/randswitchchain.m [47])
+(../matlab/rprimechain.m) (../matlab/runvisitedchain.m [48])
+(../matlab/avghops.m) (../matlab/ruavghops.m [49]) (../matlab/ctmcsteadystate.m
+) (../matlab/lumpavghops.m [50]) (../matlab/lump.m) (../matlab/makestates.m
+[51]) [52] (./thesis.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 15242 strings out of 493848
- 223744 string characters out of 1152823
- 876766 words of memory out of 3000000
+ 15244 strings out of 493848
+ 223762 string characters out of 1152823
+ 892766 words of memory out of 3000000
  16423 multiletter control sequences out of 15000+50000
  13863 words of font info for 54 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 41i,15n,58p,829b,2042s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 41i,15n,58p,829b,2040s stack positions out of 5000i,500n,10000p,200000b,50000s
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exi
 st, replaced by a fixed one
 
@@ -839,9 +831,9 @@ ype1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public
 /amsfonts/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
 /cmsy8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb>
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on thesis.pdf (51 pages, 1085964 bytes).
+Output written on thesis.pdf (52 pages, 1086829 bytes).
 PDF statistics:
- 2744 PDF objects out of 2984 (max. 8388607)
- 1795 named destinations out of 2073 (max. 500000)
+ 2749 PDF objects out of 2984 (max. 8388607)
+ 1797 named destinations out of 2073 (max. 500000)
  330 words of extra memory for PDF output out of 10000 (max. 10000000)
 
