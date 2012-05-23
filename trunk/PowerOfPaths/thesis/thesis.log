@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.5.14)  23 MAY 2012 10:58
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.5.14)  23 MAY 2012 11:16
 entering extended mode
  %&-line parsing enabled.
 **thesis.tex
@@ -613,15 +613,15 @@ File: data/randswitchp.pdf Graphic file (type pdf)
 File: data/evenswitchright.pdf Graphic file (type pdf)
 
 <use data/evenswitchright.pdf>
-<data/randunvisitedright.pdf, id=297, 420.57124pt x 407.5225pt>
+<data/randunvisitedright.pdf, id=297, 420.57124pt x 397.485pt>
 File: data/randunvisitedright.pdf Graphic file (type pdf)
 
 <use data/randunvisitedright.pdf> [12 <./data/randswitchp.pdf> <./data/evenswit
-chright.pdf>] <data/primeright.pdf, id=318, 420.57124pt x 407.5225pt>
+chright.pdf>] <data/primeright.pdf, id=318, 420.57124pt x 397.485pt>
 File: data/primeright.pdf Graphic file (type pdf)
 
 <use data/primeright.pdf>
-<data/randprimeright.pdf, id=319, 420.57124pt x 407.5225pt>
+<data/randprimeright.pdf, id=319, 420.57124pt x 397.485pt>
 File: data/randprimeright.pdf Graphic file (type pdf)
 
 <use data/randprimeright.pdf>
@@ -666,17 +666,17 @@ Overfull \hbox (2.22221pt too wide) in paragraph at lines 364--374
 File: data/4randprimerandprime.pdf Graphic file (type pdf)
 
 <use data/4randprimerandprime.pdf> [14 <./data/randunvisited_prime_randprime.pd
-f>] <data/right_5_2.pdf, id=366, 420.57124pt x 407.5225pt>
+f>] [15 <./data/4rightright.pdf> <./data/4switchswitch.pdf> <./data/4randswitch
+randswitch.pdf> <./data/4randunvisitedrandunvisited.pdf> <./data/4randprimerand
+prime.pdf>] <data/right_5_2.pdf, id=396, 420.57124pt x 407.5225pt>
 File: data/right_5_2.pdf Graphic file (type pdf)
 
-<use data/right_5_2.pdf> [15] [16 <./data/4rightright.pdf> <./data/4switchswitc
-h.pdf> <./data/4randswitchrandswitch.pdf> <./data/4randunvisitedrandunvisited.p
-df> <./data/4randprimerandprime.pdf>] [17 <./data/right_5_2.pdf>]
+<use data/right_5_2.pdf> [16] [17 <./data/right_5_2.pdf>]
 Overfull \hbox (72.8061pt too wide) detected at line 452
 \OML/cmm/m/it/10 Q \OT1/cmr/m/n/10 = []
  []
 
-<resources/plotright.pdf, id=414, 614.295pt x 794.97pt>
+<resources/plotright.pdf, id=415, 614.295pt x 794.97pt>
 File: resources/plotright.pdf Graphic file (type pdf)
 
 <use resources/plotright.pdf>
@@ -792,7 +792,7 @@ ype1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public
 /amsfonts/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
 /cmsy8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb>
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on thesis.pdf (52 pages, 1089188 bytes).
+Output written on thesis.pdf (52 pages, 1089159 bytes).
 PDF statistics:
  2747 PDF objects out of 2984 (max. 8388607)
  1795 named destinations out of 2073 (max. 500000)
