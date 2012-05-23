@@ -1,5 +1,6 @@
 \documentclass[10pt,a4paper]{article}
 \usepackage[latin1]{inputenc}
+\usepackage{csquotes}
 \usepackage[english]{babel}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -63,6 +64,9 @@
 \newcommand{\CO}{\textit{coprime offset\xspace}}
 \newcommand{\RCO}{\textit{random coprime offset\xspace}}
 
+\hyphenpenalty=5000
+\tolerance=1000
+
 \author{Wouter ibens \\ University of Antwerp \\ Supervisor: Prof. dr. Benny Van Houdt}
 \title{Masterthesis: \\ The power of two paths in grid computing networks}
 \date{May 28, 2012}
@@ -99,7 +103,7 @@ Finally, I would like to thank my girlfriend Nicky. Although she might have caus
 \newpage
 
 \section*{Introduction}
-This thesis researches the behavior of different forwarding algorithms in a ring-structured distributed system.
+This thesis researches the behavior of different forwarding algorithms in a ring structured distributed system.
 
 Section \ref{secsetup} precisely describes the setup of the system. It specifies the general assumptions made in this document and gives a short overview of the different algorithms we have reviewed. We specify how each algorithms works and their properties are summed up.
 
@@ -296,7 +300,7 @@ Unlike the previous algorithms, this algorithm is not bound to its neighbors whe
 Figure \ref{figrandunvisited} shows the results of this algorithm. The performance benefit is at least $10 \%$ in the range $0.20 - 1.00$, and even up to $30 \%$ under medium load.
 
 \subsubsection*{(Random) Coprime offset}
-Two other algorithms that are not restricted to forwarding to a neighbor are Coprime offset and Random coprime offset. Figure \ref{figprimes} shows the results of both these algorithms. The difference of these algorithms with themselves and the random unvisited algorithms is not clearly visible when comparing both to the \FR algorithm. To put these results in perspective, we included figure \ref{figrandunvisited} where Coprime offset and Random Coprime offset are depicted relative to Random unvisited. Although the difference is very small, it seems the Random unvisited algorithm shows a better performance than the other two. However, Coprime offset and Random Coprime offset require $\lceil log_2 \varphi(N) \rceil$ bits in the job's metadata instead of $N$ for Random unvisited.
+Two other algorithms that are not restricted to forwarding to a neighbor are Coprime offset and Random coprime offset. Figure \ref{figprimes} shows the results of both these algorithms. The difference of these algorithms with themselves and the random unvisited algorithms is not clearly visible when comparing both to the \FR algorithm. To put these results in perspective, we included figure \ref{figrurrp} where Coprime offset and Random Coprime offset are depicted relative to Random unvisited. Although the difference is very small, it seems the Random unvisited algorithm shows a better performance than the other two. However, Coprime offset and Random Coprime offset require $\lceil log_2 \varphi(N) \rceil$ bits in the job's metadata instead of $N$ for Random unvisited.
 
 \begin{figure}[h!tb]
         \begin{subfigure}[b]{0.5\textwidth}
@@ -318,7 +322,7 @@ Two other algorithms that are not restricted to forwarding to a neighbor are Cop
 \centering
 \includegraphics[width=0.8\textwidth]{data/randunvisited_prime_randprime.pdf}
 \caption{Random unvisited (green), Coprime offset (blue), Random Coprime offset (Red)}
-\label{figrandunvisited}
+\label{figrurrp}
 \end{figure}
 
 
@@ -355,7 +359,7 @@ Since the ring size for the second test is 25 instead of 100, the number of forw
                 \caption{Left/right forward}
         \end{subfigure}
 
-        \vspace*{2em}
+        \vspace*{1.6em}
 
         \begin{subfigure}[b]{0.5\textwidth}
                 \centering
@@ -368,7 +372,7 @@ Since the ring size for the second test is 25 instead of 100, the number of forw
                 \caption{Random unvisited}
         \end{subfigure}
 
-        \vspace*{2em}
+        \vspace*{1.6em}
 
         \begin{subfigure}[b]{0.5\textwidth}
                 \centering
@@ -383,7 +387,7 @@ Figure \ref{figcpus} shows the performance of 4 CPUs versus 1 CPU for different 
 Since we assume each algorithm is influenced the same way, we will investigate one of them in depth. We will try to transform the results of an algorithm with ring size $N$ and $1$ CPU per server into the results of the same algorithm with ring size $N/c$ and $c$ CPUs per server. Every other parameter should be unchanged.
 
 Let $d$ be the distribution of the number of forwards, stored as a row vector. We will build a transformation vector $M$ in the form $[ \lfloor 0/c \rfloor,  \lfloor 1/c \rfloor, \ldots, \lfloor (N-1)/c \rfloor]'$. This vector represents the number of times a job would be forwarded if there would be $c$ CPUs per server. $d*M$ equals the average number of forwards when using such a system. To ignore the dropped jobs, the results must be weighted for only the completed jobs.
-In our example, we will transform the results of the \FR algorithm using ring size $N=10$ and 1 CPU into the results of a ring with size $N=5$ and $c=2$ CPUs per server, see table \ref{tabcpus} for a worked out example and figure \ref{figcpusmatch} for a comparison of the transformation and a simulation result.
+In our example, we will transform the results of the \FR algorithm using ring size $N=10$ and 1 CPU into the results of a ring with size $N=5$ and $c=2$ CPUs per server, see table \ref{tabdistr} for a worked out example and figure \ref{figcpusmatch} for a comparison of the transformation and a simulation result.
 
 
 \begin{table}
@@ -405,7 +409,7 @@ Weighted total & \multicolumn{3}{|c|}{$0.3944/0.9816 = 0.4018 $} \\ \hline
 Simulation result & \multicolumn{3}{|c|}{$0.4171$} \\ \hline
 \end{tabular}
 \caption{Comparison when load=0.5}
-\label{tabcpus}
+\label{tabdistr}
 \end{table}
 
 \begin{figure}[h!tb]
@@ -695,26 +699,26 @@ N	& Random unvisited	& Random Coprime offset \\ \hline
 \section{Conclusion}
 \label{secconclusion}
 
-We have simulated all our algorithms and validated the results of some. The ideal algorithm is depends on the specific requirements of the distributed system. However, we can say some algorithms are not ideal for any situation. One should also note that in some configurations, different algorithms can yield the same results. In those cases, only memory requirements or the complexity to implement the algorithms should be decisive.
+We have simulated all our algorithms and validated the results of some of them. The ideal algorithm is depends on the specific requirements of the distributed system. However, it is safe to say some algorithms are not ideal for any situation. One should also note that in some configurations, different algorithms can yield the same results. In those cases, only memory requirements or the complexity to implement the algorithms should be decisive.
 
 \subsubsection*{Forward to neighbors}
 When nodes are only directly connected to their neighbors, the choice depend on the memory requirements. When at least 1 bit can be saved in both the job's metadata as the node's state, \LRF is an ideal choice. This algorithm provides up to 4\% better result than \FR under medium load ($N=100$).
 
-When no memory is available, the \FR algorithm is the only possible choice while maintaining sufficient results. Furthermore, it is the easiest algorithm to implement.
+When no memory is available, the \FR algorithm is the only possible choice while maintaining sufficient results. Additionally, it is the easiest algorithm to implement.
 
 Both these algorithms allow nodes to come and go. The random left/right and Position dependent forwarding techniques perform worse than \FR while having more requirements, therefore they should not be chosen.
 
 \subsubsection*{Forward anywhere}
-If each node can reach each other node directly, forward anywhere algorithms improve the results significantly. The best results can be achieved using the Random unvisited algorithm. This algorithm performs slightly better than Coprime offset and Random Coprime offset, but at a higher cost: the Random unvisited algorithm requires $N-1$ bits in the job's metadata.
+If each node can reach each other node directly, the forward anywhere algorithms improve the results significantly. The best results can be achieved using the Random unvisited algorithm. This algorithm performs slightly better than coprime offset and random Coprime offset, but at a higher cost: the random unvisited algorithm requires $N-1$ bits in the job's metadata.
 
-The Coprime offset and Random Coprime offset algorithms require less memory but with worse performance. However, when the ring size is prime, those results are only slightly less than Random unvisited. The memory required in the job's metadata is lowered to $\lceil log_2 \varphi(N) \rceil$ bits ($\lceil log_2 (N-1) \rceil$ bits when $N$ is prime). The Coprime offset algorithm yields about the same results as the random variant. In addition, it needs to save $\lceil log_2 \varphi(N) \rceil$ bits in the state of each node. Random coprime offset and random unvisited seem two very good candidates, it depends whether the small performance benefit is worth the memory and implementation cost.
+The Coprime offset and Random Coprime offset algorithms require less memory but with worse performance. However, when the ring size is prime, its results are only slightly less than those of random unvisited. The memory required in the job's metadata is lowered to $\lceil log_2 \varphi(N) \rceil$ bits ($\lceil log_2 (N-1) \rceil$ bits when $N$ is prime). The coprime offset algorithm yields about the same results as the random variant. In addition, it needs to save $\lceil log_2 \varphi(N) \rceil$ bits in the state of each node. Random coprime offset and random unvisited seem two very good candidates, it depends whether the small performance benefit is worth the memory and implementation cost.
 
-\subsubsection{Other findings}
+\subsubsection*{Other findings}
 The results of using multiple CPUs per server can be approximated using the the results of 1 CPU per server and a ring size $N_1 = N_c \cdot c$. This approximation is an upper bound to the real outcome since the derivation ignores the fact that the choice for a node is no longer a choice for a CPU, it is a choice for a group of $c$ CPUs. 
 
 For the \RLRF{$p$}, we have found out its results are worst for $p=0.5$. We did not come up with an explanation why this algorithm is worse than \FR. This might be a start for further research.
 
-We have also found a way to model some of these algorithms into Markov Chains. This made it possible to compute the actual result of a simulation. The drawback of our model is the limited ring size. We optimized it by lumping states and using sparse matrices, but because of the non-polynomial nature of the matrix size, these optimizations allow us to increase $N$ only by 2 or 3.
+We have also found a way to model some of these algorithms into Markov Chains. This allowed us to compute the actual result of a simulation. The drawback of our model is the limited ring size. We optimized it by lumping states and using sparse matrices, but because of the non-polynomial nature of the matrix size, these optimizations allow us to increase $N$ only by 2 or 3.
 
 Another finding is the equivalency between multiple algorithms, under certain conditions some algorithms model the exact same problem.
 

@@ -30,8 +30,6 @@
 \defcounter {refsection}{0}
 \contentsline {section}{\numberline {4}Conclusion}{26}{section.4}
 \defcounter {refsection}{0}
-\contentsline {subsubsection}{\numberline {4.0.1}Other findings}{27}{subsubsection.4.0.1}
+\contentsline {section}{\numberline {A}Simulator source code}{29}{appendix.A}
 \defcounter {refsection}{0}
-\contentsline {section}{\numberline {A}Simulator source code}{28}{appendix.A}
-\defcounter {refsection}{0}
-\contentsline {section}{\numberline {B}MATLAB Numerical evaluation code}{46}{appendix.B}
+\contentsline {section}{\numberline {B}MATLAB Numerical evaluation code}{47}{appendix.B}
