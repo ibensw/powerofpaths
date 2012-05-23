@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.5.14)  21 MAY 2012 14:49
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.5.14)  23 MAY 2012 10:21
 entering extended mode
  %&-line parsing enabled.
 **thesis.tex
@@ -210,6 +210,9 @@ File: listings.cfg 2007/02/22 1.4 listings configuration
 ))
 Package: listings 2007/02/22 1.4 (Carsten Heinz)
 
+(/usr/share/texmf-texlive/tex/latex/tools/xspace.sty
+Package: xspace 2006/05/08 v1.12 Space after command names (DPC,MH)
+)
 (/usr/share/texmf/tex/latex/biblatex/biblatex.sty
 Package: biblatex 2010/03/19 v0.9a programmable bibliographies
 
@@ -479,20 +482,20 @@ LaTeX Warning: Label `tabcpus' multiply defined.
 )
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 60.
-LaTeX Font Info:    ... okay on input line 60.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 69.
+LaTeX Font Info:    ... okay on input line 69.
  (/usr/share/texmf/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count191
@@ -516,9 +519,9 @@ Package caption Info: End \AtBeginDocument code.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'thesis.bbl' found.
  (./thesis.bbl)
-Package biblatex Info: Reference section=0 on input line 60.
-Package biblatex Info: Reference segment=0 on input line 60.
-Package hyperref Info: Link coloring OFF on input line 60.
+Package biblatex Info: Reference section=0 on input line 69.
+Package biblatex Info: Reference segment=0 on input line 69.
+Package hyperref Info: Link coloring OFF on input line 69.
  (/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
 Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
 
@@ -527,24 +530,24 @@ Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
 )
 \c@section@level=\count197
 )
-LaTeX Info: Redefining \ref on input line 60.
-LaTeX Info: Redefining \pageref on input line 60.
+LaTeX Info: Redefining \ref on input line 69.
+LaTeX Info: Redefining \pageref on input line 69.
  (./thesis.out)
 (./thesis.out)
 \@outlinefile=\write4
 \openout4 = `thesis.out'.
 
 \AtBeginShipoutBox=\box34
-LaTeX Font Info:    Try loading font information for U+msa on input line 63.
+LaTeX Font Info:    Try loading font information for U+msa on input line 72.
  (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 63.
+LaTeX Font Info:    Try loading font information for U+msb on input line 72.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 )
-<resources/ua.pdf, id=67, 68.55383pt x 55.31607pt>
+<resources/ua.pdf, id=71, 68.55383pt x 55.31607pt>
 File: resources/ua.pdf Graphic file (type pdf)
  <use resources/ua.pdf>
 [1
@@ -555,172 +558,172 @@ File: resources/ua.pdf Graphic file (type pdf)
 \openout5 = `thesis.toc'.
 
  [4]
-<resources/drawing.pdf, id=115, 515.38403pt x 599.29929pt>
+<resources/drawing.pdf, id=120, 515.38403pt x 599.29929pt>
 File: resources/drawing.pdf Graphic file (type pdf)
 
 <use resources/drawing.pdf> [5] [6 <./resources/drawing.pdf>] [7]
-Underfull \hbox (badness 10000) in paragraph at lines 173--173
+Underfull \hbox (badness 10000) in paragraph at lines 182--182
 []\OT1/cmr/m/n/10 Size
  []
 
 
-Overfull \hbox (74.21695pt too wide) in paragraph at lines 171--182
+Overfull \hbox (74.21695pt too wide) in paragraph at lines 180--191
 []  [] 
  []
 
 [8] (/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 214.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 223.
 
 
 (/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 214.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 223.
  [9]
-<data/right.pdf, id=257, 415.5525pt x 407.5225pt>
+<data/right.pdf, id=263, 415.5525pt x 407.5225pt>
 File: data/right.pdf Graphic file (type pdf)
  <use data/right.pdf>
-<data/switchright.pdf, id=259, 432.61626pt x 407.5225pt>
+<data/switchright.pdf, id=265, 432.61626pt x 407.5225pt>
 File: data/switchright.pdf Graphic file (type pdf)
 
 <use data/switchright.pdf>
-<data/randswitchright.pdf, id=260, 444.66125pt x 407.5225pt>
+<data/randswitchright.pdf, id=266, 444.66125pt x 407.5225pt>
 File: data/randswitchright.pdf Graphic file (type pdf)
 
 <use data/randswitchright.pdf> [10 <./data/right.pdf>]
-<data/randswitchp.pdf, id=276, 432.61626pt x 407.5225pt>
+<data/randswitchp.pdf, id=282, 432.61626pt x 407.5225pt>
 File: data/randswitchp.pdf Graphic file (type pdf)
 
 <use data/randswitchp.pdf> [11 <./data/switchright.pdf> <./data/randswitchright
-.pdf>] <data/evenswitchright.pdf, id=295, 444.66125pt x 407.5225pt>
+.pdf>] <data/evenswitchright.pdf, id=301, 444.66125pt x 407.5225pt>
 File: data/evenswitchright.pdf Graphic file (type pdf)
 
 <use data/evenswitchright.pdf>
-<data/randunvisitedright.pdf, id=296, 420.57124pt x 407.5225pt>
+<data/randunvisitedright.pdf, id=302, 420.57124pt x 407.5225pt>
 File: data/randunvisitedright.pdf Graphic file (type pdf)
 
 <use data/randunvisitedright.pdf> [12 <./data/randswitchp.pdf> <./data/evenswit
-chright.pdf>] <data/primeright.pdf, id=316, 420.57124pt x 407.5225pt>
+chright.pdf>] <data/primeright.pdf, id=323, 420.57124pt x 407.5225pt>
 File: data/primeright.pdf Graphic file (type pdf)
 
 <use data/primeright.pdf>
-<data/randprimeright.pdf, id=317, 420.57124pt x 407.5225pt>
+<data/randprimeright.pdf, id=324, 420.57124pt x 407.5225pt>
 File: data/randprimeright.pdf Graphic file (type pdf)
 
 <use data/randprimeright.pdf>
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 293--304
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 302--313
 [][] [] 
  []
 
-<data/randunvisited_prime_randprime.pdf, id=318, 444.66125pt x 407.5225pt>
+<data/randunvisited_prime_randprime.pdf, id=325, 444.66125pt x 407.5225pt>
 File: data/randunvisited_prime_randprime.pdf Graphic file (type pdf)
 
-<use data/randunvisited_prime_randprime.pdf>
-Overfull \hbox (36.00526pt too wide) in paragraph at lines 324--331
+<use data/randunvisited_prime_randprime.pdf> [13 <./data/randunvisitedright.pdf
+> <./data/primeright.pdf> <./data/randprimeright.pdf>]
+Overfull \hbox (36.00526pt too wide) in paragraph at lines 333--340
  [][] 
  []
 
-
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-<data/4rightright.pdf, id=321, 420.57124pt x 397.485pt>
+<data/4rightright.pdf, id=352, 420.57124pt x 397.485pt>
 File: data/4rightright.pdf Graphic file (type pdf)
 
 <use data/4rightright.pdf>
-<data/4switchswitch.pdf, id=322, 420.57124pt x 397.485pt>
+<data/4switchswitch.pdf, id=353, 420.57124pt x 397.485pt>
 File: data/4switchswitch.pdf Graphic file (type pdf)
 
 <use data/4switchswitch.pdf>
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 338--348
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 347--357
 [][] [] 
  []
 
-<data/4randswitchrandswitch.pdf, id=323, 420.57124pt x 397.485pt>
+<data/4randswitchrandswitch.pdf, id=354, 420.57124pt x 397.485pt>
 File: data/4randswitchrandswitch.pdf Graphic file (type pdf)
 
 <use data/4randswitchrandswitch.pdf>
-<data/4randunvisitedrandunvisited.pdf, id=324, 420.57124pt x 397.485pt>
+<data/4randunvisitedrandunvisited.pdf, id=355, 420.57124pt x 397.485pt>
 File: data/4randunvisitedrandunvisited.pdf Graphic file (type pdf)
 
 <use data/4randunvisitedrandunvisited.pdf>
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 349--359
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 360--370
 [][] [] 
  []
 
-<data/4randprimerandprime.pdf, id=325, 420.57124pt x 397.485pt>
+<data/4randprimerandprime.pdf, id=356, 420.57124pt x 397.485pt>
 File: data/4randprimerandprime.pdf Graphic file (type pdf)
 
-<use data/4randprimerandprime.pdf> [13 <./data/randunvisitedright.pdf>]
-[14 <./data/primeright.pdf> <./data/randprimeright.pdf> <./data/randunvisited_p
-rime_randprime.pdf>] [15 <./data/4rightright.pdf> <./data/4switchswitch.pdf> <.
-/data/4randswitchrandswitch.pdf> <./data/4randunvisitedrandunvisited.pdf> <./da
-ta/4randprimerandprime.pdf>]
-<data/right_5_2.pdf, id=395, 420.57124pt x 407.5225pt>
+<use data/4randprimerandprime.pdf>
+
+LaTeX Warning: Float too large for page by 6.0917pt on input line 379.
+
+[14 <./data/randunvisited_prime_randprime.pdf>]
+<data/right_5_2.pdf, id=372, 420.57124pt x 407.5225pt>
 File: data/right_5_2.pdf Graphic file (type pdf)
 
 <use data/right_5_2.pdf>
-Overfull \hbox (9.445pt too wide) in paragraph at lines 410--412
+Overfull \hbox (9.445pt too wide) in paragraph at lines 423--425
 \OT1/cmr/m/n/10 To val-i-date the re-sults ob-tained in the pre-vi-ous sec-tion
 , we mod-eled the scheduling-
  []
 
-[16] [17 <./data/right_5_2.pdf>]
-Overfull \hbox (72.8061pt too wide) detected at line 435
+[15] [16 <./data/4rightright.pdf> <./data/4switchswitch.pdf> <./data/4randswitc
+hrandswitch.pdf> <./data/4randunvisitedrandunvisited.pdf> <./data/4randprimeran
+dprime.pdf>] [17 <./data/right_5_2.pdf>]
+Overfull \hbox (72.8061pt too wide) detected at line 448
 \OML/cmm/m/it/10 Q \OT1/cmr/m/n/10 = []
  []
 
-<resources/plotright.pdf, id=413, 614.295pt x 794.97pt>
+<resources/plotright.pdf, id=419, 614.295pt x 794.97pt>
 File: resources/plotright.pdf Graphic file (type pdf)
 
 <use resources/plotright.pdf>
-Overfull \hbox (72.8061pt too wide) detected at line 463
+Overfull \hbox (72.8061pt too wide) detected at line 476
 \OML/cmm/m/it/10 Q \OT1/cmr/m/n/10 = []
  []
 
 [18 <./resources/plotright.pdf>]
-<resources/plotrandlr.pdf, id=426, 614.295pt x 794.97pt>
+<resources/plotrandlr.pdf, id=432, 614.295pt x 794.97pt>
 File: resources/plotrandlr.pdf Graphic file (type pdf)
 
 <use resources/plotrandlr.pdf>
-<resources/plotrandlrp.pdf, id=431, 614.295pt x 794.97pt>
+<resources/plotrandlrp.pdf, id=437, 614.295pt x 794.97pt>
 File: resources/plotrandlrp.pdf Graphic file (type pdf)
 
 <use resources/plotrandlrp.pdf> [19 <./resources/plotrandlr.pdf>]
-<resources/plotrandcoprime.pdf, id=447, 614.295pt x 794.97pt>
+<resources/plotrandcoprime.pdf, id=453, 614.295pt x 794.97pt>
 File: resources/plotrandcoprime.pdf Graphic file (type pdf)
 
 <use resources/plotrandcoprime.pdf>
-<resources/plotrandcoprime11.pdf, id=449, 614.295pt x 794.97pt>
+<resources/plotrandcoprime11.pdf, id=455, 614.295pt x 794.97pt>
 File: resources/plotrandcoprime11.pdf Graphic file (type pdf)
 
 <use resources/plotrandcoprime11.pdf>
-<resources/plotrandcoprime12.pdf, id=451, 614.295pt x 794.97pt>
+<resources/plotrandcoprime12.pdf, id=457, 614.295pt x 794.97pt>
 File: resources/plotrandcoprime12.pdf Graphic file (type pdf)
 
 <use resources/plotrandcoprime12.pdf>
-<resources/plotrandunvisitedrandprime.pdf, id=455, 614.295pt x 794.97pt>
+<resources/plotrandunvisitedrandprime.pdf, id=461, 614.295pt x 794.97pt>
 File: resources/plotrandunvisitedrandprime.pdf Graphic file (type pdf)
 
 <use resources/plotrandunvisitedrandprime.pdf> [20 <./resources/plotrandlrp.pdf
 >] [21 <./resources/plotrandcoprime.pdf> <./resources/plotrandcoprime11.pdf> <.
 /resources/plotrandcoprime12.pdf>] [22 <./resources/plotrandunvisitedrandprime.
-pdf>] <resources/plotlumping.pdf, id=495, 614.295pt x 794.97pt>
+pdf>] <resources/plotlumping.pdf, id=501, 614.295pt x 794.97pt>
 File: resources/plotlumping.pdf Graphic file (type pdf)
 
 <use resources/plotlumping.pdf>
-<resources/plotlumpingnnz.pdf, id=497, 614.295pt x 794.97pt>
+<resources/plotlumpingnnz.pdf, id=503, 614.295pt x 794.97pt>
 File: resources/plotlumpingnnz.pdf Graphic file (type pdf)
 
 <use resources/plotlumpingnnz.pdf> [23 <./resources/plotlumping.pdf>] [24 <./re
 sources/plotlumpingnnz.pdf>]
-Overfull \hbox (69.01639pt too wide) detected at line 639
+Overfull \hbox (69.01639pt too wide) detected at line 652
 \OML/cmm/m/it/10 Q[] \OT1/cmr/m/n/10 = []
  []
 
-<resources/plotload10rurpo.pdf, id=523, 614.295pt x 794.97pt>
+<resources/plotload10rurpo.pdf, id=529, 614.295pt x 794.97pt>
 File: resources/plotload10rurpo.pdf Graphic file (type pdf)
 
 <use resources/plotload10rurpo.pdf>
@@ -728,12 +731,15 @@ File: resources/plotload10rurpo.pdf Graphic file (type pdf)
 LaTeX Warning: `!h' float specifier changed to `!ht'.
 
 [25] [26 <./resources/plotload10rurpo.pdf>]
+
+Package hyperref Warning: Difference (2) between bookmark levels is greater 
+(hyperref)                than one, level fixed on input line 712.
+
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 700.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 721.
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 700.
- [27]
-(/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 721.
+[27] (/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
 (/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
@@ -768,13 +774,13 @@ LaTeX Warning: There were multiply-defined labels.
 
  ) 
 Here is how much of TeX's memory you used:
- 15240 strings out of 493848
- 223707 string characters out of 1152823
- 892766 words of memory out of 3000000
- 16423 multiletter control sequences out of 15000+50000
+ 15275 strings out of 493848
+ 224316 string characters out of 1152823
+ 893315 words of memory out of 3000000
+ 16453 multiletter control sequences out of 15000+50000
  13863 words of font info for 54 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 41i,15n,58p,829b,2040s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 41i,15n,58p,918b,2040s stack positions out of 5000i,500n,10000p,200000b,50000s
 pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exi
 st, replaced by a fixed one
 
@@ -796,9 +802,9 @@ ype1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public
 /amsfonts/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
 /cmsy8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb>
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on thesis.pdf (51 pages, 1084274 bytes).
+Output written on thesis.pdf (51 pages, 1089328 bytes).
 PDF statistics:
- 2741 PDF objects out of 2984 (max. 8388607)
- 1793 named destinations out of 2073 (max. 500000)
- 330 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2746 PDF objects out of 2984 (max. 8388607)
+ 1794 named destinations out of 2073 (max. 500000)
+ 338 words of extra memory for PDF output out of 10000 (max. 10000000)
 
