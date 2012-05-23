@@ -18,7 +18,7 @@
 \defcounter {refsection}{0}
 \contentsline {subsection}{\numberline {2.2}Results}{10}{subsection.2.2}
 \defcounter {refsection}{0}
-\contentsline {subsection}{\numberline {2.3}Multiple execution units}{13}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.3}Multiple execution units}{14}{subsection.2.3}
 \defcounter {refsection}{0}
 \contentsline {section}{\numberline {3}Numerical Validation}{17}{section.3}
 \defcounter {refsection}{0}
@@ -29,6 +29,8 @@
 \contentsline {subsection}{\numberline {3.3}Equivalent algorithms}{23}{subsection.3.3}
 \defcounter {refsection}{0}
 \contentsline {section}{\numberline {4}Conclusion}{26}{section.4}
+\defcounter {refsection}{0}
+\contentsline {subsubsection}{\numberline {4.0.1}Other findings}{27}{subsubsection.4.0.1}
 \defcounter {refsection}{0}
 \contentsline {section}{\numberline {A}Simulator source code}{28}{appendix.A}
 \defcounter {refsection}{0}
