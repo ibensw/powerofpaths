@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.5.14)  23 MAY 2012 11:16
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2012.5.14)  23 MAY 2012 13:19
 entering extended mode
  %&-line parsing enabled.
 **thesis.tex
@@ -481,8 +481,8 @@ Package color Info: Driver file: pdftex.def on input line 130.
 (/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
-Package csquotes Info: Adjusting default style on input line 73.
-Package csquotes Info: Redefining alias 'default' -> 'english' on input line 73
+Package csquotes Info: Adjusting default style on input line 65.
+Package csquotes Info: Redefining alias 'default' -> 'english' on input line 65
 .
 Package biblatex Info: Trying to load language 'english'...
 Package biblatex Info: ... file 'english.lbx' found.
@@ -492,20 +492,20 @@ File: english.lbx 2010/03/19 v0.9a biblatex localization
 ) (./thesis.aux)
 \openout1 = `thesis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 73.
-LaTeX Font Info:    ... okay on input line 73.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 73.
-LaTeX Font Info:    ... okay on input line 73.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 73.
-LaTeX Font Info:    ... okay on input line 73.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 73.
-LaTeX Font Info:    ... okay on input line 73.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 73.
-LaTeX Font Info:    ... okay on input line 73.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 73.
-LaTeX Font Info:    ... okay on input line 73.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 73.
-LaTeX Font Info:    ... okay on input line 73.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 65.
+LaTeX Font Info:    ... okay on input line 65.
 
 (/usr/share/texmf/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -530,9 +530,9 @@ Package caption Info: End \AtBeginDocument code.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'thesis.bbl' found.
  (./thesis.bbl)
-Package biblatex Info: Reference section=0 on input line 73.
-Package biblatex Info: Reference segment=0 on input line 73.
-Package hyperref Info: Link coloring OFF on input line 73.
+Package biblatex Info: Reference section=0 on input line 65.
+Package biblatex Info: Reference segment=0 on input line 65.
+Package hyperref Info: Link coloring OFF on input line 65.
  (/usr/share/texmf-texlive/tex/latex/hyperref/nameref.sty
 Package: nameref 2007/05/29 v2.31 Cross-referencing by name of section
 
@@ -541,19 +541,19 @@ Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
 )
 \c@section@level=\count202
 )
-LaTeX Info: Redefining \ref on input line 73.
-LaTeX Info: Redefining \pageref on input line 73.
+LaTeX Info: Redefining \ref on input line 65.
+LaTeX Info: Redefining \pageref on input line 65.
  (./thesis.out)
 (./thesis.out)
 \@outlinefile=\write4
 \openout4 = `thesis.out'.
 
 \AtBeginShipoutBox=\box34
-LaTeX Font Info:    Try loading font information for U+msa on input line 76.
+LaTeX Font Info:    Try loading font information for U+msa on input line 68.
  (/usr/share/texmf-texlive/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 76.
+LaTeX Font Info:    Try loading font information for U+msb on input line 68.
 
 (/usr/share/texmf-texlive/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
@@ -573,166 +573,166 @@ File: resources/ua.pdf Graphic file (type pdf)
 File: resources/drawing.pdf Graphic file (type pdf)
 
 <use resources/drawing.pdf> [5] [6 <./resources/drawing.pdf>] [7]
-Underfull \hbox (badness 10000) in paragraph at lines 186--186
+Underfull \hbox (badness 10000) in paragraph at lines 180--180
 []\OT1/cmr/m/n/10 Size
  []
 
 
-Overfull \hbox (74.21695pt too wide) in paragraph at lines 184--195
+Overfull \hbox (74.21695pt too wide) in paragraph at lines 178--189
 []  [] 
  []
 
 [8] (/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 227.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 221.
 
 
 (/usr/share/texmf-texlive/tex/latex/base/omscmr.fd
 File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <8> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 227.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 221.
  [9]
-<data/right.pdf, id=258, 415.5525pt x 407.5225pt>
+<data/right.pdf, id=257, 415.5525pt x 407.5225pt>
 File: data/right.pdf Graphic file (type pdf)
  <use data/right.pdf>
-<data/switchright.pdf, id=260, 432.61626pt x 407.5225pt>
+<data/switchright.pdf, id=259, 432.61626pt x 407.5225pt>
 File: data/switchright.pdf Graphic file (type pdf)
 
 <use data/switchright.pdf>
-<data/randswitchright.pdf, id=261, 444.66125pt x 407.5225pt>
+<data/randswitchright.pdf, id=260, 444.66125pt x 407.5225pt>
 File: data/randswitchright.pdf Graphic file (type pdf)
 
 <use data/randswitchright.pdf> [10 <./data/right.pdf>]
-<data/randswitchp.pdf, id=277, 432.61626pt x 407.5225pt>
+<data/randswitchp.pdf, id=276, 432.61626pt x 407.5225pt>
 File: data/randswitchp.pdf Graphic file (type pdf)
 
 <use data/randswitchp.pdf> [11 <./data/switchright.pdf> <./data/randswitchright
-.pdf>] <data/evenswitchright.pdf, id=296, 444.66125pt x 407.5225pt>
+.pdf>] <data/evenswitchright.pdf, id=295, 444.66125pt x 407.5225pt>
 File: data/evenswitchright.pdf Graphic file (type pdf)
 
 <use data/evenswitchright.pdf>
-<data/randunvisitedright.pdf, id=297, 420.57124pt x 397.485pt>
+<data/randunvisitedright.pdf, id=296, 420.57124pt x 397.485pt>
 File: data/randunvisitedright.pdf Graphic file (type pdf)
 
 <use data/randunvisitedright.pdf> [12 <./data/randswitchp.pdf> <./data/evenswit
-chright.pdf>] <data/primeright.pdf, id=318, 420.57124pt x 397.485pt>
+chright.pdf>] <data/primeright.pdf, id=317, 420.57124pt x 397.485pt>
 File: data/primeright.pdf Graphic file (type pdf)
 
 <use data/primeright.pdf>
-<data/randprimeright.pdf, id=319, 420.57124pt x 397.485pt>
+<data/randprimeright.pdf, id=318, 420.57124pt x 397.485pt>
 File: data/randprimeright.pdf Graphic file (type pdf)
 
 <use data/randprimeright.pdf>
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 306--317
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 300--311
 [][] [] 
  []
 
-<data/randunvisited_prime_randprime.pdf, id=320, 444.66125pt x 407.5225pt>
+<data/randunvisited_prime_randprime.pdf, id=319, 444.66125pt x 407.5225pt>
 File: data/randunvisited_prime_randprime.pdf Graphic file (type pdf)
 
 <use data/randunvisited_prime_randprime.pdf> [13 <./data/randunvisitedright.pdf
 > <./data/primeright.pdf> <./data/randprimeright.pdf>]
-Overfull \hbox (36.00526pt too wide) in paragraph at lines 337--344
+Overfull \hbox (36.00526pt too wide) in paragraph at lines 331--338
  [][] 
  []
 
-<data/4rightright.pdf, id=347, 420.57124pt x 397.485pt>
+<data/4rightright.pdf, id=346, 420.57124pt x 397.485pt>
 File: data/4rightright.pdf Graphic file (type pdf)
 
 <use data/4rightright.pdf>
-<data/4switchswitch.pdf, id=348, 420.57124pt x 397.485pt>
+<data/4switchswitch.pdf, id=347, 420.57124pt x 397.485pt>
 File: data/4switchswitch.pdf Graphic file (type pdf)
 
 <use data/4switchswitch.pdf>
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 351--361
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 345--355
 [][] [] 
  []
 
-<data/4randswitchrandswitch.pdf, id=349, 420.57124pt x 397.485pt>
+<data/4randswitchrandswitch.pdf, id=348, 420.57124pt x 397.485pt>
 File: data/4randswitchrandswitch.pdf Graphic file (type pdf)
 
 <use data/4randswitchrandswitch.pdf>
-<data/4randunvisitedrandunvisited.pdf, id=350, 420.57124pt x 397.485pt>
+<data/4randunvisitedrandunvisited.pdf, id=349, 420.57124pt x 397.485pt>
 File: data/4randunvisitedrandunvisited.pdf Graphic file (type pdf)
 
 <use data/4randunvisitedrandunvisited.pdf>
-Overfull \hbox (2.22221pt too wide) in paragraph at lines 364--374
+Overfull \hbox (2.22221pt too wide) in paragraph at lines 358--368
 [][] [] 
  []
 
-<data/4randprimerandprime.pdf, id=351, 420.57124pt x 397.485pt>
+<data/4randprimerandprime.pdf, id=350, 420.57124pt x 397.485pt>
 File: data/4randprimerandprime.pdf Graphic file (type pdf)
 
 <use data/4randprimerandprime.pdf> [14 <./data/randunvisited_prime_randprime.pd
 f>] [15 <./data/4rightright.pdf> <./data/4switchswitch.pdf> <./data/4randswitch
 randswitch.pdf> <./data/4randunvisitedrandunvisited.pdf> <./data/4randprimerand
-prime.pdf>] <data/right_5_2.pdf, id=396, 420.57124pt x 407.5225pt>
+prime.pdf>] <data/right_5_2.pdf, id=395, 420.57124pt x 407.5225pt>
 File: data/right_5_2.pdf Graphic file (type pdf)
 
 <use data/right_5_2.pdf> [16] [17 <./data/right_5_2.pdf>]
-Overfull \hbox (72.8061pt too wide) detected at line 452
+Overfull \hbox (72.8061pt too wide) detected at line 446
 \OML/cmm/m/it/10 Q \OT1/cmr/m/n/10 = []
  []
 
-<resources/plotright.pdf, id=415, 614.295pt x 794.97pt>
+<resources/plotright.pdf, id=414, 614.295pt x 794.97pt>
 File: resources/plotright.pdf Graphic file (type pdf)
 
 <use resources/plotright.pdf>
-Overfull \hbox (72.8061pt too wide) detected at line 480
+Overfull \hbox (72.8061pt too wide) detected at line 474
 \OML/cmm/m/it/10 Q \OT1/cmr/m/n/10 = []
  []
 
 [18 <./resources/plotright.pdf>]
-<resources/plotrandlr.pdf, id=427, 614.295pt x 794.97pt>
+<resources/plotrandlr.pdf, id=426, 614.295pt x 794.97pt>
 File: resources/plotrandlr.pdf Graphic file (type pdf)
 
 <use resources/plotrandlr.pdf>
-<resources/plotrandlrp.pdf, id=432, 614.295pt x 794.97pt>
+<resources/plotrandlrp.pdf, id=431, 614.295pt x 794.97pt>
 File: resources/plotrandlrp.pdf Graphic file (type pdf)
 
 <use resources/plotrandlrp.pdf> [19 <./resources/plotrandlr.pdf>]
-<resources/plotrandcoprime.pdf, id=448, 614.295pt x 794.97pt>
+<resources/plotrandcoprime.pdf, id=447, 614.295pt x 794.97pt>
 File: resources/plotrandcoprime.pdf Graphic file (type pdf)
 
 <use resources/plotrandcoprime.pdf>
-<resources/plotrandcoprime11.pdf, id=450, 614.295pt x 794.97pt>
+<resources/plotrandcoprime11.pdf, id=449, 614.295pt x 794.97pt>
 File: resources/plotrandcoprime11.pdf Graphic file (type pdf)
 
 <use resources/plotrandcoprime11.pdf>
-<resources/plotrandcoprime12.pdf, id=452, 614.295pt x 794.97pt>
+<resources/plotrandcoprime12.pdf, id=451, 614.295pt x 794.97pt>
 File: resources/plotrandcoprime12.pdf Graphic file (type pdf)
 
 <use resources/plotrandcoprime12.pdf>
-<resources/plotrandunvisitedrandprime.pdf, id=456, 614.295pt x 794.97pt>
+<resources/plotrandunvisitedrandprime.pdf, id=455, 614.295pt x 794.97pt>
 File: resources/plotrandunvisitedrandprime.pdf Graphic file (type pdf)
 
 <use resources/plotrandunvisitedrandprime.pdf> [20 <./resources/plotrandlrp.pdf
 >] [21 <./resources/plotrandcoprime.pdf> <./resources/plotrandcoprime11.pdf> <.
 /resources/plotrandcoprime12.pdf>] [22 <./resources/plotrandunvisitedrandprime.
-pdf>] <resources/plotlumping.pdf, id=496, 614.295pt x 794.97pt>
+pdf>] <resources/plotlumping.pdf, id=495, 614.295pt x 794.97pt>
 File: resources/plotlumping.pdf Graphic file (type pdf)
 
 <use resources/plotlumping.pdf>
-<resources/plotlumpingnnz.pdf, id=498, 614.295pt x 794.97pt>
+<resources/plotlumpingnnz.pdf, id=497, 614.295pt x 794.97pt>
 File: resources/plotlumpingnnz.pdf Graphic file (type pdf)
 
 <use resources/plotlumpingnnz.pdf> [23 <./resources/plotlumping.pdf>] [24 <./re
 sources/plotlumpingnnz.pdf>]
-Overfull \hbox (69.01639pt too wide) detected at line 656
+Overfull \hbox (69.01639pt too wide) detected at line 650
 \OML/cmm/m/it/10 Q[] \OT1/cmr/m/n/10 = []
  []
 
-<resources/plotload10rurpo.pdf, id=524, 614.295pt x 794.97pt>
+<resources/plotload10rurpo.pdf, id=523, 614.295pt x 794.97pt>
 File: resources/plotload10rurpo.pdf Graphic file (type pdf)
 
 <use resources/plotload10rurpo.pdf> [25] [26 <./resources/plotload10rurpo.pdf>]
 [27]
 LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 725.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 719.
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 725.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 719.
  [28] (/usr/share/texmf-texlive/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2004/09/05 1.3 listings language file
 )
@@ -764,13 +764,13 @@ LaTeX Font Info:    Font shape `OML/cmr/m/n' in size <8> not available
 ) (../matlab/lumpavghops.m [50]) (../matlab/lump.m) (../matlab/makestates.m
 [51]) [52] (./thesis.aux) ) 
 Here is how much of TeX's memory you used:
- 15728 strings out of 493848
- 231444 string characters out of 1152823
- 908492 words of memory out of 3000000
- 16897 multiletter control sequences out of 15000+50000
+ 15721 strings out of 493848
+ 231425 string characters out of 1152823
+ 908296 words of memory out of 3000000
+ 16890 multiletter control sequences out of 15000+50000
  13863 words of font info for 54 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 41i,15n,58p,910b,2090s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 41i,15n,58p,821b,2090s stack positions out of 5000i,500n,10000p,200000b,50000s
 pdfTeX warning (dest): name{Hfootnote.1} has been re
 ferenced but does not exist, replaced by a fixed one
 
@@ -792,7 +792,7 @@ ype1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public
 /amsfonts/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm
 /cmsy8.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmti10.pfb>
 </usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmtt10.pfb>
-Output written on thesis.pdf (52 pages, 1089159 bytes).
+Output written on thesis.pdf (52 pages, 1087953 bytes).
 PDF statistics:
  2747 PDF objects out of 2984 (max. 8388607)
  1795 named destinations out of 2073 (max. 500000)

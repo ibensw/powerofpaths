@@ -56,14 +56,6 @@
   morekeywords={*,...},               % if you want to add more keywords to the set
 }
 
-\newcommand{\FR}{\textit{forward right\xspace}}
-\newcommand{\LRF}{\textit{left/right forward\xspace}}
-\newcommand{\RLRF}[1]{\textit{random left/right forward with parameter #1\xspace}}
-\newcommand{\PDF}{\textit{position dependent forwarding\xspace}}
-\newcommand{\RU}{\textit{random unvisited\xspace}}
-\newcommand{\CO}{\textit{coprime offset\xspace}}
-\newcommand{\RCO}{\textit{random coprime offset\xspace}}
-
 \hyphenpenalty=5000
 \tolerance=1000
 
@@ -81,7 +73,9 @@
 \newpage
 
 \section*{Abstract}
-In ring structured distributed systems, busy nodes will forward new jobs to other nodes. This thesis focuses on the algorithms for choosing a successor node for a job. ...
+This thesis researched the behavior of forwarding algorithms on ring structured distributed systems. We first describe how the different algorithms actually behave and what their basic properties are. Next, we will simulate the algorithms, where we will find left/right forward to be the best performing algorithm when nodes can only see their neighbors. When nodes can see all other nodes, random unvisited has the best performance, but only slightly better than the coprime offset family. An upper bound is found for the simulations using multiple CPUs per server.
+
+When validating those results numerically, it seems the algorithms behave alike. This means the simulation does not contain serious faults. We have also found that the numerical model can be optimized by lumping redundant states. While this increases the performance of the validation, the actual benefit is disappointing, due to the non-polynomial nature of the algorithms. We have also proven the equivalence between multiple algorithms under certain conditions.
 
 \newpage
 
@@ -141,22 +135,22 @@ Because the amount of dropped jobs is equal for each forwarding algorithm, these
 A busy node using this technique will forward a job to its right neighbor. The job will keep traveling in this direction until an idle node is found, where it will be processed, or until it has visited all nodes when it will be dropped. Unless otherwise noted, this algorithm is used as a baseline in all further tests. This algorithm does not use any space in the job's metadata, nor must nodes save states.
 
 \subsubsection*{Left/right forward}
-A variant to the previous algorithm is the \LRF technique. Instead of forwarding each job to its right neighbor, a busy node will alternate the direction after forwarding an incoming job. To avoid a job coming back, this initial direction is saved in the job's metadata. Busy nodes receiving a job from another neighbor must forward it in the same direction as specified in the job's metadata. This algorithm requires the job to keep 1 bit representing the direction in the job's metadata, it also needs to save 1 bit state information in each node to keep track of the last direction a new job was forwarded to.
+A variant to the previous algorithm is the left/right forward technique. Instead of forwarding each job to its right neighbor, a busy node will alternate the direction after forwarding an incoming job. To avoid a job coming back, this initial direction is saved in the job's metadata. Busy nodes receiving a job from another neighbor must forward it in the same direction as specified in the job's metadata. This algorithm requires the job to keep 1 bit representing the direction in the job's metadata, it also needs to save 1 bit state information in each node to keep track of the last direction a new job was forwarded to.
 
 \subsubsection*{Random left/right forward with parameter $p$}
-This technique is a variant of the \LRF algorithm. However, instead of alternating the direction for each new job, a node will forward a job to its right with probability $p$ and to its left with probability $1-p$. Like the previous technique, the direction is saved in the job's metadata and subsequent nodes must maintain this direction when forwarding. Unlike \LRF, nodes do not need to save state information.
+This technique is a variant of the left/right forward algorithm. However, instead of alternating the direction for each new job, a node will forward a job to its right with probability $p$ and to its left with probability $1-p$. Like the previous technique, the direction is saved in the job's metadata and subsequent nodes must maintain this direction when forwarding. Unlike left/right forward, nodes do not need to save state information.
 
-\subsubsection*{Position-dependent forwarding}
+\subsubsection*{Position dependent forwarding}
 As shown in figure \ref{figring}, each node in the ring has a unique ID. The IDs are ordered clockwise on the ring. Nodes using this algorithm will always forward an incoming job into the same direction: to the right when the node's id is even, to the left otherwise. Just like the previous algorithm, the direction is saved in the job's metadata and this direction must be used when other nodes have to forward the job. The initial direction of incoming jobs can be derived from the node's ID, therefore the node needs no state information.
 
 \subsection{Forward anywhere}
 The ring structure can be used in real networks, however in many cases the ring is just a virtual overlay over another structure (e.g. the internet). In these networks each node is able to connect each other node directly and more sophisticated forwarding algorithms can be used.
 
 \subsubsection*{Random unvisited}
-The Random unvisited algorithm is the most basic algorithm in this category. Every time a job must be forwarded, a list of unvisited nodes is generated and a random node is chosen from that list. The current node is added to the list of visited nodes, which is found in the job's metadata. This list can be saved using $N-1$ bits ($-1$ because the initial node is saved separately). Each unvisited node must have an equal probability of being picked.
+The random unvisited algorithm is the most basic algorithm in this category. Every time a job must be forwarded, a list of unvisited nodes is generated and a random node is chosen from that list. The current node is added to the list of visited nodes, which is found in the job's metadata. This list can be saved using $N-1$ bits ($-1$ because the initial node is saved separately). Each unvisited node must have an equal probability of being picked.
 
 \subsubsection*{Coprime offset}
-Another algorithm is Coprime offset. This algorithm generates a list of all numbers smaller than $N$, and coprime to $N$. The first time a job is forwarded, the next number of this list is selected. This is the job's forwarding offset and it is saved in the job's metadata. When a job is forwarded, it is sent exactly this many nodes farther. Because this number and $N$ are coprime, it will visit all nodes exactly once before being returned to its originating node. 
+Another algorithm is coprime offset. This algorithm generates a list of all numbers smaller than $N$, and coprime to $N$. The first time a job is forwarded, the next number of this list is selected. This is the job's forwarding offset and it is saved in the job's metadata. When a job is forwarded, it is sent exactly this many nodes farther. Because this number and $N$ are coprime, it will visit all nodes exactly once before being returned to its originating node. 
 
 Example:
 Consider a ring size of $N=10$ in which every node is busy. The list of coprimes is: $[1, 3, 7, 9]$. Let's assume a job arrives at node $3$ and the last time node $3$ forwarded a job, the job was given offset $1$.
@@ -164,8 +158,8 @@ Because this node is busy, the next number on the list ($3$) is selected and sav
 
 Because the list of coprimes can be regenerated each time a job arrives, it must not be saved. Both the job and the node must keep an index to a coprime. The size of this list $\varphi(N)$, ergo an index to an element in this list requires $\lceil log_2 \varphi(N) \rceil$ bits (see section \ref{secprops} for the definition of $\varphi(N)$).
 
-\subsubsection*{Random Coprime offset}
-The Random Coprime offset algorithm is almost equal to Coprime offset. The difference between them is the decision of the offset value. Where it is the next number on the list in Coprime offset, a random value is taken from the list when using Random Coprime offset. As Coprime offset, the offset must be saved in the job's metadata. Since the offset for incoming jobs is chosen at random, the nodes do not need to keep state information.
+\subsubsection*{Random coprime offset}
+The random coprime offset algorithm is almost equal to coprime offset. The difference between them is the decision of the offset value. Where it is the next number on the list in coprime offset, a random value is taken from the list when using random coprime offset. As coprime offset, the offset must be saved in the job's metadata. Since the offset for incoming jobs is chosen at random, the nodes do not need to keep state information.
 
 \subsection{Properties of Algorithms}
 \label{secprops}
@@ -179,7 +173,7 @@ We have reviewed some of the basic properties for each algorithm. They are summa
 
 Note that this value is upper bound by $N-1$ and equals $N-1$ when $N$ is prime.
 
-\footnotetext[1]{For Random Left/Right forward where $p \neq 0.5$, the probability of each path is different.}
+\footnotetext[1]{For random left/right forward where $p \neq 0.5$, the probability of each path is different.}
 \begin{table}[h!]
 \hspace{-0.12\textwidth}
 \begin{tabular}{|p{0.30\textwidth}|p{0.10\textwidth}|p{0.18\textwidth}|p{0.18\textwidth}|p{0.18\textwidth}|p{0.18\textwidth}|} \cline{2-6}
@@ -232,7 +226,7 @@ The goal of the algorithms is to distribute the jobs evenly along the ring. This
 
 It is clear that when the system load approaches $0$, the probability that a node is busy will also approach $0$ and the average number of forwards will therefore also approach $0$. On the other hand, when the load approaches $\infty$, each node's probability of being busy will approach $1$ and therefore the number of forwards will be $N-1$ and the job will fail. A system with load $> 1$ is called an overloaded system. For the purpose of this thesis, only loads up to $1$ are discussed.
 
-We will compare each algorithm to a baseline result. The baseline used in this thesis is the \FR algorithm. This means that each graph will show its result relative to the \FR results. The results given by the simulator were obtained using a ring size of 100 and using a random seed for each run.
+We will compare each algorithm to a baseline result. The baseline used in this thesis is the forward right algorithm. This means that each graph will show its result relative to the forward right results. The results given by the simulator were obtained using a ring size of 100 and using a random seed for each run.
 
 The absolute performance of the baseline algorithm is shown in figure \ref{baseline}.
 
@@ -247,7 +241,7 @@ The absolute performance of the baseline algorithm is shown in figure \ref{basel
 \label{simresults}
 
 \subsubsection*{Left/right forward}
-It is intuitively clear that alternating the forwarding direction of incoming jobs should distribute the load better than keeping the same direction, certainly under temporary local heavy load. Figure \ref{figlr} shows the improvement made by the \LRF algorithm over the \FR method. The performance gain is at least 1\% and up to over 4\% under medium load.
+It is intuitively clear that alternating the forwarding direction of incoming jobs should distribute the load better than keeping the same direction, certainly under temporary local heavy load. Figure \ref{figlr} shows the improvement made by the left/right forward algorithm over the forward right method. The performance gain is at least 1\% and up to over 4\% under medium load.
 
 \begin{figure}[h!tb]
 \centering
@@ -263,26 +257,26 @@ For $p=0.5$, one would expect the results of this algorithm being similar to tho
 \begin{figure}[h!tb]
 \centering
 \includegraphics[width=0.6\textwidth]{data/randswitchright.pdf}
-\caption{Random Left/Right forward with parameter $0.5$}
+\caption{Random left/right forward with parameter $0.5$}
 \label{figrandswitch}
 \end{figure}
 
-Figure \ref{figrandswitch} shows the results of this algorithm for $p=0.5$. For $p=0$, the algorithm is equal to the \FR algorithm. Hence, we should investigate how different values of $p$ influence the final results. Figure \ref{figrandswitchp} shows the results obtained for $0 \leq p \leq 0.5$. We find no value of $p$ for which this algorithm performs better than \FR.
+Figure \ref{figrandswitch} shows the results of this algorithm for $p=0.5$. For $p=0$, the algorithm is equal to the forward right algorithm. Hence, we should investigate how different values of $p$ influence the final results. Figure \ref{figrandswitchp} shows the results obtained for $0 \leq p \leq 0.5$. We find no value of $p$ for which this algorithm performs better than forward right.
 
 \begin{figure}[h!tb]
 \centering
 \includegraphics[width=0.6\textwidth]{data/randswitchp.pdf}
-\caption{Random Left/Right forward with load $0.8$}
+\caption{Random left/right forward with load $0.8$}
 \label{figrandswitchp}
 \end{figure}
 
-\subsubsection*{Position-dependant forwarding}
+\subsubsection*{Position dependent forwarding}
 This technique groups every 2 nodes into small virtual clusters. When a job arrives at a busy node, the job will be forwarded to the other node in this cluster. Jobs leaving a cluster will seem to do this in a random direction ($p=0.5$). Since the load is concentrated per cluster instead of being distributed over the whole system, this technique performs worse than other techniques. The results are shown in figure \ref{figevenswitch}.
 
 \begin{figure}[h!tb]
 \centering
 \includegraphics[width=0.6\textwidth]{data/evenswitchright.pdf}
-\caption{Position-dependant forwarding}
+\caption{Position dependent forwarding}
 \label{figevenswitch}
 \end{figure}
 
@@ -300,7 +294,7 @@ Unlike the previous algorithms, this algorithm is not bound to its neighbors whe
 Figure \ref{figrandunvisited} shows the results of this algorithm. The performance benefit is at least $10 \%$ in the range $0.20 - 1.00$, and even up to $30 \%$ under medium load.
 
 \subsubsection*{(Random) Coprime offset}
-Two other algorithms that are not restricted to forwarding to a neighbor are Coprime offset and Random coprime offset. Figure \ref{figprimes} shows the results of both these algorithms. The difference of these algorithms with themselves and the random unvisited algorithms is not clearly visible when comparing both to the \FR algorithm. To put these results in perspective, we included figure \ref{figrurrp} where Coprime offset and Random Coprime offset are depicted relative to Random unvisited. Although the difference is very small, it seems the Random unvisited algorithm shows a better performance than the other two. However, Coprime offset and Random Coprime offset require $\lceil log_2 \varphi(N) \rceil$ bits in the job's metadata instead of $N$ for Random unvisited.
+Two other algorithms that are not restricted to forwarding to a neighbor are coprime offset and random coprime offset. Figure \ref{figprimes} shows the results of both these algorithms. The difference of these algorithms with themselves and the random unvisited algorithms is not clearly visible when comparing both to the forward right algorithm. To put these results in perspective, we included figure \ref{figrurrp} where coprime offset and random coprime offset are depicted relative to random unvisited. Although the difference is very small, it seems the random unvisited algorithm shows a better performance than the other two. However, coprime offset and random coprime offset require $\lceil log_2 \varphi(N) \rceil$ bits in the job's metadata instead of $N$ for random unvisited.
 
 \begin{figure}[h!tb]
         \begin{subfigure}[b]{0.5\textwidth}
@@ -311,7 +305,7 @@ Two other algorithms that are not restricted to forwarding to a neighbor are Cop
         \begin{subfigure}[b]{0.5\textwidth}
                 \centering
                 \includegraphics[width=\textwidth]{data/randprimeright.pdf}
-                \caption{Random Coprime offset}
+                \caption{Random coprime offset}
                 \label{figsimrcp}
         \end{subfigure}
 \caption{(Random) Coprime offset}
@@ -321,7 +315,7 @@ Two other algorithms that are not restricted to forwarding to a neighbor are Cop
 \begin{figure}[h!tb]
 \centering
 \includegraphics[width=0.8\textwidth]{data/randunvisited_prime_randprime.pdf}
-\caption{Random unvisited (green), Coprime offset (blue), Random Coprime offset (Red)}
+\caption{Random unvisited (green), coprime offset (blue), random coprime offset (Red)}
 \label{figrurrp}
 \end{figure}
 
@@ -387,13 +381,13 @@ Figure \ref{figcpus} shows the performance of 4 CPUs versus 1 CPU for different 
 Since we assume each algorithm is influenced the same way, we will investigate one of them in depth. We will try to transform the results of an algorithm with ring size $N$ and $1$ CPU per server into the results of the same algorithm with ring size $N/c$ and $c$ CPUs per server. Every other parameter should be unchanged.
 
 Let $d$ be the distribution of the number of forwards, stored as a row vector. We will build a transformation vector $M$ in the form $[ \lfloor 0/c \rfloor,  \lfloor 1/c \rfloor, \ldots, \lfloor (N-1)/c \rfloor]'$. This vector represents the number of times a job would be forwarded if there would be $c$ CPUs per server. $d*M$ equals the average number of forwards when using such a system. To ignore the dropped jobs, the results must be weighted for only the completed jobs.
-In our example, we will transform the results of the \FR algorithm using ring size $N=10$ and 1 CPU into the results of a ring with size $N=5$ and $c=2$ CPUs per server, see table \ref{tabdistr} for a worked out example and figure \ref{figcpusmatch} for a comparison of the transformation and a simulation result.
+In our example, we will transform the results of the forward right algorithm using ring size $N=10$ and 1 CPU into the results of a ring with size $N=5$ and $c=2$ CPUs per server, see table \ref{tabdistr} for a worked out example and figure \ref{figcpusmatch} for a comparison of the transformation and a simulation result.
 
 
 \begin{table}
 \centering
 \begin{tabular}{|r|l|r|l|} \hline
-\# hops & Distribution & M & Result \\ \hline
+\# Forwards & Distribution & M & Result \\ \hline
 0 & 0.5092 & 0 & 0 \\ \hline
 1 & 0.2118 & 0 & 0 \\ \hline
 2 & 0.1082 & 1 & 0.1082 \\ \hline
@@ -424,12 +418,12 @@ While deriving the transformation, we did not take into account that for each ch
 \section{Numerical Validation}
 \label{secvalidation}
 
-To validate the results obtained in the previous section, we modeled the scheduling algorithms into Markov Chains. Using the steady state distribution of these chains, we can derive the average number of hops and the average loss.
+To validate the results obtained in the previous section, we modeled the scheduling algorithms into Markov Chains. Using the steady state distribution of these chains, we can derive the average number of forwards and the average loss.
 For $N$ nodes in a ring, the Markov chain consists of $2^N$ states, where the $n$-th bit represents whether the $n$-th server is busy ($1$) or idle ($0$). To optimize the computation time and memory requirements, we used sparse matrices for the validation. The validation code is written in MATLAB, it can be found in appendix \ref{matlabcode} or on \url{http://code.google.com/p/powerofpaths/}.
 
 The validation of the results happens in a different environment than the simulation. Because of the non-polynomial execution time of the algorithm, the size of the ring is reduced to $10$. Therefore, the results of this validation are smaller but the relative results are still relevant.
 
-Not every algorithm can be modeled efficiently into a Markov Chain. Computing the results of algorithms requiring state information in the nodes is infeasible for a decent ring size, therefore we did not model \LRF and the Coprime offset algorithms. We also ignored the Position dependant forwarding algorithm since its results seemed logical and further investigation would not reveal useful information.
+Not every algorithm can be modeled efficiently into a Markov Chain. Computing the results of algorithms requiring state information in the nodes is infeasible for a decent ring size, therefore we did not model left/right forward and the coprime offset algorithms. We also ignored the position dependent forwarding algorithm since its results seemed logical and further investigation would not reveal useful information.
 
 \subsection{Comparison}
 \subsubsection*{Forward right}
@@ -497,9 +491,9 @@ As in the simulation section, we have validated the results for different values
 \label{validrlrp}
 \end{figure}
 
-The random left/right forward algorithm does not seem a viable choice for real implementations. It has a small performance drawback compared to \FR and has no other benefits.
+The random left/right forward algorithm does not seem a viable choice for real implementations. It has a small performance drawback compared to forward right and has no other benefits.
 
-\subsubsection*{Random Unvisited}
+\subsubsection*{Random unvisited}
 This problem can be modeled much more efficiently than the techniques. Since the next node is chosen at random, it is not necessary to store the position of the nodes. The information we need to save consists only of the number of servers that are currently busy. This problem is similar to modeling an Erlang-B loss system. The number of states in this Markov Chain is linear to $N$, which is much more dense than the previous given models. For $N=3$, the matrix is given below.
 
 \[ Q =
@@ -514,7 +508,7 @@ This problem can be modeled much more efficiently than the techniques. Since the
   \end{blockarray}
 \]
 
-\subsubsection*{Random Coprime offset}
+\subsubsection*{Random coprime offset}
 Modeling this technique yields different results for various ring sizes. The performance of this algorithm depends on $\varphi(N)$. The results in figure \ref{validcp} are very similar to those found in the simulation (figure \ref{figsimrcp}).
 
 \begin{figure}
@@ -538,7 +532,7 @@ Modeling this technique yields different results for various ring sizes. The per
 			\caption{$N=12$}
 			\label{validcp12}
 		\end{subfigure}
-\caption{Validation of the Random Coprime offset algorithm}
+\caption{Validation of the random coprime offset algorithm}
 \label{validcp}
 \end{figure}
 
@@ -547,20 +541,20 @@ The results show a performance gain up to 5\% for a ring size of $N=10$. The lis
 \begin{figure}[h!tb]
 \centering
 \includegraphics[clip=true, trim=9em 24em 9em 24em, width=0.9\textwidth]{resources/plotrandunvisitedrandprime.pdf}
-\caption{Performance of Random Coprime offset relative to Random unvisited}
+\caption{Performance of random coprime offset relative to random unvisited}
 \label{figrurcpo}
 \end{figure}
 
 \subsection{Lumped states}
 \label{lump}
 
-Except for Random Unvisited, each described technique is modeled into a Markov Chain with $N^2$ states. However, many of these states are redundant: for example, for $N=3$ the states $001$, $010$ and $100$ all represent a state where one of the nodes is busy. For states representing multiple busy nodes, the space between these servers is critical information. Redundant states can be generated from one state: bitrotate the state by 1 until you get the original state. Each encountered state is redundant.
+Except for random unvisited, each described technique is modeled into a Markov Chain with $N^2$ states. However, many of these states are redundant: for example, for $N=3$ the states $001$, $010$ and $100$ all represent a state where one of the nodes is busy. For states representing multiple busy nodes, the space between these servers is critical information. Redundant states can be generated from one state: bitrotate the state by 1 until you get the original state. Each encountered state is redundant.
 Example: the states below are redundant and can therefore be lumped into one state:
 \begin{verbatim}
 001101 = 011010 = 110100 = 101001 = 010011 = 100110
 \end{verbatim}
 
-The example model of the \FR algorithm can be lumped into the following Markov Chain:
+The example model of the forward right algorithm can be lumped into the following Markov Chain:
 
 \[ Q =
   \begin{blockarray}{ccccc}
@@ -622,9 +616,9 @@ When a node becomes idle, the first event will be an incoming job. The first inc
 
 \subsubsection*{Random left/right with parameter $p$ versus forward right}
 This algorithm is always equivalent to itself using parameter $1-p$. This is intuitively clear because the probabilities of right and left are swapped, like looking to the ring in a mirror.
-It is clear that for $p=0$ (and so for $p=1$), this algorithm is equivalent to the \FR algorithm. Furthermore, for arbitrary values of $p$, this algorithm is still equivalent to \FR as long as the ring size $N \leq 5$. This can be proven by lumping the Markov Chains for both techniques.
+It is clear that for $p=0$ (and so for $p=1$), this algorithm is equivalent to the forward right algorithm. Furthermore, for arbitrary values of $p$, this algorithm is still equivalent to forward right as long as the ring size $N \leq 5$. This can be proven by lumping the Markov Chains for both techniques.
 
-For $N=4$, define the lumped Markov Chain of the \FR algorithm.
+For $N=4$, define the lumped Markov Chain of the forward right algorithm.
 \[ Q_1 =
   \begin{blockarray}{ccccccc}
     & 0000 & 0001 & 0011 & 0101 & 0111 & 1111 \\
@@ -670,11 +664,11 @@ Now, define the lumped Markov Chain of the FR algorithm with parameter $p$ and s
 
 We find $Q_1 = Q_2$ for $N=4$. This also works for $N=5$, but for $N \geq 6$, the matrices are different.
 
-\subsubsection*{Random Coprime offset versus forward right}
-For $N=4$, this algorithm is equivalent to the \FR algorithm as well. The coprimes of 4 are 1 and 3. Meaning a jump of 1 (right neighbor) or a jump of 3 (left neighbor). It is clear this is the same as \RLRF{0.5}, which is equivalent to the \FR algorithm.
+\subsubsection*{Random coprime offset versus forward right}
+For $N=4$, this algorithm is equivalent to the forward right algorithm as well. The coprimes of 4 are 1 and 3. Meaning a jump of 1 (right neighbor) or a jump of 3 (left neighbor). It is clear this is the same as random left/right forward using parameter $p=0.5$, which is equivalent to the forward right algorithm.
 
-\subsubsection*{Random Coprime offset versus Random unvisited}
-The performance of the Random Coprime offset algorithm depends on $\varphi(N)$, which is $N-1$ when $N$ is prime. Figure \ref{figrcovsru} shows the average ring traversal of this algorithm and the Random unvisited algorithm. It seems for prime values of $N$, the graphs touch. However, when looking at the actual data we see this is only true for $N=5$.
+\subsubsection*{Random coprime offset versus random unvisited}
+The performance of the random coprime offset algorithm depends on $\varphi(N)$, which is $N-1$ when $N$ is prime. Figure \ref{figrcovsru} shows the average ring traversal of this algorithm and the random unvisited algorithm. It seems for prime values of $N$, the graphs touch. However, when looking at the actual data we see this is only true for $N=5$.
 
 \begin{figure}[h!tb]
 \centering
@@ -686,7 +680,7 @@ The performance of the Random Coprime offset algorithm depends on $\varphi(N)$, 
 \begin{table}[h!]
 \centering
 \begin{tabular}{|l|l|l|} \hline
-N	& Random unvisited	& Random Coprime offset \\ \hline
+N	& Random unvisited	& Random coprime offset \\ \hline
 3	&   0.161764705882353 &  0.161764705882353 \\
 5	&   0.204376460590610 &  0.204376460590610 \\
 7	&   0.219792926622134 &  0.219788935482327 \\
@@ -702,21 +696,21 @@ N	& Random unvisited	& Random Coprime offset \\ \hline
 We have simulated all our algorithms and validated the results of some of them. The ideal algorithm is depends on the specific requirements of the distributed system. However, it is safe to say some algorithms are not ideal for any situation. One should also note that in some configurations, different algorithms can yield the same results. In those cases, only memory requirements or the complexity to implement the algorithms should be decisive.
 
 \subsubsection*{Forward to neighbors}
-When nodes are only directly connected to their neighbors, the choice depend on the memory requirements. When at least 1 bit can be saved in both the job's metadata as the node's state, \LRF is an ideal choice. This algorithm provides up to 4\% better result than \FR under medium load ($N=100$).
+When nodes are only directly connected to their neighbors, the choice depend on the memory requirements. When at least 1 bit can be saved in both the job's metadata as the node's state, left/right forward is an ideal choice. This algorithm provides up to 4\% better result than forward right under medium load ($N=100$).
 
-When no memory is available, the \FR algorithm is the only possible choice while maintaining sufficient results. Additionally, it is the easiest algorithm to implement.
+When no memory is available, the forward right algorithm is the only possible choice while maintaining sufficient results. Additionally, it is the easiest algorithm to implement.
 
-Both these algorithms allow nodes to come and go. The random left/right and Position dependent forwarding techniques perform worse than \FR while having more requirements, therefore they should not be chosen.
+Both these algorithms allow nodes to come and go. The random left/right and position dependent forwarding techniques perform worse than forward right while having more requirements, therefore they should not be chosen.
 
 \subsubsection*{Forward anywhere}
-If each node can reach each other node directly, the forward anywhere algorithms improve the results significantly. The best results can be achieved using the Random unvisited algorithm. This algorithm performs slightly better than coprime offset and random Coprime offset, but at a higher cost: the random unvisited algorithm requires $N-1$ bits in the job's metadata.
+If each node can reach each other node directly, the forward anywhere algorithms improve the results significantly. The best results can be achieved using the random unvisited algorithm. This algorithm performs slightly better than coprime offset and random coprime offset, but at a higher cost: the random unvisited algorithm requires $N-1$ bits in the job's metadata.
 
-The Coprime offset and Random Coprime offset algorithms require less memory but with worse performance. However, when the ring size is prime, its results are only slightly less than those of random unvisited. The memory required in the job's metadata is lowered to $\lceil log_2 \varphi(N) \rceil$ bits ($\lceil log_2 (N-1) \rceil$ bits when $N$ is prime). The coprime offset algorithm yields about the same results as the random variant. In addition, it needs to save $\lceil log_2 \varphi(N) \rceil$ bits in the state of each node. Random coprime offset and random unvisited seem two very good candidates, it depends whether the small performance benefit is worth the memory and implementation cost.
+The coprime offset and random coprime offset algorithms require less memory but with worse performance. However, when the ring size is prime, its results are only slightly less than those of random unvisited. The memory required in the job's metadata is lowered to $\lceil log_2 \varphi(N) \rceil$ bits ($\lceil log_2 (N-1) \rceil$ bits when $N$ is prime). The coprime offset algorithm yields about the same results as the random variant. In addition, it needs to save $\lceil log_2 \varphi(N) \rceil$ bits in the state of each node. Random coprime offset and random unvisited seem two very good candidates, it depends whether the small performance benefit is worth the memory and implementation cost.
 
 \subsubsection*{Other findings}
 The results of using multiple CPUs per server can be approximated using the the results of 1 CPU per server and a ring size $N_1 = N_c \cdot c$. This approximation is an upper bound to the real outcome since the derivation ignores the fact that the choice for a node is no longer a choice for a CPU, it is a choice for a group of $c$ CPUs. 
 
-For the \RLRF{$p$}, we have found out its results are worst for $p=0.5$. We did not come up with an explanation why this algorithm is worse than \FR. This might be a start for further research.
+For the random left/right forward, we have found out its results are worst for $p=0.5$. We did not come up with an explanation why this algorithm is worse than forward right. This might be a start for further research.
 
 We have also found a way to model some of these algorithms into Markov Chains. This allowed us to compute the actual result of a simulation. The drawback of our model is the limited ring size. We optimized it by lumping states and using sparse matrices, but because of the non-polynomial nature of the matrix size, these optimizations allow us to increase $N$ only by 2 or 3.
 
