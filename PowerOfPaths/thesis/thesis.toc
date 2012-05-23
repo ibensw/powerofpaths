@@ -20,9 +20,9 @@
 \defcounter {refsection}{0}
 \contentsline {subsection}{\numberline {2.3}Multiple execution units}{14}{subsection.2.3}
 \defcounter {refsection}{0}
-\contentsline {section}{\numberline {3}Numerical Validation}{17}{section.3}
+\contentsline {section}{\numberline {3}Numerical Validation}{16}{section.3}
 \defcounter {refsection}{0}
-\contentsline {subsection}{\numberline {3.1}Comparison}{18}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.1}Comparison}{17}{subsection.3.1}
 \defcounter {refsection}{0}
 \contentsline {subsection}{\numberline {3.2}Lumped states}{22}{subsection.3.2}
 \defcounter {refsection}{0}
