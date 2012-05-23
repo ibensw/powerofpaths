@@ -73,9 +73,9 @@
 \newpage
 
 \section*{Abstract}
-This thesis researched the behavior of forwarding algorithms on ring structured distributed systems. We first describe how the different algorithms actually behave and what their basic properties are. Next, we will simulate the algorithms, where we will find left/right forward to be the best performing algorithm when nodes can only see their neighbors. When nodes can see all other nodes, random unvisited has the best performance, but only slightly better than the coprime offset family. An upper bound is found for the simulations using multiple CPUs per server.
+This thesis researched the behavior of forwarding algorithms on ring structured distributed systems. We first describe how the different algorithms actually behave and what their basic properties are. Next, we will simulate the algorithms, where we will find the left/right forwarding algorithm to be the best performing one when nodes can only see their direct neighbors. When nodes can see all other nodes, random unvisited has the best performance, but only slightly better than the coprime offset family. An upper bound is found for the simulations using multiple CPUs per server.
 
-When validating those results numerically, it seems the algorithms behave alike. This means the simulation does not contain serious faults. We have also found that the numerical model can be optimized by lumping redundant states. While this increases the performance of the validation, the actual benefit is disappointing, due to the non-polynomial nature of the algorithms. We have also proven the equivalence between multiple algorithms under certain conditions.
+When validating those results numerically, it seems the algorithms behave like the simulations. This means the simulation does not contain serious faults. We have also found that the numerical model can be optimized by lumping redundant states. While this increases the performance of the validation, the actual benefit is disappointing, due to the non-polynomial nature of the algorithms. Finally, we have proven the equivalence between multiple algorithms under certain conditions.
 
 \newpage
 

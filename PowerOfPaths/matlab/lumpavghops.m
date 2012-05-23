@@ -1,7 +1,7 @@
 function [ avg ] = lumpavghops(Q)
 %LUMPAVGHOPS Get the average number of times a job is forwarded when the state matrix is lumped
 %Parameters:
-%	Q	A lumped matrix representation of a markov Chain
+%	Q	A matrix representation of a markov Chain
 
 	fullsize=length(Q);
 	[Q S]=lump(Q);
