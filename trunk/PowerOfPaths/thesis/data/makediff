@@ -24,6 +24,6 @@ done
 
 cat $output.footer >> $output.header
 
-graph $args -C -T ps -X "Load" -Y "Relative # forwards" -x 0.1 1.0 -y 0.0 1.1 < $output.header > $output.ps
+graph $args -C -T ps -X "Load" -Y "Relative # forwards" -x 0.1 1.0 -y 0.0 1.05 < $output.header > $output.ps
 epstopdf $output.ps
 rm $output.ps $output.footer # $output.header

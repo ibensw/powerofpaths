@@ -1,0 +1,24 @@
+#/bin/bash
+
+file2=$1
+shift
+file1=$1
+shift
+
+output=$file1$file2
+
+args=$@
+
+echo "#m=2,S=4" > $output.header
+
+xs=$(cat $file1 | grep -v "#" | cut -f1)
+for x in $xs; do
+	f1=`cat $file1 | grep "^$x\s" | cut -f2 | tr '\n' ' '`
+	f2=`cat $file2 | grep "^$x\s" | cut -f2 | tr '\n' ' '`
+	diff=`echo "scale=15; $f1-$f2" | bc`
+	echo $x $diff >> $output.header
+done
+
+graph $args -C -T ps -X "Load" -Y "Relative # forwards" -x 0.1 1.0 < $output.header > $output.ps
+epstopdf $output.ps
+rm $output.ps # $output.header
