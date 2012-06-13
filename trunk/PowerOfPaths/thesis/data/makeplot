@@ -1,5 +1,5 @@
 #!/bin/bash
 
-graph -C -T ps -X "Load" -Y "Average # forwards" < $1 > $1.ps
+graph -C -T ps -X "Load" -Y "Relative # forwards" < $1 > $1.ps
 epstopdf $1.ps
 rm $1.ps
