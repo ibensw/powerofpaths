@@ -1,0 +1,103 @@
+\documentclass[compress]{beamer}
+\usetheme[darktitle,framenumber]{UniversiteitAntwerpen}
+
+\usepackage[english]{babel}
+\usepackage[utf8x]{inputenc}
+\usepackage{graphicx}
+\usepackage{hyperref}
+
+\title{The power of two paths in grid computing networks}
+%\subtitle{This is a dummy subtitle}
+
+\author{Wouter ibens}
+
+
+\begin{document}
+\maketitle
+
+\begin{frame}
+\frametitle{Overview}
+\tableofcontents
+\end{frame}
+
+\section{Setup}
+\begin{frame}
+\frametitle{Setup}
+\begin{figure}[h!tb]
+\centering
+\includegraphics[width=0.7\textwidth,clip=true,trim=0px 225px 0px 0px]{../resources/drawing.pdf}
+\end{figure}
+\end{frame}
+
+\section{Algorithms}
+
+\begin{frame}
+\frametitle{Forward to neighbor - Algorithms}
+\begin{itemize}
+ \item Forward right \begin{figure}[h!tb]
+ \includegraphics[width=0.7\textwidth]{../resources/p_forwardright.pdf}
+ \end{figure}
+ \item Left/right forward \begin{figure}[h!tb]
+ \includegraphics[width=0.7\textwidth]{../resources/p_forwardleftright.pdf}
+ \end{figure}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Forward to neighbor - Algorithms}
+\begin{itemize}
+ \item Random left/right with parameter $p$ \begin{figure}[h!tb]
+ \includegraphics[width=0.7\textwidth]{../resources/p_randforward.pdf}
+ \end{figure}
+ \item Position dependent \begin{figure}[h!tb]
+ \includegraphics[width=0.7\textwidth]{../resources/p_position.pdf}
+ \end{figure}
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Forward anywhere - Algorithms}
+\begin{itemize}
+ \item Random unvisited
+ \item (Random) Coprime offset \[\text{Ex: } N=10 ~~~~ c=\{1,3,7,9\}\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\frametitle{Space requirements algorithms}
+\begin{table}[h!]
+\centering
+\begin{tabular}{|p{0.45\textwidth}|p{0.20\textwidth}|p{0.20\textwidth}|} \cline{2-3}
+\multicolumn{1}{l|}{}		& Job				& Node \\ \hline
+Forward right			& 0				& 0		\\ \hline
+Left/right forward		& 1				& 1		\\ \hline
+Random left/right forward (p)	& 1				& 0		\\ \hline
+Position dependent forward	& 1				& 0		\\ \hline
+Random unvisited		& $N-1$				& 0		\\ \hline
+Coprime offset			& $\lceil log_2 \varphi(N) \rceil$	& $\lceil log_2 \varphi(N) \rceil$ \\ \hline
+Random coprime offset		& $\lceil log_2 \varphi(N) \rceil$	& 0		\\ \hline
+\end{tabular}
+\end{table}
+
+\[
+\varphi(N) ~=~ \sum_{0 < p < N, p \perp N} 1 ~=~  N \cdot \prod_{p|N, p\text{ is prime}} (1-\frac{1}{p})
+\]
+
+\end{frame}
+
+\section{Simulation}
+\begin{frame}
+\frametitle{Simulator}
+\begin{itemize}
+ \item C++, STL
+ \item OpenMP
+ \item Source code: \url{http://code.google.com/p/powerofpaths/}
+\end{itemize}
+\end{frame}
+
+
+\section{Numerical validation}
+
+\section{Results}
+
+\end{document}
