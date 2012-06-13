@@ -5,6 +5,7 @@
 \usepackage[utf8x]{inputenc}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{color}
 
 \title{The power of two paths in grid computing networks}
 %\subtitle{This is a dummy subtitle}
@@ -96,12 +97,38 @@ Random coprime offset		& $\lceil log_2 \varphi(N) \rceil$	& 0		\\ \hline
 \end{frame}
 
 \begin{frame}
-\frametitle{Forward to neighbor}
+\frametitle{Forward to neighbors - Results}
 \begin{figure}[h!tb]
- \includegraphics[width=0.7\textwidth]{../data/neighbors.dat.pdf}
+ \includegraphics[width=0.9\textwidth]{../data/neighbors.pdf}
  \end{figure}
 \end{frame}
 
+\begin{frame}
+\frametitle{Forward anywhere - Results}
+\begin{figure}[h!tb]
+ \includegraphics[width=0.9\textwidth]{../data/anywhere.pdf}
+ \end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{$N$ CPUs per server}
+
+\begin{columns}[t]
+\begin{column}{0.45\textwidth}
+\vspace{5em}
+\begin{itemize}
+ \item Divide ring size by $N$
+ \item Multiply \#forwards by $N$
+\end{itemize}
+\end{column}
+\begin{column}{0.55\textwidth}
+\begin{figure}[h!tb]
+ \includegraphics[width=\textwidth]{../data/right_5_2.pdf}
+ \end{figure}
+\end{column}
+\end{columns}
+
+\end{frame}
 
 \section{Numerical validation}
 
