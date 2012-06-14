@@ -7,6 +7,7 @@
 \usepackage{hyperref}
 \usepackage{color}
 \usepackage{blkarray}
+\usepackage{subfigure}
 
 \title{The power of two paths in grid computing networks}
 %\subtitle{This is a dummy subtitle}
@@ -127,6 +128,11 @@ Random coprime offset		& $\lceil log_2 \varphi(N) \rceil$	& 0		\\ \hline
 \end{frame}
 
 \begin{frame}
+\frametitle{OMGOMGOMG}
+Random left right in functie van p nog tonen
+\end{frame}
+
+\begin{frame}
 \frametitle{Forward anywhere - Results}
 \begin{figure}[h!tb]
  \includegraphics[width=0.9\textwidth]{../data/anywhere.pdf}
@@ -189,6 +195,51 @@ Random left/right \\ Ring size = 3
 \end{center}
 \end{frame}
 
+\begin{frame}
+\frametitle{Forward to neighbors}
+\begin{figure}[h!tb]
+\includegraphics[width=\textwidth,clip=true,trim=4em 22em 6em 23em]{../resources/validate_rlr.pdf}
+\end{figure}
+\end{frame}
+
+\begin{frame}
+\frametitle{Forward anywhere}
+\begin{figure}[h!tb]
+\includegraphics[width=\textwidth,clip=true,trim=4em 22em 6em 23em]{../resources/validate.pdf}
+\end{figure}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Random coprime offset}
+\begin{figure}
+	\includegraphics[clip=true, trim=9em 22em 9em 22em, width=0.5\textwidth]{../resources/plotrandcoprime11.pdf}
+	\includegraphics[clip=true, trim=9em 22em 9em 22em, width=0.5\textwidth]{../resources/plotrandcoprime12.pdf}
+\end{figure}
+\begin{center}
+Random coprime offset for $N=11$ and $N=12$
+\end{center}
+\end{frame}
+
+\begin{frame}
+\frametitle{Lumping states}
+\begin{itemize}
+ \item Many states are redundant
+ \item Compress the matrix using 1 entry per redundant state
+ \item Example: 0011 = 0110 = 1100 = 1001
+\end{itemize}
+\vspace{2em}\[\begin{blockarray}{ccccc}
+    & 000 & 001 & 011 & 111 \\
+    \begin{block}{c[cccc]}
+    000 & -3\lambda & 3\lambda & 0 & 0 \\
+    001 & \mu & 3\lambda-\mu & 3\lambda & 0 \\
+    011 & 0 & 2\mu & 3\lambda-2\mu & 3\lambda \\
+    111 & 0 & 0 & 3\mu & -3\mu \\
+    \end{block}
+\end{blockarray}\]
+
+
+\end{frame}
 
 
 \section{Results}
