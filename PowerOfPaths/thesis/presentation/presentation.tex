@@ -127,11 +127,6 @@ Random coprime offset		& $\lceil log_2 \varphi(N) \rceil$	& 0		\\ \hline
 \end{frame}
 
 \begin{frame}
-\frametitle{OMGOMGOMG}
-Random left right in functie van p nog tonen
-\end{frame}
-
-\begin{frame}
 \frametitle{Forward anywhere - Results}
 \begin{figure}[h!tb]
  \includegraphics[width=0.9\textwidth]{../data/anywhere.pdf}
@@ -202,6 +197,14 @@ Random left/right \\ Ring size = 3
 \end{frame}
 
 \begin{frame}
+\frametitle{Random left/right}
+\begin{figure}[h!tb]
+\centering
+\includegraphics[clip=true, trim=8em 21em 9em 22em, width=0.8\textwidth]{../resources/plotrandlrp.pdf}
+\end{figure}
+\end{frame}
+
+\begin{frame}
 \frametitle{Forward anywhere}
 \begin{figure}[h!tb]
 \includegraphics[width=\textwidth,clip=true,trim=4em 22em 6em 23em]{../resources/validate.pdf}
@@ -254,11 +257,20 @@ Random coprime offset for $N=11$ and $N=12$
 \section{Conclusion}
 \begin{frame}
 \frametitle{Wrap up}
+\begin{itemize}
+ \item Left/right $>$ Forward right $>$ Random left/right
+ \item Random unvisited $>$ (Random) Coprime offset
+ \item Multiple CPUs per server
+ \item Lumping Markov Chains
+\end{itemize}
+
 \end{frame}
 
 \begin{frame}
 \frametitle{Questions}
-http://xkcd.com/552/
+\begin{figure}[h!tb]
+\includegraphics[height=0.7\textheight]{../resources/question.jpg}
+\end{figure}
 \end{frame}
 
 \end{document}
